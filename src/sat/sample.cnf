@@ -1,0 +1,7 @@
+c This is a comment... 
+c Link for more info: http://www.dwheeler.com/essays/minisat-user-guide.html
+c Specify an output file by running: minisat sample.cnf sample.out -> first satisfiable solution is saved in sample.out (or none if not satisfiable)
+p cnf 5 3 
+1 -5 4 0
+-1 5 3 4 
+0 -3 -4 0
