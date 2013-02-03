@@ -16,7 +16,7 @@ $(document).ready(function() {
   // Make the call to load the damn data... (avoid cross domain call nonsense)
   $.ajax({
     type: "GET",
-    url: 'plot.json',
+    url: 'full_1644nodes_test.json',
     dataType: "jsonp",
     jsonp: false,
     jsonpCallback: "callback",

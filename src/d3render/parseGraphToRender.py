@@ -4,10 +4,6 @@
 File: parseGraphToRender.py
 """
 
-# Load the right version of the library
-import sys
-sys.path.append("/Users/caw/Libraries/networkx")
-
 # Load the D3.js support
 import networkx as nx
 from networkx.readwrite import d3_js
