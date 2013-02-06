@@ -9,6 +9,25 @@ from networkx.readwrite import json_graph
 from operator import itemgetter
 import json 
 import sys
+
+class G127:
+	def __init__(self, n, r):
+		self.graph = nx.Graph()
+
+		# Add the vertices
+		for v in range(0, n):
+			self.graph.add_node(v)
+
+		# Add the edges
+		for x in range(0, n):
+			for y in range(0, n):
+				for alpha in range(0, n):
+					# E(G) = {(x,y) | x-y = alpha^r mod n}
+					if (((x - y) % n) == ((alpha ** r) % n)):
+						self.graph.add_edge(x, y)
+
+	def getGraph(self):
+		return self.graph
 	
 def save_to_jsonfile(filename, graph):
 	''' 
@@ -44,19 +63,17 @@ def report_node_data(graph, node=""):
 		
 def main():
 
+	# Build the output file
 	path = '/Users/caw/Projects/RamseyTheory/src/d3render/'
 
+	# TODO: read in cmd line arguments to render the graphs
+
 	# Make G_127...
-	g = nx.Graph()
-	for v in range(0, 127):
-		g.add_node(v)
-	for x in range(0, 127):
-		for y in range(0, 127):
-			g.add_edge(x, y)
-	
-	outputjsonfile = 'full_1644nodes_test.json'
-	save_to_jsonfile( path+outputjsonfile, g)
-	print "Saved to new file: ", path+outputjsonfile
+	g = G127(127,3)
+		
+	outputjsonfile = 'plot.json'
+	save_to_jsonfile(path + outputjsonfile, g.getGraph())
+	print("Saved to new file: " + str(path + outputjsonfile))
 
 if __name__ == '__main__':
     main()
