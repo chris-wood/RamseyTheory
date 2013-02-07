@@ -33,8 +33,10 @@ def checkPresence(F, n, edgeColor, edgeColorMap, color):
 						if (edgeColor[edgeColorMap[edge1]] == color and edgeColor[edgeColorMap[edge2]] == color):
 							return True
 		return False 
+	elif (n == 4):
+		print("TODO: 2/7/13")
 	else:
-		raise Exception("Cases other than n = 3 are not yet implemented.")
+		raise Exception("Cases other than n = 3,4 are not yet implemented.")
 	return False
 
 def walkColors(F, m, n, edgeColor, edgeColorMap, edgeIndex, maxColor, colorSet):
