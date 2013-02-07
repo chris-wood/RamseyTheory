@@ -4,77 +4,62 @@
 # Don't reinvent the wheel...
 from networkx import nx
 
-'''
-for each edge (u,v):
-  for each vertex w:
-     if (v,w) is an edge and (w,u) is an edge:
-          return true
-return false
-'''
-
 def checkPresence(F, n, edgeColor, edgeColorMap, color):
-	#print("checking the presence of K_" + str(n) + " for color " + str(color))
+	''' Check to see if a K_n of color 'color' is in F.
+
+	Note: edgeColor maps edge indices to colors, and edgeColorMap maps edges 
+	to edge indices, use as needed.
+	'''
 	if (n == 3): # Search for triangles with a stupid simple for loop...
 		edgeIndex = 0
-		show = str(edgeColor) == "[1, 0, 0, 1, 1, 0, 0, 1, 0, 1]" # This edge color set should fail... not return true... figure out what's wrong
 		for edgeIndex in range(0, len(edgeColor)):
 			edge = F.edges()[edgeIndex]
 			if (edgeColor[edgeIndex] == color): # Only look at the specific color
 				for vertex in F.nodes():
-					#print(F.edges())
+					# Format the edge for linst the index check
+					edge1 = ()
+					if (edge[0] < vertex):
+						edge1 = (edge[0], vertex)
+					else:
+						edge1 = (vertex, edge[0])
+					edge2 = ()
+					if (edge[1] < vertex):
+						edge2 = (edge[1], vertex)
+					else:
+						edge2 = (vertex, edge[1])
 
-					# TODO: why doesn't this work? need to debug on 2/7/13...
-
-					edge1Index = -1
-					edge11 = ((edge[0], vertex) in F.edges())# and (edgeColor[(edge[0], vertex)] == color)
-					edge12 = ((vertex, edge[0]) in F.edges())# and (edgeColor[(vertex, edge[0])] == color)
-					if (edge11):
-						edge11 = edgeColor[edgeColorMap[(edge[0], vertex)]] == color
-					if (edge12):
-						edge12 = edgeColor[edgeColorMap[(vertex, edge[0])]] == color
-
-					edge21 = ((edge[1], vertex) in F.edges())# and (edgeColor[(edge[1], vertex)] == color)
-					edge22 = ((vertex, edge[1]) in F.edges())# and (edgeColor[(vertex, edge[1])] == color)
-					if (edge21):
-						edge21 = edgeColor[edgeColorMap[(edge[1], vertex)]] == color
-					if (edge22):
-						edge22 = edgeColor[edgeColorMap[(vertex, edge[1])]] == color
-
-					# Check all edge combinations
-					if (edge11 or edge12) and (edge21 or edge22):
-						if show:
-							print("Edge set: " + str(F.edges()))
-							print("Colors: " + str(edgeColor))
-							print(str(edge) + " - " + str(vertex)) 
-						return True
+					# Check to see if we have a triangle of the same color
+					if (edge1 in F.edges() and edge2 in F.edges()):
+						if (edgeColor[edgeColorMap[edge1]] == color and edgeColor[edgeColorMap[edge2]] == color):
+							return True
 		return False 
+	else:
+		raise Exception("Cases other than n = 3 are not yet implemented.")
 	return False
 
-	# TODO: the check should go here..
-	# TODO: leverage nauty here...
-
 def walkColors(F, m, n, edgeColor, edgeColorMap, edgeIndex, maxColor, colorSet):
-	if (edgeIndex == (len(edgeColor) - 1)):
+	''' Walk over all possible colorings for the graph F.
+
+	Note: edgeColor maps edge indices to colors, and edgeColorMap maps edges to edge 
+	indices, use as needed. Also, maxColor is the maximum number of colors to check, 
+	colorSet is the result of each edge coloring, and m/n are the order of the 
+	complete graphs to check.
+	'''
+	if (edgeIndex == (len(edgeColor) - 1)): # base case - last edge to color
 		for i in range(0, maxColor):
 			edgeColor[edgeIndex] = i
-			#print("Edges: " + str(F.edges()))
 			induced = False
 
 			# We've completed the color assignment... now check to see if there's a K_m in color1/2 or K_n in color1/2
 			for color in range(0, maxColor):
 				if (checkPresence(F, m, edgeColor, edgeColorMap, color)):
 					induced = True
-					#print("True for color " + str(color) + " - " + str(edgeColor))
 				elif checkPresence(F, n, edgeColor, edgeColorMap, color):
 					induced = True
-					#print("True for color " + str(color) + " - " + str(edgeColor))
 
-			#if (induced == False):
-				#print("False: " + str(edgeColor))
-
-			colorSet.append(induced) # Append the result of this coloring...
-
-	else:
+			# Dump in the result
+			colorSet.append(induced)
+	else: # keep coloring more edges recursively
 		foundSubgraph = False
 		for i in range(0, maxColor):
 			edgeColor[edgeIndex] = i
@@ -84,7 +69,7 @@ def walkColors(F, m, n, edgeColor, edgeColorMap, edgeIndex, maxColor, colorSet):
 		return foundSubgraph
 
 def folkman(F, m, n):
-	''' Decide whether or not F -> (K_m,K_n)
+	''' Decide whether or not F -> (K_m,K_n).
 	'''
 	# Initialize the edge color sets
 	edgeColorMap = {}
@@ -93,6 +78,7 @@ def folkman(F, m, n):
 	for edge in F.edges():
 		edgeColorMap[edge] = index
 		edgeColor.append(0) # start with color 0
+		index = index + 1
 
 	# Walk the colors and do the check...
 	colorSet = []
@@ -102,25 +88,19 @@ def folkman(F, m, n):
 			return False
 	return True
 
-	# brute force algorithm: 
-	# - make a copy of F
-	# - loop over all possible edge assignments (dictionary from edge -> color)
-	# - for each color, check for existince of G and then H in colors
-
 def main():
 
 	# TODO: read in all three params from command line
 	# TODO: first must be a graph (adj matrix), second can be graphs or 
 
+	# The two test cases shown in the presentation...
 	F = nx.complete_graph(5)
-	#G = nx.complete_graph(3)
-	#H = nx.complete_graph(3)
 	print("Checking K_5 -> (3,3)")
 	print(folkman(F, 3, 3))
 
-	#F = nx.complete_graph(6)
-	#print("Checking K_6 -> (3,3)")
-	#folkman(F, 3, 3)
+	F = nx.complete_graph(6)
+	print("Checking K_6 -> (3,3)")
+	print(folkman(F, 3, 3))
 
 if __name__ == "__main__":
 	main()
