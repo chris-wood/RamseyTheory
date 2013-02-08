@@ -34,7 +34,50 @@ def checkPresence(F, n, edgeColor, edgeColorMap, color):
 							return True
 		return False 
 	elif (n == 4):
-		print("TODO: 2/7/13")
+		edgeIndex = 0
+		for edgeIndex in range(0, len(edgeColor)):
+			edge = F.edges()[edgeIndex]
+			if (edgeColor[edgeIndex] == color): # Only look at the specific color
+				for vertex in F.nodes():
+					# Format the edge for linst the index check
+					edge1 = ()
+					if (edge[0] < vertex):
+						edge1 = (edge[0], vertex)
+					else:
+						edge1 = (vertex, edge[0])
+					edge2 = ()
+					if (edge[1] < vertex):
+						edge2 = (edge[1], vertex)
+					else:
+						edge2 = (vertex, edge[1])
+
+					# Check to see if we have a triangle of the same color
+					if (edge1 in F.edges() and edge2 in F.edges()):
+						if (edgeColor[edgeColorMap[edge1]] == color and edgeColor[edgeColorMap[edge2]] == color):
+							for v in F.nodes():
+								if (v != vertex and v != edge[0] and v != edge[1]): # Make sure this is a new node
+									edge1 = ()
+									if (edge[0] < v):
+										edge1 = (edge[0], v)
+									else:
+										edge1 = (v, edge[0])
+
+									edge2 = ()
+									if (edge[1] < v):
+										edge2 = (edge[1], v)
+									else:
+										edge2 = (v, edge[1])
+
+									edge3 = ()
+									if (vertex < v):
+										edge3 = (vertex, v)
+									else:
+										edge3 = (v, vertex)
+
+									# Now check to see if we have the K_4
+									if (edge1 in F.edges() and edge2 in F.edges() and edge3 in F.edges()):
+										if (edgeColor[edgeColorMap[edge1]] == color and edgeColor[edgeColorMap[edge2]] == color and edgeColor[edgeColorMap[edge3]] == color):
+											return True
 	else:
 		raise Exception("Cases other than n = 3,4 are not yet implemented.")
 	return False
@@ -100,9 +143,17 @@ def main():
 	print("Checking K_5 -> (3,3)")
 	print(folkman(F, 3, 3))
 
-	F = nx.complete_graph(6)
-	print("Checking K_6 -> (3,3)")
-	print(folkman(F, 3, 3))
+	#F = nx.complete_graph(6)
+	#print("Checking K_6 -> (3,3)")
+	#print(folkman(F, 3, 3))
+
+	F = nx.complete_graph(8)
+	print("Checking K_8 -> (3,4)")
+	print(folkman(F, 3, 4))
+
+	F = nx.complete_graph(8)
+	print("Checking K_8 -> (4,3)")
+	print(folkman(F, 4, 3))
 
 if __name__ == "__main__":
 	main()
