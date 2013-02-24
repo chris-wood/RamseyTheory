@@ -35,7 +35,13 @@ def save_to_jsonfile(filename, graph):
 	'''
 	g = graph
 	g_json = json_graph.node_link_data(g) # node-link format to serialize
-	json.dump(g_json, open(filename,'w'))
+	f = open(filename, 'w')
+	f.write("callback(")
+	f.close()
+	json.dump(g_json, open(filename,'a'))
+	f = open(filename, 'a')
+	f.write(")")
+	f.close()
 
 def read_json_file(filename, info=True):
 	'''
