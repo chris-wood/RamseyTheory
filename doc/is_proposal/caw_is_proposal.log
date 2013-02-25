@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  23 FEB 2013 18:17
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  24 FEB 2013 11:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -512,43 +512,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--68
 
  []
 
-LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 72.
-
-LaTeX Warning: Reference `tab:history' on page 1 undefined on input line 72.
-
-
-Overfull \hbox (1.9389pt too wide) in paragraph at lines 84--86
-\T1/futs/m/n/10.95 TODO: lower bound, push-ing to-wards 20 us-ing large-scale c
-om-pu-ta-tions TODO: up-per bound
- []
-
 [1
 
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] (./caw_is_proposal.aux)
+Overfull \hbox (1.9389pt too wide) in paragraph at lines 106--108
+[]\T1/futs/m/n/10.95 TODO: lower bound, push-ing to-wards 20 us-ing large-scale
+ com-pu-ta-tions TODO: up-per bound
+ []
 
-LaTeX Warning: There were undefined references.
-
- ) 
+[2] [3] (./caw_is_proposal.aux) ) 
 Here is how much of TeX's memory you used:
- 3794 strings out of 493488
- 52387 string characters out of 3141326
- 213169 words of memory out of 3000000
- 7025 multiletter control sequences out of 15000+200000
- 86325 words of font info for 101 fonts, out of 3000000 for 9000
+ 3802 strings out of 493488
+ 52450 string characters out of 3141326
+ 217169 words of memory out of 3000000
+ 7036 multiletter control sequences out of 15000+200000
+ 81795 words of font info for 98 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 35i,10n,47p,253b,222s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2012/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb></usr/local/te
-xlive/2012/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/local/texlive/2
-012/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/local/texlive/2012/tex
-mf-dist/fonts/type1/adobe/utopia/putri8a.pfb>
-Output written on caw_is_proposal.pdf (2 pages, 49528 bytes).
+ 35i,10n,47p,253b,310s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2012/texmf-dist/fonts/enc/
+dvips/base/8r.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/fourie
+r/fourier-ms.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/adobe/utopia/p
+utr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/adobe/utopia/putri8a.
+pfb>
+Output written on caw_is_proposal.pdf (3 pages, 47543 bytes).
 PDF statistics:
- 28 PDF objects out of 1000 (max. 8388607)
- 19 compressed objects within 1 object stream
+ 27 PDF objects out of 1000 (max. 8388607)
+ 18 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

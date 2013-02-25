@@ -36,7 +36,7 @@
 \normalfont \normalsize 
 \textsc{Department of Computer Science, Rochester Institute of Technology} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{2pt} \\[0.4cm] % Thin top horizontal rule
-\huge Narrowing Bounds for Edge Folkman Numbers \\ 
+\huge Narrowing the Edge Folkman Number Bounds \\ 
 \Large Independent Study Proposal \\
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
@@ -54,14 +54,14 @@
 %----------------------------------------------------------------------------------------
 
 \section{Background}
-Edge Folkman numbers, first introduced by Folkman in 1960 (TODO: CITE), are concerned
+Edge Folkman numbers, first introduced by Folkman in 1970 \cite{Folkman}, are concerned
 with the study of graphs in which a monochromatic coloring of a particular subgraph always exists. 
 We write $G \to (a_1, ..., a_k; p)^e$ if for ever edge coloring of an undirected simple graph $G$ not 
 containing $K_p$, there exists a monochromatic $K_{a_{i}}$ in color $i$ for some $i \in \{1, ..., k\}$. 
 The edge Folkman number is defined as $F_e(a_1, ..., a_k) = \min\{|V(G)| : G \to (a_1, ..., a_k; p)^e\}$.
 In 1970 Folkman proved that for all $k > \max(s,t)$, edge- and vertex- Folkman numbers $F_e(s,t;k$
-and $F_v(s,t;k)$ exist (TODO: CITE). Prior to this, Erdos and Hajnal pose the problem of finding $F_e(3,3;4)$, which
-can be informally stated as the following: (TODO: CITE) \\
+and $F_v(s,t;k)$ exist. Prior to this, Erdos and Hajnal pose the problem of finding $F_e(3,3;4)$, which
+can be informally stated as the following \cite{Erdos01}: \\
 
 \noindent \emph{What is the order of the smallest $K_4$-free graph for which any $2$-coloring of its edges must contain at least one 
 monochromatic triangle?}\\
@@ -73,6 +73,29 @@ Table \ref{tab:history} enumerates the work on this problem and leads us to the
 current state of the field.
 
 % TOO: insert table from alex's paper here.
+\begin{table}
+\caption{History of $F_e(e,e;4)$}
+\begin{center}
+	\begin{tabular}{c|c|l|c}
+	\hline
+	Year & Bounds & Who & Ref. \\ \hline
+	1967 & any? & Erd\H os-Hajnal & \cite{Erdos01} \\
+	1970 & exist & Folkman & \cite{Folkman} \\
+	1972 & $\geq 10$ & Lin & \cite{lin} \\
+	1975 & $\leq 10^{10}$? & Erd\H os offers \$100 for proof & ~ \\
+	1986 & $\leq 8 \times 10^{11}$ & Frankl-R\H odl & \cite{frankl86} \\
+	1988 & $\leq 3 \times 10^9$ & Spencer & \cite{spencer88} \\
+	1999 & $\geq 16$ & Piwakowski et al (implicit) & \cite{piwakowski99} \\
+	2007 & $\geq 19$ & Radziszowski-Xu & \cite{spr07} \\
+	2008 & $\leq 9697$ & Lu & \cite{lu08} \\
+	2008 & $\leq 941$ & Dudek-R\H odel & \cite{dudek08} \\
+	2012 & $\leq 786$ & Lange et al & TODO \\
+	2012 & $\leq 100$? & Garaham offers \$100 for proof & ~ \\
+	\hline
+	\end{tabular}
+\end{center}
+\label{tab:history}
+\end{table}
 
 \section{Proposed Work}
 The current lower bound for $F_e(3,3;4)$ stands at $19$ (TODO: CITE). A significant step
@@ -85,5 +108,41 @@ TODO: upper bound attacking G127, and subgraph extensions using 3-sat solvers
 
 \section{Outcomes and Deliverables}
 Publication-ready paper and more in-depth progress report for the entire project
+
+
+%%%%% REFERENCES %%%%%
+
+\begin{thebibliography}{9}
+
+\bibitem{Folkman} Jon Folkman. Graphs with monochromatic complete subgraphs in
+every edge coloring. \emph{SIAM Journal of Applied Mathematics}. 18 (1970), 19-24.
+
+\bibitem{Erdos01} P. Erd\H os, A. Hajnal. Research problem 2-5. \emph{Journal of Combinatory Theory}, 
+2 (1967), 104.
+
+\bibitem{lin} Shen Lin. On Ramsey numbers and $K_r$-coloring of graphs. \emph{Journal of
+Combinatiorial Theory, Series B}, 12:82-92, 1972.
+
+\bibitem{frankl86} Peter Frankl and Vojtech R\H odl. Large triangle-free subgraphs
+in graphs with $K_4$. \emph{Graphs and Combinatorics}, 2:135-144, 1986.
+
+\bibitem{spencer88} Joel Spencer. Three hunder million points suffice. \emph{Journal of
+Combinatiorial Theory, Series A}, 49(2):210-217, 1988. Also see erratum by M. Hovey in
+Vol. 50, p. 323.
+
+\bibitem{piwakowski99} Konrad, Piwakoswki, Stanis{\l}aw P. Radziszowski, and Sebastian
+Urba\'nski. Computation of the Folkman Number $F_e(3,3;5)$. \emph{Journal of Graph
+Theory}, 32:41-49, 1999.
+
+\bibitem{spr07} Stanis{\l}aw P. Radziszowski and Xiaodong Xu. On the Most Wanted
+Folkman Graph. \emph{Geocombinatiorics}, 16(4):367-381, 2007.
+
+\bibitem{lu08} Linyuan Lu. Explicit Construction of Samll Folkman Graphs. \emph{SIAM Journal
+on Discrete Mathematics}, 21(4):1053-1060, January 2008.
+
+\bibitem{dudek08} Andrzej Dudek and Vojtech R\H odel. On the Folkman Number $f(2,3,4)$.
+\emph{Experimental Mathematics}, 17(1):63-67, 2008.
+
+\end{thebibliography}
 
 \end{document}
