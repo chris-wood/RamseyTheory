@@ -8,7 +8,7 @@
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
 \usepackage{sectsty} % Allows customizing section commands
-\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+%\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
 
 \usepackage{fancyhdr} % Custom headers and footers
 \pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
@@ -18,11 +18,24 @@
 \fancyfoot[R]{\thepage} % Page numbering for right footer
 \renewcommand{\headrulewidth}{0pt} % Remove header underlines
 \renewcommand{\footrulewidth}{0pt} % Remove footer underlines
-\setlength{\headheight}{13.6pt} % Customize the height of the header
 
-\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
-\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
-\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*0}{*0}
+\titlespacing{\subsection}{0pt}{*0}{*0}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parsep}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\topmargin}{0pt}
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+
+%\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+%\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+%\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
 
 \setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
 
@@ -61,10 +74,10 @@ containing $K_p$, there exists a monochromatic $K_{a_{i}}$ in color $i$ for some
 The edge Folkman number is defined as $F_e(a_1, ..., a_k) = \min\{|V(G)| : G \to (a_1, ..., a_k; p)^e\}$.
 In 1970 Folkman proved that for all $k > \max(s,t)$, edge- and vertex- Folkman numbers $F_e(s,t;k$
 and $F_v(s,t;k)$ exist. Prior to this, Erdos and Hajnal pose the problem of finding $F_e(3,3;4)$, which
-can be informally stated as the following \cite{Erdos01}: \\
+can be informally stated as the following \cite{Erdos01}: 
 
-\noindent \emph{What is the order of the smallest $K_4$-free graph for which any $2$-coloring of its edges must contain at least one 
-monochromatic triangle?}\\
+\noindent \emph{What is the order of the smallest $K_4$-free graph for which any $2$-coloring of 
+its edges must contain at least one monochromatic triangle?}
 
 This is equivalent to finding the smallest $K_4$-free graph that is not the union of two 
 triangle-free graphs. Since the proposition of this problem, there has been a significant
@@ -72,7 +85,6 @@ amount of work towards aimed at narrowing the upper and lower bounds of $F_e(3,3
 Table \ref{tab:history} enumerates the work on this problem and leads us to the 
 current state of the field.
 
-% TOO: insert table from alex's paper here.
 \begin{table}
 \caption{History of $F_e(e,e;4)$}
 \begin{center}
@@ -97,18 +109,58 @@ current state of the field.
 \label{tab:history}
 \end{table}
 
-\section{Proposed Work}
-The current lower bound for $F_e(3,3;4)$ stands at $19$ (TODO: CITE). A significant step
-forward would be to push this bound to $20$ using massive computations. Naturally, it is 
-infeasible to enumerate all possible graphs on $20$ vertices and check to see if the arrowing 
-property does not hold. 
+\section{Problems}
+\subsection{Lower Bound}
+The current lower bound for $F_e(3,3;4)$ stands at $19$ \cite{spr07}. The proof used for this bound,
+which relies on the existence of independent sets of size $k$ in a graph $G$ on $18$ vertices,
+where $k = 4$, cannot easily be extended to graphs on $19$ vertices. It is estimated
+that more than $10^{19}$ nonisomorphic, $K_4$-free graphs on $19$ vertices exist \cite{spr1995}. 
 
-TODO: lower bound, pushing towards 20 using large-scale computations
-TODO: upper bound attacking G127, and subgraph extensions using 3-sat solvers
+% TODO: state this proof more clearly...
+The proof for this bound relies on the fact that $H \to (3,3;4)^v \Rightarrow H + x \to (3,3;5)^e$ and 
+$F_e(3,3;5) = 15$. More specifically, using all nonisomorphic graphs on $18$ vertices with
+contained independent sets of size $k = 4$, the authors were show that, for each candidate graph
+$G$, the graph 
+
+\subsection{Upper Bound}
+The second segment of this project is to address the conjecture that $F_e(3,3;4) \leq 127$ by
+examining the graph $G_{127} = (\mathbb{Z}_{127}, E = \{(x,y) | x - y = \alpha^3 \mod 127\})$.
+It was first conjectured that $G_{127} \to (3,3)^e$ in \cite{spr07}, where the intuition for this
+conjecture is that $G_{127}$ has a large number of triangles and many small dense subgraphs.
+We will attempt to prove or disprove this conjecture by showing that $G_{127} \not \to (3,3)^e$
+using subgraph $H$ extensions. More specifically, we will identify subgraphs $H$ witnessing
+$H \not \to (3,3)^e$ and then attempt to extend $H$ to all of $G$. However, due to the computationally
+intensive nature of this procedure, we will reduce $\{H | H \not \to (3,3)^e\}$ to 3-SAT and leverage
+the power of SAT solvers such as Minisat \cite{minisat} and zChaff \cite{zchaff}. The reduction works by
+mapping the edges in $E(H)$ to variables in $\phi_G \in$ 3-SAT, and for edge adding the following
+clauses to $\phi_G$:
+\begin{align*}
+(x + y + z) \wedge (\bar{x} + \bar{y} + \bar{z})
+\end{align*}
+Clearly, $H \not \to (3,3)^e \Leftrightarrow \phi_G$ is satisfiable. 
+
+TODO: 
+
+\section{Summary of Proposed Study}
+The work for this project will be two-fold. 
+
+1. addressing lower bound
+2. addressing upper bound
+
+A major part of this work will be identifying
+candidate subgraphs $H$ for extension that can easily be solved using the aforementioned 3-SAT solvers.
+
+\section{Project Goals}
+\begin{itemize}
+	\item Research current methods and potential techniques for computing the upper and lower bounds of Folkman numbers (in particular, $F_e(3,3;4)$).
+	\item Implement software to aid in the computation of Folkman number bounds.
+	\item Begin a survey paper outlining the history of Folkman number research \cite{sprSurvey}.
+\end{itemize}
 
 \section{Outcomes and Deliverables}
-Publication-ready paper and more in-depth progress report for the entire project
-
+- Publication-ready paper and more in-depth progress report for the entire project
+- Report that weighs the performance of various SAT solvers for solving this arrowing problem with G127
+- Report discussing the subgraph pruning techniques used for the lower bound
 
 %%%%% REFERENCES %%%%%
 
@@ -122,6 +174,9 @@ every edge coloring. \emph{SIAM Journal of Applied Mathematics}. 18 (1970), 19-2
 
 \bibitem{lin} Shen Lin. On Ramsey numbers and $K_r$-coloring of graphs. \emph{Journal of
 Combinatiorial Theory, Series B}, 12:82-92, 1972.
+
+\bibitem{spr1995} Brendan D. McKay and Stanis{\l}aw P. Radziszowski. R(4,5) = 25. \emph{Journal
+of Graph Theory}, 19(1995), 309-322.
 
 \bibitem{frankl86} Peter Frankl and Vojtech R\H odl. Large triangle-free subgraphs
 in graphs with $K_4$. \emph{Graphs and Combinatorics}, 2:135-144, 1986.
@@ -142,6 +197,12 @@ on Discrete Mathematics}, 21(4):1053-1060, January 2008.
 
 \bibitem{dudek08} Andrzej Dudek and Vojtech R\H odel. On the Folkman Number $f(2,3,4)$.
 \emph{Experimental Mathematics}, 17(1):63-67, 2008.
+
+\bibitem{minisat} Niklas Sorensson and Niklas Een. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005}, (2005): 53.
+
+\bibitem{zchaff} Yogesh Mahajan, Fu Zhaohui, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg, 2005.
+
+\bibitem{sprSurvey} Stanis{\l}aw P. Radziszowski. Small Ramsey Numbers. \emph{Electronic Journal of Combinatorics}, 1 (2011).
 
 \end{thebibliography}
 
