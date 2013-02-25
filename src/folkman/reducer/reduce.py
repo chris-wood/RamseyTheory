@@ -4,11 +4,20 @@
 from networkx import nx
 
 def reduce(G):
+	''' Generate the CNF formula for the 3-SAT version of the reduction.
+	'''
 	triangleSet = []
+	edgeMap = {}
+	cnf = []
 
+	# Map the edges to integer identifiers
 	edgeIndex = 0
 	for edge in G.edges():
 		edgeIndex = edgeIndex + 1
+		edgeMap[edge] = edgeIndex
+
+	edgeIndex = 0
+	for edge in G.edges():
 
 		# TODO: map edges to variables and then generate the CNF formula as needed
 
@@ -30,11 +39,27 @@ def reduce(G):
 				vTuple = (vSet[0], vSet[1], vSet[2])
 				if not (vTuple in triangleSet):
 					triangleSet.append(vTuple)
+					cnf.append((edgeMap[edge], edgeMap[edge1], edgeMap[edge2])) # positive clause
+					cnf.append((edgeMap[edge] * -1, edgeMap[edge1] * -1, edgeMap[edge2] * -1)) # negative clause
 
+	# return the CNF formula and number of variables 
+	return len(edgeMap), cnf
+
+def makeDimacsCNF(numVars, cnf):
+	''' Generate the DIMACS CNF file string for the specified 3-SAT CNF formula.
+	'''
+	bucket = "p cnf " + str(numVars) + " " + str(len(cnf)) + "\n"
+	for clause in cnf:
+		v1 = str(clause[0])
+		v2 = str(clause[1])
+		v3 = str(clause[2])
+		bucket = bucket + v1 + " " + v2 + " " + v3 + " 0\n"
+	return bucket
 
 def main():
 	G = nx.complete_graph(4)
-	reduce(G)
+	numVars, cnf = reduce(G)
+	print(makeDimacsCNF(numVars, cnf))
 
 if __name__ == "__main__":
 	main()
