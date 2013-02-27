@@ -3,6 +3,27 @@
 
 from networkx import nx
 
+class GNR:
+	''' Class for the graph G(n,r) = (Z_n, {(u,v) | u - v = alpha^r mod n}).
+	'''
+	def __init__(self, n, r):
+		self.graph = nx.Graph()
+
+		# Add the vertices
+		for v in range(0, n):
+			self.graph.add_node(v)
+
+		# Add the edges
+		for x in range(0, n):
+			for y in range(0, n):
+				for alpha in range(0, n):
+					# E(G) = {(x,y) | x-y = alpha^r mod n}
+					if (((x - y) % n) == ((alpha ** r) % n)):
+						self.graph.add_edge(x, y)
+
+	def getGraph(self):
+		return self.graph
+
 def reduce(G):
 	''' Generate the CNF formula for the 3-SAT version of the reduction.
 	'''
@@ -16,11 +37,9 @@ def reduce(G):
 		edgeIndex = edgeIndex + 1
 		edgeMap[edge] = edgeIndex
 
+	# Walk the edges, search for triangles, and add clauses to the CNF formula
 	edgeIndex = 0
 	for edge in G.edges():
-
-		# TODO: map edges to variables and then generate the CNF formula as needed
-
 		for vertex in G.nodes():
 			edge1 = ()
 			if (edge[0] < vertex):
@@ -57,8 +76,8 @@ def makeDimacsCNF(numVars, cnf):
 	return bucket
 
 def main():
-	G = nx.complete_graph(4)
-	numVars, cnf = reduce(G)
+	G = GNR(127,3)
+	numVars, cnf = reduce(G.graph)
 	print(makeDimacsCNF(numVars, cnf))
 
 if __name__ == "__main__":
