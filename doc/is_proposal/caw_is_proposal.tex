@@ -62,10 +62,6 @@
 
 \maketitle % Print the title
 
-%----------------------------------------------------------------------------------------
-%	PROBLEM 1
-%----------------------------------------------------------------------------------------
-
 \section{Background}
 Edge Folkman numbers, first introduced by Folkman in 1970 \cite{Folkman}, are concerned
 with the study of graphs in which a monochromatic coloring of a particular subgraph always exists. 
@@ -123,15 +119,15 @@ contained independent sets of size $k = 4$, the authors were show that, for each
 $G$, the graph 
 
 \subsection{Upper Bound}
-It was proven by Dudek and Rodel that $G \to (3,3)^e$ if and only if $MC(H_G) < 2t_{\Delta}(G)$ \cite{dudek08},
+Dudek and Rodel proved that $G \to (3,3)^e$ if and only if $MC(H_G) < 2t_{\Delta}(G)$ \cite{dudek08},
 where $MC(H_G)$ is the size of the maximum cut of graph $H = (E(G), \{(e_1, e_2) | \{e_1, e_2, e_3\}$ form a triangle
 in $G\}$. Since MAX-CUT is an NP-complete problem, computations using this fact rely on approximation
 algorithms, such as the one proposed by Geomans and Williamson (TODO: CITE). In fact, Lange et al \cite{arlFolkman}
 used this approximation approach, which formulates the MAX-CUT problem as a semidefinite program (SDP).
-In their work, the authors examined graphs of the form (TODO: general form here)
+In their work, the authors examined graphs of the form 
+$G(n, r) = (\mathbb{Z}_{n}, \{(x,y) | x \not= y, x - y \equiv \alpha^r \mod n, \alpha \in \mathbb{Z}_{n}\}$
 Using these computations, the authors were able to show that $MC(H_{G_{786}}) \leq 857750$, where
-$G_{786} = G(786, 3) = (\mathbb{Z}_{786}, \{(x,y) | x \not= y, x - y \equiv \alpha^r \mod 786, \alpha \in \mathbb{Z}_{786}\}$,
-and since $2t_{\Delta}(G_{786}) = 857762$, the authors conclude that $F_e(3,3;4) \leq 786$. 
+$G_{786} = G(786, 3)$, and since $2t_{\Delta}(G_{786}) = 857762$, it is clear that $F_e(3,3;4) \leq 786$. 
 
 It has been conjectured that $F_e(3,3;4) \leq 127$ by using a witnessing graph 
 $G_{127} = (\mathbb{Z}_{127}, E = \{(x,y) | x - y = \alpha^3 \mod 127\})$.
@@ -141,24 +137,34 @@ We will attempt to prove or disprove this conjecture by showing that $G_{127} \n
 using subgraph $H$ extensions. More specifically, we will identify subgraphs $H$ witnessing
 $H \not \to (3,3)^e$ and then attempt to extend $H$ to all of $G$. 
 
-Unfortunately, due to the computationally
-intensive nature of this procedure, we will reduce $\{H | H \not \to (3,3)^e\}$ to 3-SAT and leverage
+\section{Summary of Proposed Study}
+The ultimate goal of this work is to attack both the upper and lower bounds of $F_e(3,3;4)$. 
+Unfortunately, it will not be feasible to leverage the same technique used by Radziszowski 
+et al to prove the current bound of $19$. The reason for this is that the estimate number of independent
+sets in non isomorphic graphs on $19$ vertices is expected to be more than $10^{15}$ (TODO: CITE). 
+Clearly, the number of candidate graphs $G$ to check if $G \to (3,3)^e$ needs to be smaller, so we will
+work towards devising constraints similar to the chromatic number $\chi(G) \geq 6$. 
+
+Attacking the upper bound will be an entirely different form of computation. In particular, we will need to find a 
+graph $G$ on $n$ vertices where $G \to (3,3)^e$. As previously discussed, we will be focusing on the graph 
+$G_{127} = G(127,3)$ in an attempt to prove the conjecture that $G_{127} \to (3,3)^e$. 
+To determine prove this we will decompose the problem arrowing problems on subgraphs $H$ that 
+witness $H \not \to (3,3)^e$, and then carefully extend $H$ to encompass all of $G$. 
+
+Unfortunately, due to the computationally intensive nature of this procedure, we will 
+reduce $\{H | H \not \to (3,3)^e\}$ to 3-SAT and leverage
 the power of SAT solvers such as Minisat \cite{minisat} and zChaff \cite{zchaff}. The reduction works by
 mapping the edges in $E(H)$ to variables in $\phi_G \in$ 3-SAT, and for edge adding the following
 clauses to $\phi_G$:
 \begin{align*}
 (x + y + z) \wedge (\bar{x} + \bar{y} + \bar{z})
 \end{align*}
-Clearly, $H \not \to (3,3)^e \Leftrightarrow \phi_G$ is satisfiable. 
+Clearly, $H \not \to (3,3)^e \Leftrightarrow \phi_G$ is satisfiable. Therefore, if $\phi_G$ is not satisfiable,
+then $G \to (3,3)^e$, and so $F_e(3,3;4)$.
 
-\section{Summary of Proposed Study}
-The work for this project will be two-fold. 
-
-1. addressing lower bound
-2. addressing upper bound
-
-A major part of this work will be identifying
-candidate subgraphs $H$ for extension that can easily be solved using the aforementioned 3-SAT solvers.
+A major part of this work will be identifying candidate subgraphs $H$ for extension that 
+can easily be solved using the aforementioned 3-SAT solvers. We will also take this opportunity
+to compare the performance of popular k-SAT solvers published in the literature \cite{zchaff} \cite{minisat}.
 
 \section{Project Goals and Deliverables}
 The following project goals have been identified for this work
