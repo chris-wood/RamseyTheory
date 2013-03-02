@@ -16,10 +16,11 @@ class GNR:
 		# Add the edges
 		for x in range(0, n):
 			for y in range(0, n):
-				for alpha in range(0, n):
-					# E(G) = {(x,y) | x-y = alpha^r mod n}
-					if (((x - y) % n) == ((alpha ** r) % n)):
-						self.graph.add_edge(x, y)
+				if (x != y):
+					for alpha in range(0, n):
+						# E(G) = {(x,y) | x-y = alpha^r mod n}
+						if (((x - y) % n) == ((alpha ** r) % n)):
+							self.graph.add_edge(x, y)
 
 	def getGraph(self):
 		return self.graph
@@ -36,6 +37,7 @@ def reduce(G):
 	for edge in G.edges():
 		edgeIndex = edgeIndex + 1
 		edgeMap[edge] = edgeIndex
+	print("number of edges = " + str(edgeIndex))
 
 	# Walk the edges, search for triangles, and add clauses to the CNF formula
 	edgeIndex = 0
@@ -60,6 +62,7 @@ def reduce(G):
 					triangleSet.append(vTuple)
 					cnf.append((edgeMap[edge], edgeMap[edge1], edgeMap[edge2])) # positive clause
 					cnf.append((edgeMap[edge] * -1, edgeMap[edge1] * -1, edgeMap[edge2] * -1)) # negative clause
+	print("number of triangles = " + str(triangleSet))
 
 	# return the CNF formula and number of variables 
 	return len(edgeMap), cnf
@@ -78,7 +81,10 @@ def makeDimacsCNF(numVars, cnf):
 def main():
 	G = GNR(127,3)
 	numVars, cnf = reduce(G.graph)
-	print(makeDimacsCNF(numVars, cnf))
+	outFile = open('out.cnf', 'w')
+	output = makeDimacsCNF(numVars, cnf)
+	outFile.write(output)
+	#print(makeDimacsCNF(numVars, cnf))
 
 if __name__ == "__main__":
 	main()
