@@ -108,17 +108,15 @@ current state of the field.
 \section{Problems}
 \subsection{Lower Bound}
 The current lower bound for $F_e(3,3;4)$ stands at $19$ \cite{spr07}. The proof technique for this bound,
-which relies on the existence of independent sets of size $k$ in a graph $G$ on $18$ vertices,
-where $k = 4$, cannot easily be extended to graphs on $19$ vertices. It is estimated
-that more than $10^{19}$ nonisomorphic, $K_4$-free graphs on $19$ vertices exist \cite{spr1995}. 
-
-TODO: FIX THIS PROOF DISCUSSION
-
-% TODO: state this proof more clearly...
-The proof for this bound relies on the fact that $H \to (3,3;4)^v \Rightarrow H + x \to (3,3;5)^e$ and 
-$F_e(3,3;5) = 15$. More specifically, using all nonisomorphic graphs on $18$ vertices with
-contained independent sets of size $k = 4$, the authors were show that, for each candidate graph
-$G$, the graph 
+which relies on the fact that $H \to (3,3;4)^v \Rightarrow H + x \to (3,3;5)^e$, constructed all 
+nonisomorphic graphs $G$ on $18$ vertices that contained independent sets $I$ of cardinality $4$. Then, for
+each graph $G$, the authors used the fact that all induced subgraphs $H \in F_v(3,3;4)$, where $H$ is 
+composed of the vertex set $V(G) \setminus I$. Using computations, the authors then constructed
+all possible candidate graphs $G$ from these subgraphs $H$ by taking the union of the vertices in
+$I$ with every vertex set $A \subset M$, where $M$ is the set of all subsets $A \subset V(H)$ such that
+the graph induced by $A$ is a maximal triangle-free subgraph, and testing to see whether the resultant
+graph $G$ arrows $(3,3)^e$. The fact that $\chi(G) \geq 6$ if $G \in \mathcal{F}_e(3,3;4)$ was used to further
+restrict the candidate graphs $G$ that were checked. 
 
 \subsection{Upper Bound}
 Dudek and Rodel proved that $G \to (3,3)^e$ if and only if $MC(H_G) < 2t_{\Delta}(G)$ \cite{dudek08},
@@ -131,21 +129,20 @@ $G(n, r) = (\mathbb{Z}_{n}, \{(x,y) | x \not= y, x - y \equiv \alpha^r \mod n, \
 Using these computations, the authors were able to show that $MC(H_{G_{786}}) \leq 857750$, where
 $G_{786} = G(786, 3)$, and since $2t_{\Delta}(G_{786}) = 857762$, it is clear that $F_e(3,3;4) \leq 786$. 
 
-It has been conjectured that $F_e(3,3;4) \leq 127$ by using a witnessing graph 
-$G_{127} = (\mathbb{Z}_{127}, E = \{(x,y) | x - y = \alpha^3 \mod 127\})$.
-It was first conjectured that $G_{127} \to (3,3)^e$ in \cite{spr07}, where the intuition for this
-conjecture is that $G_{127}$ has a large number of triangles and many small dense subgraphs.
-We will attempt to prove or disprove this conjecture by showing that $G_{127} \not \to (3,3)^e$
-using subgraph $H$ extensions. More specifically, we will identify subgraphs $H$ witnessing
-$H \not \to (3,3)^e$ and then attempt to extend $H$ to all of $G$. 
+It has been conjectured that $F_e(3,3;4) \leq 127$, which is motivated by the graph 
+$G_{127} = (\mathbb{Z}_{127}, E = \{(x,y) | x - y = \alpha^3 \mod 127\})$ \cite{spr07}.
+The intuition for this conjecture is that $G_{127}$ has a large number of triangles and many small dense subgraphs.
+Proving or disproving this conjecture would be a significant result for the upper bound of
+$F_e(3,3;4)$.
 
 \section{Summary of Proposed Study}
 The ultimate goal of this work is to attack both the upper and lower bounds of $F_e(3,3;4)$. 
 Unfortunately, it will not be feasible to leverage the same technique used by Radziszowski 
-et al to prove the current bound of $19$. The reason for this is that the estimate number of independent
-sets in non isomorphic graphs on $19$ vertices is expected to be more than $10^{15}$ (TODO: CITE). 
+et al to prove the current bound of $19$. The reason for this is that the estimated number of independent
+sets of size $5$ in nonisomorphic graphs on $19$ vertices is expected to be more than $10^{19}$ \cite{spr1995}.
 Clearly, the number of candidate graphs $G$ to check if $G \to (3,3)^e$ needs to be smaller, so we will
-work towards devising constraints similar to the chromatic number $\chi(G) \geq 6$. 
+work towards devising constraints similar to the chromatic number $\chi(G) \geq 6$. We will also investigate
+other facts about graph structure imposed by membership in the set $\mathcal{F}_e(3,3;4)$. 
 
 Attacking the upper bound will be an entirely different form of computation. In particular, we will need to find a 
 graph $G$ on $n$ vertices where $G \to (3,3)^e$. As previously discussed, we will be focusing on the graph 
@@ -171,7 +168,8 @@ to compare the performance of popular k-SAT solvers published in the literature 
 \section{Project Goals and Deliverables}
 The following project goals have been identified for this work
 \begin{itemize}
-	\item Research current methods and potential techniques for computing the upper and lower bounds of Folkman numbers (in particular, $F_e(3,3;4)$).
+	\item Research current methods and potential techniques for computing the upper and lower bounds of Folkman 
+	numbers (in particular, $F_e(3,3;4)$).
 	\item Implement software to aid in the computation of Folkman number bounds.
 	\item Begin a survey paper outlining the history of Folkman number research \cite{sprSurvey}.
 \end{itemize}
@@ -179,7 +177,7 @@ The following project goals have been identified for this work
 By achieving these goals I will generate the following deliverables:
 \begin{itemize}
 	\item Publication-ready paper and more in-depth progress report for the entire project
-	\item Report that weighs the performance of various SAT solvers for solving this arrowing problem with G127
+	\item Report that weighs the performance of various SAT solvers for solving this arrowing problem with $G_{127}$
 	\item Report discussing the subgraph pruning techniques used for the lower bound
 \end{itemize}
 
