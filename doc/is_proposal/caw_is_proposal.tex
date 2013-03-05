@@ -110,7 +110,11 @@ current state of the field.
 The current lower bound for $F_e(3,3;4)$ stands at $19$ \cite{spr07}. The proof technique for this bound,
 which relies on the fact that $H \to (3,3;4)^v \Rightarrow H + x \to (3,3;5)^e$, constructed all 
 nonisomorphic graphs $G$ on $18$ vertices that contained independent sets $I$ of cardinality $4$. Then, for
+<<<<<<< HEAD
 each graph $G$, the authors used the fact that all induced subgraphs $H \in F_v(3,3;4)$, where $H$ is 
+=======
+each graph $G$, the authors used the fact that all induced subgraphs $H \in \mathcal{F}_v(3,3;4)$, where $H$ is 
+>>>>>>> GAHHHH. Made some typos.
 composed of the vertex set $V(G) \setminus I$. Using computations, the authors then constructed
 all possible candidate graphs $G$ from these subgraphs $H$ by taking the union of the vertices in
 $I$ with every vertex set $A \subset M$, where $M$ is the set of all subsets $A \subset V(H)$ such that
@@ -122,7 +126,8 @@ restrict the candidate graphs $G$ that were checked.
 Dudek and Rodel proved that $G \to (3,3)^e$ if and only if $MC(H_G) < 2t_{\Delta}(G)$ \cite{dudek08},
 where $MC(H_G)$ is the size of the maximum cut of graph $H = (E(G), \{(e_1, e_2) | \{e_1, e_2, e_3\}$ form a triangle
 in $G\}$. Since MAX-CUT is an NP-complete problem, computations using this fact rely on approximation
-algorithms, such as the one proposed by Geomans and Williamson (TODO: CITE). In fact, Lange et al \cite{arlFolkman}
+algorithms, such as the one proposed by Geomans and Williamson \cite{geomans95-maxcut}. 
+In fact, Lange et al \cite{arlFolkman}
 used this approximation approach, which formulates the MAX-CUT problem as a semidefinite program (SDP).
 In their work, the authors examined graphs of the form 
 $G(n, r) = (\mathbb{Z}_{n}, \{(x,y) | x \not= y, x - y \equiv \alpha^r \mod n, \alpha \in \mathbb{Z}_{n}\}$
@@ -222,6 +227,8 @@ on Discrete Mathematics}, 21(4):1053-1060, January 2008.
 \bibitem{zchaff} Yogesh Mahajan, Fu Zhaohui, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg, 2005.
 
 \bibitem{sprSurvey} Stanis{\l}aw P. Radziszowski. Small Ramsey Numbers. \emph{Electronic Journal of Combinatorics}, 1 (2011).
+
+\bibitem{geomans95-maxcut} Michael Goemans and David Williamson. Improved Maximum Approximation Algorithms for Maximum Cut and Satisability Problems Using Semidefinite Programming. \emph{Journal of the ACM}, 42(6):1115-1145, 1995.
 
 \bibitem{arlFolkman} TODO
 
