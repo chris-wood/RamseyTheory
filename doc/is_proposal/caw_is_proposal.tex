@@ -49,7 +49,7 @@
 \normalfont \normalsize 
 \textsc{Department of Computer Science, Rochester Institute of Technology} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{2pt} \\[0.4cm] % Thin top horizontal rule
-\huge Narrowing the Edge Folkman Number Bounds \\ 
+\huge Study of the Edge Folkman Number Bounds \\ 
 \Large Independent Study Proposal \\
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
@@ -64,22 +64,23 @@
 
 \section{Background}
 Edge Folkman numbers, first introduced by Folkman in 1970 \cite{Folkman}, are concerned
-with the study of graphs in which a monochromatic coloring of a particular subgraph always exists. 
-We write $G \to (a_1, ..., a_k; p)^e$ if for ever edge coloring of an undirected simple graph $G$ not 
+with the graphs in which a monochromatic copy of a particular subgraph exists for all edge colorings. 
+We write $G \to (a_1, ..., a_k; p)^e$ iff for every edge coloring of an undirected simple graph $G$ not 
 containing $K_p$, there exists a monochromatic $K_{a_{i}}$ in color $i$ for some $i \in \{1, ..., k\}$. 
 The edge Folkman number is defined as $F_e(a_1, ..., a_k) = \min\{|V(G)| : G \to (a_1, ..., a_k; p)^e\}$.
+Similarly, the vertex Folkman number is defined as $F_v(a_1, ..., a_k) = \min\{|V(G)| : G \to (a_1, ..., a_k; p)^v\}$.
 In 1970 Folkman proved that for all $k > \max(s,t)$, edge- and vertex- Folkman numbers $F_e(s,t;k$
-and $F_v(s,t;k)$ exist. Prior to this, Erdos and Hajnal pose the problem of finding $F_e(3,3;4)$, which
-can be informally stated as the following question \cite{Erdos01}: 
+and $F_v(s,t;k)$ exist. Prior to this, Erd\H{o}s and Hajnal posed the problem of finding $F_e(3,3;4)$, which
+can be equivalently stated as the following question \cite{Erdos01}: 
 
 \noindent \emph{What is the order of the smallest $K_4$-free graph for which any $2$-coloring of 
 its edges must contain at least one monochromatic triangle?}
 
 This is equivalent to finding the smallest $K_4$-free graph that is not the union of two 
 triangle-free graphs. Since the proposition of this problem, there has been a significant
-amount of work towards aimed at narrowing the upper and lower bounds of $F_e(3,3;4)$. 
-Table \ref{tab:history} enumerates the work on this problem and leads us to the 
-current state of the field.
+amount of work aimed at narrowing the upper and lower bounds of $F_e(3,3;4)$. 
+Table \ref{tab:history} enumerates main developments of the previous work on this problem 
+and leads us to the current state of the field.
 
 \begin{table}
 \caption{History of $F_e(e,e;4)$}
@@ -90,14 +91,14 @@ current state of the field.
 	1967 & any? & Erd\H os-Hajnal & \cite{Erdos01} \\
 	1970 & exist & Folkman & \cite{Folkman} \\
 	1972 & $\geq 10$ & Lin & \cite{lin} \\
-	1975 & $\leq 10^{10}$? & Erd\H os offers \$100 for proof & ~ \\
-	1986 & $\leq 8 \times 10^{11}$ & Frankl-R\H odl & \cite{frankl86} \\
+	1975 & $\leq 10^{10}$? & Erd\H{o}s offers \$100 for proof & ~ \\
+	1986 & $\leq 8 \times 10^{11}$ & Frankl-R\"{o}dl & \cite{frankl86} \\
 	1988 & $\leq 3 \times 10^9$ & Spencer & \cite{spencer88} \\
-	1999 & $\geq 16$ & Piwakowski et al (implicit) & \cite{piwakowski99} \\
+	1999 & $\geq 16$ & Piwakowski et al. (implicit) & \cite{piwakowski99} \\
 	2007 & $\geq 19$ & Radziszowski-Xu & \cite{spr07} \\
 	2008 & $\leq 9697$ & Lu & \cite{lu08} \\
-	2008 & $\leq 941$ & Dudek-R\H odel & \cite{dudek08} \\
-	2012 & $\leq 786$ & Lange et al & \cite{arlFolkman} \\
+	2008 & $\leq 941$ & Dudek-R\"{o}dl & \cite{dudek08} \\
+	2012 & $\leq 786$ & Lange et al. & \cite{arlFolkman} \\
 	2012 & $\leq 100$? & Garaham offers \$100 for proof & ~ \\
 	\hline
 	\end{tabular}
@@ -105,16 +106,12 @@ current state of the field.
 \label{tab:history}
 \end{table}
 
-\section{Problems}
+\section{Two Problems}
 \subsection{Lower Bound}
 The current lower bound for $F_e(3,3;4)$ stands at $19$ \cite{spr07}. The proof technique for this bound,
 which relies on the fact that $H \to (3,3;4)^v \Rightarrow H + x \to (3,3;5)^e$, constructed all 
 nonisomorphic graphs $G$ on $18$ vertices that contained independent sets $I$ of cardinality $4$. Then, for
-<<<<<<< HEAD
-each graph $G$, the authors used the fact that all induced subgraphs $H \in F_v(3,3;4)$, where $H$ is 
-=======
 each graph $G$, the authors used the fact that all induced subgraphs $H \in \mathcal{F}_v(3,3;4)$, where $H$ is 
->>>>>>> GAHHHH. Made some typos.
 composed of the vertex set $V(G) \setminus I$. Using computations, the authors then constructed
 all possible candidate graphs $G$ from these subgraphs $H$ by taking the union of the vertices in
 $I$ with every vertex set $A \subset M$, where $M$ is the set of all subsets $A \subset V(H)$ such that
@@ -123,39 +120,39 @@ graph $G$ arrows $(3,3)^e$. The fact that $\chi(G) \geq 6$ if $G \in \mathcal{F}
 restrict the candidate graphs $G$ that were checked. 
 
 \subsection{Upper Bound}
-Dudek and Rodel proved that $G \to (3,3)^e$ if and only if $MC(H_G) < 2t_{\Delta}(G)$ \cite{dudek08},
+Dudek and R\"{o}dl proved that $G \to (3,3)^e$ if and only if $MC(H_G) < 2t_{\Delta}(G)$ \cite{dudek08},
 where $MC(H_G)$ is the size of the maximum cut of graph $H = (E(G), \{(e_1, e_2) | \{e_1, e_2, e_3\}$ form a triangle
 in $G\}$. Since MAX-CUT is an NP-complete problem, computations using this fact rely on approximation
 algorithms, such as the one proposed by Geomans and Williamson \cite{geomans95-maxcut}. 
-In fact, Lange et al \cite{arlFolkman}
+In fact, Lange et al. \cite{arlFolkman}
 used this approximation approach, which formulates the MAX-CUT problem as a semidefinite program (SDP).
 In their work, the authors examined graphs of the form 
-$G(n, r) = (\mathbb{Z}_{n}, \{(x,y) | x \not= y, x - y \equiv \alpha^r \mod n, \alpha \in \mathbb{Z}_{n}\}$
+$G(n, r) = (\mathbb{Z}_{n}, \{(x,y) | x \not= y, x - y \equiv \alpha^r \mod n, \alpha \in \mathbb{Z}_{n}\}$.
 Using these computations, the authors were able to show that $MC(H_{G_{786}}) \leq 857750$, where
 $G_{786} = G(786, 3)$, and since $2t_{\Delta}(G_{786}) = 857762$, it is clear that $F_e(3,3;4) \leq 786$. 
 
 It has been conjectured that $F_e(3,3;4) \leq 127$, which is motivated by the graph 
 $G_{127} = (\mathbb{Z}_{127}, E = \{(x,y) | x - y = \alpha^3 \mod 127\})$ \cite{spr07}.
 The intuition for this conjecture is that $G_{127}$ has a large number of triangles and many small dense subgraphs.
-Proving or disproving this conjecture would be a significant result for the upper bound of
+Proving or disproving the conjecture that $G_{127} \to (3,3)^e$ would be a significant result for the upper bound of
 $F_e(3,3;4)$.
 
 \section{Summary of Proposed Study}
 The ultimate goal of this work is to attack both the upper and lower bounds of $F_e(3,3;4)$. 
 Unfortunately, it will not be feasible to leverage the same technique used by Radziszowski 
-et al to prove the current bound of $19$. The reason for this is that the estimated number of independent
+et al. to prove the current bound of $19$. The reason for this is that the estimated number of independent
 sets of size $5$ in nonisomorphic graphs on $19$ vertices is expected to be more than $10^{19}$ \cite{spr1995}.
-Clearly, the number of candidate graphs $G$ to check if $G \to (3,3)^e$ needs to be smaller, so we will
+Clearly, the number of candidate graphs $G$ to check for $G \to (3,3)^e$ needs to be smaller, so we will
 work towards devising constraints similar to the chromatic number $\chi(G) \geq 6$. We will also investigate
 other facts about graph structure imposed by membership in the set $\mathcal{F}_e(3,3;4)$. 
 
 Attacking the upper bound will be an entirely different form of computation. In particular, we will need to find a 
 graph $G$ on $n$ vertices where $G \to (3,3)^e$. As previously discussed, we will be focusing on the graph 
 $G_{127} = G(127,3)$ in an attempt to prove the conjecture that $G_{127} \to (3,3)^e$. 
-To determine prove this we will decompose the problem arrowing problems on subgraphs $H$ that 
+To determine this we will decompose the problem of arrowing into problems on subgraphs $H$ that 
 witness $H \not \to (3,3)^e$, and then carefully extend $H$ to encompass all of $G$. 
 
-Unfortunately, due to the computationally intensive nature of this procedure, we will 
+Due to the computationally intensive nature of this procedure, we will 
 reduce $\{H | H \not \to (3,3)^e\}$ to 3-SAT and leverage
 the power of SAT solvers such as Minisat \cite{minisat} and zChaff \cite{zchaff}. The reduction works by
 mapping the edges in $E(H)$ to variables in $\phi_G \in$ 3-SAT, and for edge adding the following
@@ -171,19 +168,20 @@ can easily be solved using the aforementioned 3-SAT solvers. We will also take t
 to compare the performance of popular k-SAT solvers published in the literature \cite{zchaff} \cite{minisat}.
 
 \section{Project Goals and Deliverables}
-The following project goals have been identified for this work
+The following project goals have been identified for this work:
 \begin{itemize}
 	\item Research current methods and potential techniques for computing the upper and lower bounds of Folkman 
 	numbers (in particular, $F_e(3,3;4)$).
+	\item Use SAT and SDP solvers in an attempt to solve the $G_{127} \to (3,3)^e$ conjecture.
 	\item Implement software to aid in the computation of Folkman number bounds.
 	\item Begin a survey paper outlining the history of Folkman number research \cite{sprSurvey}.
 \end{itemize}
 
 By achieving these goals I will generate the following deliverables:
 \begin{itemize}
-	\item Publication-ready paper and more in-depth progress report for the entire project
-	\item Report that weighs the performance of various SAT solvers for solving this arrowing problem with $G_{127}$
-	\item Report discussing the subgraph pruning techniques used for the lower bound
+	\item Publication-ready paper and more in-depth progress report for the entire project.
+	\item Report that weighs the performance of various SAT solvers for solving this arrowing problem with $G_{127}$.
+	\item Report discussing the subgraph pruning techniques used for the lower bound.
 \end{itemize}
 
 %%%%% REFERENCES %%%%%
@@ -193,7 +191,7 @@ By achieving these goals I will generate the following deliverables:
 \bibitem{Folkman} Jon Folkman. Graphs with monochromatic complete subgraphs in
 every edge coloring. \emph{SIAM Journal of Applied Mathematics}. 18 (1970), 19-24.
 
-\bibitem{Erdos01} P. Erd\H os, A. Hajnal. Research problem 2-5. \emph{Journal of Combinatory Theory}, 
+\bibitem{Erdos01} P. Erd\H{o}s, A. Hajnal. Research problem 2-5. \emph{Journal of Combinatory Theory}, 
 2 (1967), 104.
 
 \bibitem{lin} Shen Lin. On Ramsey numbers and $K_r$-coloring of graphs. \emph{Journal of
@@ -202,10 +200,10 @@ Combinatiorial Theory, Series B}, 12:82-92, 1972.
 \bibitem{spr1995} Brendan D. McKay and Stanis{\l}aw P. Radziszowski. R(4,5) = 25. \emph{Journal
 of Graph Theory}, 19(1995), 309-322.
 
-\bibitem{frankl86} Peter Frankl and Vojtech R\H odl. Large triangle-free subgraphs
+\bibitem{frankl86} Peter Frankl and Vojtech R\"{o}dl. Large triangle-free subgraphs
 in graphs with $K_4$. \emph{Graphs and Combinatorics}, 2:135-144, 1986.
 
-\bibitem{spencer88} Joel Spencer. Three hunder million points suffice. \emph{Journal of
+\bibitem{spencer88} Joel Spencer. Three hundred million points suffice. \emph{Journal of
 Combinatiorial Theory, Series A}, 49(2):210-217, 1988. Also see erratum by M. Hovey in
 Vol. 50, p. 323.
 
@@ -216,13 +214,13 @@ Theory}, 32:41-49, 1999.
 \bibitem{spr07} Stanis{\l}aw P. Radziszowski and Xiaodong Xu. On the Most Wanted
 Folkman Graph. \emph{Geocombinatiorics}, 16(4):367-381, 2007.
 
-\bibitem{lu08} Linyuan Lu. Explicit Construction of Samll Folkman Graphs. \emph{SIAM Journal
+\bibitem{lu08} Linyuan Lu. Explicit Construction of Small Folkman Graphs. \emph{SIAM Journal
 on Discrete Mathematics}, 21(4):1053-1060, January 2008.
 
-\bibitem{dudek08} Andrzej Dudek and Vojtech R\H odel. On the Folkman Number $f(2,3,4)$.
+\bibitem{dudek08} Andrzej Dudek and Vojtech R\"{o}dl. On the Folkman Number $f(2,3,4)$.
 \emph{Experimental Mathematics}, 17(1):63-67, 2008.
 
-\bibitem{minisat} Niklas Sorensson and Niklas Een. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005}, (2005): 53.
+\bibitem{minisat} Niklas S\''{o}rensson and Niklas Een. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005}, (2005): 53.
 
 \bibitem{zchaff} Yogesh Mahajan, Fu Zhaohui, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg, 2005.
 

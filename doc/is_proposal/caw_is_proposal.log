@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  3 MAR 2013 11:08
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  4 MAR 2013 23:59
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -519,26 +519,26 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 172
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 173
 .
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/fourier/ts1futs.fd
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
 )
-Overfull \hbox (0.35118pt too wide) in paragraph at lines 172--174
+Overfull \hbox (0.35118pt too wide) in paragraph at lines 173--175
 []\T1/futs/m/n/10.95 Research cur-rent meth-ods and po-ten-tial tech-niques for
  com-put-ing the up-per and lower
  []
 
 [3] [4] [5] (./caw_is_proposal.aux) ) 
 Here is how much of TeX's memory you used:
- 4107 strings out of 493488
- 56460 string characters out of 3141326
+ 4108 strings out of 493488
+ 56467 string characters out of 3141326
  226239 words of memory out of 3000000
- 7331 multiletter control sequences out of 15000+200000
+ 7332 multiletter control sequences out of 15000+200000
  81134 words of font info for 101 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 35i,10n,47p,271b,310s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35i,10n,47p,271b,313s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/
 enc/dvips/cm-super/cm-super-t1.enc}{/usr/local/texlive/2012/texmf-dist/fonts/en
 c/dvips/base/8r.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/four
@@ -551,7 +551,7 @@ putr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/adobe/utopia/putri8a
 .pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1200.p
 fb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb
 >
-Output written on caw_is_proposal.pdf (5 pages, 102775 bytes).
+Output written on caw_is_proposal.pdf (5 pages, 103739 bytes).
 PDF statistics:
  58 PDF objects out of 1000 (max. 8388607)
  41 compressed objects within 1 object stream
