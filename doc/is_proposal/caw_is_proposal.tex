@@ -56,7 +56,7 @@
 
 \author{Christopher Wood \\ Advisor: Professor Stanis{\l}aw Radziszowski} % Your name
 
-\date{\normalsize\today} % Today's date or a custom date
+\date{\normalsize March 5, 2013} % Today's date or a custom date
 
 \begin{document}
 
@@ -137,14 +137,17 @@ The intuition for this conjecture is that $G_{127}$ has a large number of triang
 Proving or disproving the conjecture that $G_{127} \to (3,3)^e$ would be a significant result for the upper bound of
 $F_e(3,3;4)$.
 
-\section{Summary of Proposed Study}
-The ultimate goal of this work is to attack both the upper and lower bounds of $F_e(3,3;4)$. 
+\section{Summary of Proposed Computational Work}
+A major thread of this project is to attack both the upper and lower bounds of $F_e(3,3;4)$. 
 Unfortunately, it will not be feasible to leverage the same technique used by Radziszowski 
 et al. to prove the current bound of $19$. The reason for this is that the estimated number of independent
 sets of size $5$ in nonisomorphic graphs on $19$ vertices is expected to be more than $10^{19}$ \cite{spr1995}.
 Clearly, the number of candidate graphs $G$ to check for $G \to (3,3)^e$ needs to be smaller, so we will
-work towards devising constraints similar to the chromatic number $\chi(G) \geq 6$. We will also investigate
-other facts about graph structure imposed by membership in the set $\mathcal{F}_e(3,3;4)$. 
+work towards devising constraints similar to the chromatic number $\chi(G) \geq 6$. 
+In doing so, we will leverage \emph{nauty} \cite{nauty} to generate all nonisomorphic 
+graphs based on these constraints. We will also investigate
+other facts about graph structure imposed by membership in the set $\mathcal{F}_e(3,3;4)$, which will hopefully 
+enable us to more efficiently enumerate all graphs on $19$ vertices to check for membership in this set. 
 
 Attacking the upper bound will be an entirely different form of computation. In particular, we will need to find a 
 graph $G$ on $n$ vertices where $G \to (3,3)^e$. As previously discussed, we will be focusing on the graph 
@@ -163,22 +166,27 @@ clauses to $\phi_G$:
 Clearly, $H \not \to (3,3)^e \Leftrightarrow \phi_G$ is satisfiable. Therefore, if $\phi_G$ is not satisfiable,
 then $G \to (3,3)^e$, and so $F_e(3,3;4)$.
 
-A major part of this work will be identifying candidate subgraphs $H$ for extension that 
+A major part of this task will be identifying candidate subgraphs $H$ for extension that 
 can easily be solved using the aforementioned 3-SAT solvers. We will also take this opportunity
 to compare the performance of popular k-SAT solvers published in the literature \cite{zchaff} \cite{minisat}.
+It may also be interesting to experiment with NAE-SAT wrappers for open-source 3-SAT solvers,
+in which an NAE-SAT (not-all-equivalent SAT) 3-CNF formula is satisfiable if and only if there is both a true and false literal
+in each clause. Such a wrapper may enable existing SAT solvers to decide if the $\phi_{G_{127}}$ formula 
+is satisfiable or not by placing an additional constraint on the size of the state space (i.e. the backtracking tree). 
 
 \section{Project Goals and Deliverables}
 The following project goals have been identified for this work:
 \begin{itemize}
 	\item Research current methods and potential techniques for computing the upper and lower bounds of Folkman 
 	numbers (in particular, $F_e(3,3;4)$).
-	\item Use SAT and SDP solvers in an attempt to solve the $G_{127} \to (3,3)^e$ conjecture.
+	\item Experiment with SAT solvers in an attempt to solve the $G_{127} \to (3,3)^e$ conjecture.
 	\item Implement software to aid in the computation of Folkman number bounds.
 	\item Begin a survey paper outlining the history of Folkman number research \cite{sprSurvey}.
 \end{itemize}
 
 By achieving these goals I will generate the following deliverables:
 \begin{itemize}
+	\item An online weekly log of the project progress.
 	\item Publication-ready paper and more in-depth progress report for the entire project.
 	\item Report that weighs the performance of various SAT solvers for solving this arrowing problem with $G_{127}$.
 	\item Report discussing the subgraph pruning techniques used for the lower bound.
@@ -191,44 +199,46 @@ By achieving these goals I will generate the following deliverables:
 \bibitem{Folkman} Jon Folkman. Graphs with monochromatic complete subgraphs in
 every edge coloring. \emph{SIAM Journal of Applied Mathematics}. 18 (1970), 19-24.
 
-\bibitem{Erdos01} P. Erd\H{o}s, A. Hajnal. Research problem 2-5. \emph{Journal of Combinatory Theory}, 
+\bibitem{Erdos01} Paul Erd\H{o}s and Andras. Hajnal. Research problem 2-5. \emph{Journal of Combinatory Theory}, 
 2 (1967), 104.
 
 \bibitem{lin} Shen Lin. On Ramsey numbers and $K_r$-coloring of graphs. \emph{Journal of
-Combinatiorial Theory, Series B}, 12:82-92, 1972.
+Combinatiorial Theory, Series B}, 12 (1972), 82-92.
 
 \bibitem{spr1995} Brendan D. McKay and Stanis{\l}aw P. Radziszowski. R(4,5) = 25. \emph{Journal
-of Graph Theory}, 19(1995), 309-322.
+of Graph Theory}, 19 (1995), 309-322.
 
 \bibitem{frankl86} Peter Frankl and Vojtech R\"{o}dl. Large triangle-free subgraphs
-in graphs with $K_4$. \emph{Graphs and Combinatorics}, 2:135-144, 1986.
+in graphs without $K_4$. \emph{Graphs and Combinatorics}, 2 (1986), 135-144.
 
 \bibitem{spencer88} Joel Spencer. Three hundred million points suffice. \emph{Journal of
-Combinatiorial Theory, Series A}, 49(2):210-217, 1988. Also see erratum by M. Hovey in
+Combinatiorial Theory, Series A}, 49 (2) (1988), 210-217. Also see erratum by M. Hovey in
 Vol. 50, p. 323.
 
-\bibitem{piwakowski99} Konrad, Piwakoswki, Stanis{\l}aw P. Radziszowski, and Sebastian
+\bibitem{piwakowski99} Konrad Piwakowski, Stanis{\l}aw P. Radziszowski, and Sebastian
 Urba\'nski. Computation of the Folkman Number $F_e(3,3;5)$. \emph{Journal of Graph
-Theory}, 32:41-49, 1999.
+Theory}, 32 (1999), 41-49.
 
 \bibitem{spr07} Stanis{\l}aw P. Radziszowski and Xiaodong Xu. On the Most Wanted
-Folkman Graph. \emph{Geocombinatiorics}, 16(4):367-381, 2007.
+Folkman Graph. \emph{Geocombinatiorics}, 16 (4) (2007), 367-381.
 
 \bibitem{lu08} Linyuan Lu. Explicit Construction of Small Folkman Graphs. \emph{SIAM Journal
-on Discrete Mathematics}, 21(4):1053-1060, January 2008.
+on Discrete Mathematics}, 21 (4) (2008), 1053-1060.
 
 \bibitem{dudek08} Andrzej Dudek and Vojtech R\"{o}dl. On the Folkman Number $f(2,3,4)$.
-\emph{Experimental Mathematics}, 17(1):63-67, 2008.
+\emph{Experimental Mathematics}, 17 (1) (2008), 63-67.
 
-\bibitem{minisat} Niklas S\''{o}rensson and Niklas Een. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005}, (2005): 53.
+\bibitem{minisat} Niklas S\"{o}rensson and Niklas E\`{e}n. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005}, (2005), 53.
 
-\bibitem{zchaff} Yogesh Mahajan, Fu Zhaohui, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg, 2005.
+\bibitem{zchaff} Yogesh Mahajan, Zhaohui Fu, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg, 2005.
 
-\bibitem{sprSurvey} Stanis{\l}aw P. Radziszowski. Small Ramsey Numbers. \emph{Electronic Journal of Combinatorics}, 1 (2011).
+\bibitem{sprSurvey} Stanis{\l}aw P. Radziszowski. Small Ramsey Numbers. \emph{Electronic Journal of Combinatorics}, Dynamic Surveys DS1, revisions \#1 through \#13, 1994-2011.
 
-\bibitem{geomans95-maxcut} Michael Goemans and David Williamson. Improved Maximum Approximation Algorithms for Maximum Cut and Satisability Problems Using Semidefinite Programming. \emph{Journal of the ACM}, 42(6):1115-1145, 1995.
+\bibitem{geomans95-maxcut} Michael Goemans and David Williamson. Improved Maximum Approximation Algorithms for Maximum Cut and Satisability Problems Using Semidefinite Programming. \emph{Journal of the ACM}, 42 (6) (1995),1115-1145.
 
-\bibitem{arlFolkman} TODO
+\bibitem{nauty} Brendan D. McKay and Adolfo Piperno. Nauty and Traces User’s Guide (Version 2.5). 2013.
+
+\bibitem{arlFolkman} Alexander Lange, Stanis{\l}aw P. Radziszowski, and Xiaodong Xu. Use of MAX-CUT for Ramsey Arrowing of Triangles. To appear in the \emph{Journal of Combinatorial Mathematics and Combinatorial Computing}.
 
 \end{thebibliography}
 
