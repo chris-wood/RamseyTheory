@@ -4,11 +4,10 @@
 #include <stdio.h>
 #include <vector>
 
-// For splitting up the computations...
+// For splitting up the computations
 typedef unsigned long Blk;
 #include "BigIntegerLibrary.hh"
 #include "NumberlikeArray.hh"
-
 typedef NumberlikeArray<Blk>::Index Index;
 
 // Storage container for an edge (used in the edge map)
@@ -237,37 +236,6 @@ bool folkman(int order, int color, int** F, int* colors)
 		// Next edge configuration
 		lower = lower + 1;
 	}
-/*
-	for (int i = 0; i < upper; i++)
-	{
-		for (int e = 0; e < edgeCount; e++)
-		{
-			if (((1 << e) & i) > 0) 
-			{
-
-			}
-			int x = edgeMap[edgeIndex].x;
-			int y = edgeMap[edgeIndex].y;
-			for (int c = 0; c < color; c++)
-			{
-				colorState[x][y] = c;
-				colorState[y][x] = c;
-				bool induced = false;
-				for (int ci = 0; ci < color; ci++)
-				{
-					if (isInduced(order, colors[ci], edgeCount, F, colorState, edgeMap, ci))
-					{
-						induced = true;
-					}
-				} 
-				if (induced == false)
-				{
-					return induced;
-				}
-			}
-			return true;	
-		}
-	}*/
 
 	// Now, walk the colors... but to do it sequentially or recursively... that is the question.
 	// Python implementation does it recursively
@@ -278,6 +246,15 @@ bool folkman(int order, int color, int** F, int* colors)
 
 // Define the order of the first graph
 #define FSIZE 6
+
+/*
+K8  -> (3,4) no
+K8  -> (4,3) no
+K9  -> (3,4) yes
+K9  -> (4,3) yes
+K17 -> (4,4) no
+K18 -> (4,4) yes  - R(4,4) = 18 :-)
+*/
 
 int main(int argc, char** argv)
 {
