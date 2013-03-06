@@ -4,6 +4,13 @@
 #include <stdio.h>
 #include <vector>
 
+// For splitting up the computations...
+typedef unsigned long Blk;
+#include "BigIntegerLibrary.hh"
+#include "NumberlikeArray.hh"
+
+typedef NumberlikeArray<Blk>::Index Index;
+
 // Storage container for an edge (used in the edge map)
 typedef struct 
 {
@@ -13,9 +20,6 @@ typedef struct
 
 // For convenience...
 using namespace std;
-
-// Store the results - NO LONGER USED BECAUSE OF MAXIMUM SIZE
-vector<bool> results;
 
 // Display the adjacency matrix for the graph F
 void display(int order, int** F)
@@ -63,9 +67,8 @@ bool isInduced(int order, int n, int edgeCount, int** F, int** colorState, edge*
 			{
 				for (int v = 0; v < order && (x != v) && (y != v); v++) // check each of the remaining vertices
 				{
-					if (F[x][v] == 1 && F[y][v] == 1 && colorState[x][v] == color && colorState[y][v] == color) // both edges exist
+					if (F[x][v] == 1 && F[y][v] == 1 && colorState[x][v] == color && colorState[y][v] == color) // both edges exist with the same color
 					{
-						// TODO: continue check for fourth vertex thats in the set...
 						for (int v2 = 0; v2 < order && (v2 != v) && (v2 != x) && (v2 != y); v2++)
 						{
 							if (F[v2][x] == 1 && F[v2][y] && F[v2][v] && 
@@ -107,7 +110,6 @@ bool walkColors(int order, int color, int** F, int* colors, int** colorState, in
 					induced = true;
 				}
 			} 
-			// TODO: Append results to the vector 
 			if (induced == false)
 			{
 				return induced;
@@ -183,31 +185,99 @@ bool folkman(int order, int color, int** F, int* colors)
 		}
 	}
 
-	printf("edge count contents:\n");
+	printf("edge count contents (%d):\n", edgeCount);
 	for (int i = 0; i < edgeCount; i++)
 	{
 		printf("%d,%d\n", edgeMap[i].x, edgeMap[i].y);
 	}
 
-	// Now, walk the colors... but to do it sequentially or recursively... that is the question.
-	// Python implementation does it recursively
-	bool result = walkColors(order, color, F, colors, colorState, edgeCount, edgeMap, 0);
-
-	/*bool result = true;
-	for (int i = 0; i < results.size(); i++)
+	// Walk from 0 -> 2^edgeCount - 1
+	BigUnsigned upper(1);
+	BigUnsigned exponent(2);
+	for (int power = 0; power < edgeCount; power++)
 	{
-		if (results[i] == false) 
+		upper *= exponent;
+	}
+	cout << upper << endl;
+	BigUnsigned lower(0);
+	bool result = true;
+	while (lower < upper && result) 
+	{
+		// Set the edges in the color state
+		for (int c = 0; c < color && result; c++)
 		{
-			result = false;
-			break;
+			for (uint32_t index = 0; index < edgeCount && result; index++)
+			{
+				Index bitIndex(index);
+				if (lower.getBit(bitIndex)) // bit is 1/true (this edge is included)
+				{
+					int x = edgeMap[index].x;
+					int y = edgeMap[index].y;
+					colorState[x][y] = c;
+					colorState[y][x] = c;
+				}
+			}
+
+			// Walk over the colors given the color state
+			bool induced = false;
+			for (int ci = 0; ci < color; ci++)
+			{
+				if (isInduced(order, colors[ci], edgeCount, F, colorState, edgeMap, ci))
+				{
+					induced = true;
+				}
+			}
+			if (induced == false)
+			{
+				result = false;
+				break;
+			}
+		}
+
+		// Next edge configuration
+		lower = lower + 1;
+	}
+/*
+	for (int i = 0; i < upper; i++)
+	{
+		for (int e = 0; e < edgeCount; e++)
+		{
+			if (((1 << e) & i) > 0) 
+			{
+
+			}
+			int x = edgeMap[edgeIndex].x;
+			int y = edgeMap[edgeIndex].y;
+			for (int c = 0; c < color; c++)
+			{
+				colorState[x][y] = c;
+				colorState[y][x] = c;
+				bool induced = false;
+				for (int ci = 0; ci < color; ci++)
+				{
+					if (isInduced(order, colors[ci], edgeCount, F, colorState, edgeMap, ci))
+					{
+						induced = true;
+					}
+				} 
+				if (induced == false)
+				{
+					return induced;
+				}
+			}
+			return true;	
 		}
 	}*/
 
+	// Now, walk the colors... but to do it sequentially or recursively... that is the question.
+	// Python implementation does it recursively
+	//bool result = walkColors(order, color, F, colors, colorState, edgeCount, edgeMap, 0);
+	//bool result = false;
 	return result;
 }
 
 // Define the order of the first graph
-#define FSIZE 9
+#define FSIZE 6
 
 int main(int argc, char** argv)
 {
@@ -225,7 +295,7 @@ int main(int argc, char** argv)
 	}
 
 	int* colors = new int[2];
-	colors[0] = 4;
+	colors[0] = 3;
 	colors[1] = 3;
 
 	// Run the checks now...
