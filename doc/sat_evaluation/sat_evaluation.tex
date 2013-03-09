@@ -63,6 +63,23 @@
 \maketitle % Print the title
 
 \section{Introduction}
+In his 1972 seminal paper entitled, ``Reducibility Among Combinatorial Problems,'' Karp introduced a 
+list of 21 NP-complete problems, including Boolean satisfiability, the maximum cut of a graph, 
+and 0-1 integer programming \cite{karp72}. The complexity of these problems was proven by deriving
+a polynomial-time reduction from CIRCUIT-SAT = $\{\langle C \rangle : C$ is a satisfiable Boolean combinational
+circuit $\}$, the first problem shown to be NP-complete by Cook in 1971 \cite{cook71-np}, starting
+the rush of complexity theory research. 
+
+The problem $3-SAT$, or more formally, $3-CNF SAT$, is a special case of satisfiability.
+It is a decision problem in which takes as input a 3-CNF Boolean formula and returns YES if 
+the formula is satisfiable, and NO otherwise \cite{clrs90-algorithms}. A 3-CNF formula, more formally known as a Boolean 
+formula in 3-conjunctive normal form, is expressed as the Boolean AND of arbitrarily many clauses,
+where each clause is the Boolean OR of three literals, which is a Boolean variable or its negation. 
+Such a Boolean formula is said to be satisfiable if and only if there exists an assignment of truth 
+values to the variables such that substituting them into the literals of the formula will cause it 
+to evaluate to true (or 1). Expressed as a formal language, we have that 
+$3-SAT = \{\langle \phi \rangle : \phi \text{ is satisfiable }\}$.
+
 TODO: sat problem, sat competition, categories of evaluation, types of problems, graph arrowing...
 
 \section{Selected $k-SAT$ Solvers}
@@ -75,9 +92,15 @@ TODO: table
 
 \begin{thebibliography}{9}
 
-\bibitem{minisat} Niklas S\"{o}rensson and Niklas E\`{e}n. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005}, (2005), 53.
+\bibitem{karp72} Richard Karp. Reducibility among combinatorial problems. \emph{Complexity of Computer Computations, (RE Miller and JM Thatcher, eds.)} (1972), 85–103.
 
-\bibitem{zchaff} Yogesh Mahajan, Zhaohui Fu, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg, 2005.
+\bibitem{cook71-np} Stephen A. Cook. The Complexity of Theorem-Proving Procedures. \emph{In Proceedings of the third annual ACM symposium on Theory of computing (STOC '71)}. ACM, New York, NY, USA (1971), 151-158. DOI=10.1145/800157.805047. {\tt http://doi.acm.org/10.1145/800157.805047}
+
+\bibitem{clrs90-algorithms} Gormen, Thomas H., Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. Introduction to Algorithms. MIT Press 44 (1990), 97-138.
+
+\bibitem{minisat} Niklas S\"{o}rensson and Niklas E\`{e}n. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005} (2005) 53.
+
+\bibitem{zchaff} Yogesh Mahajan, Zhaohui Fu, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg (2005).
 
 \end{thebibliography}
 
