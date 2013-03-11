@@ -20,7 +20,7 @@
 
             <div class="hero-unit" style="vertical-align: middle;">
                 <div class="row-fluid">
-                    <div class="span8">
+                    <div class="span6">
                         <h2>Welcome!</h2>
                         <p>
                             We're a group of students and professors tackling problems related to Folkman
@@ -31,8 +31,14 @@
                             where we can. 
                         </p>
                     </div>
-                    <div class="span3">
-                        <img src="img/FolkmanLogoLargeOld.png"/>
+                    <div class="span5">
+                        <table style="width: 100%;">
+                          <tr>
+                             <td style="text-align: center; vertical-align: middle;">
+                                  <img src="img/FolkmanLargeColor.png"/>
+                             </td>
+                          </tr>
+                        </table>
                     </div>
                 </div>
             </div>

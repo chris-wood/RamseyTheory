@@ -17,13 +17,21 @@
         </div>
 
         <div class="container">
+            <div class="tabbable tabs-left">
+              <ul class="nav nav-tabs">
+                log!
+              </ul>
+              <div class="tab-content">
+                log2!
+              </div>
+            </div>
             <div class="row-fluid">
-                <div class="span8">
+                <div class="span12">
                     <!-- Example row of columns -->
-                    <div class="span6 offset 1">
+                    <div class="span10 offset 1">
                         TODO: more details description of work, website, etc
                     </div>
-
+                    
                     <hr>
                 </div>
             </div>
