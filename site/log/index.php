@@ -19,21 +19,25 @@
         <div class="container">
             <div class="tabbable tabs-left">
               <ul class="nav nav-tabs">
-                log!
+                <li class="active"><a href="#spr" data-toggle="tab">Stanis&#322;aw Radziszowski</a></li>
+                <li><a href="#arl" data-toggle="tab">Alexander Lange</a></li>
+                <li><a href="#caw" data-toggle="tab">Christopher Wood</a></li>
               </ul>
               <div class="tab-content">
-                log2!
+                <div class="tab-pane active" id="spr">
+                  <h3>Stanis&#322;aw Radziszowski Log</h3>
+                  <?php include_once('./spr.htm'); ?>
+                </div>
+                <div class="tab-pane" id="arl">
+                  <h3>Alexander Lange Log</h3>
+                  <?php include_once('./arl.htm'); ?>
+                </div>
+                <div class="tab-pane" id="caw">
+                  <h3>Christopher Wood Log</h3>
+                  <?php include_once('./caw.htm'); ?>
+                </div>
               </div>
             </div>
-            <div class="row-fluid">
-                <div class="span12">
-                    <!-- Example row of columns -->
-                    <div class="span10 offset 1">
-                        TODO: more details description of work, website, etc
-                    </div>
-                    
-                    <hr>
-                </div>
-            </div>
+            
 <?php include_once('../footer.php'); ?>
             

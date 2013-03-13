@@ -77,12 +77,12 @@ generate non-isomorphic graphs
 \begin{frame}{Graph automorphism}
 {definition}
 
-\emph{Graph automorphism}: A vertex mapping that preserves connectivity between vertex and edge
-connectivity (e.g. an isomorphism onto itself)
+\emph{Graph automorphism}: A vertex mapping that preserves vertex and edge
+connectivity (e.g. an isomorphism of the vertices onto the same graph).
 
 \medskip
 
-The set of all automorphism on a graph is the \emph{automorphism group}
+The set of all automorphisms on a graph is the \emph{automorphism group}.
 
 \medskip
 
@@ -176,18 +176,18 @@ Dreadnaut version 2.4 (64 bits).
 \begin{frame}[fragile] {Scaling up}
 {size limits}
 
-Nauty is limited by the word size $n$ of the machine on which it is compiled (unfortunately)
+Nauty is limited by the word size $n$ of the machine on which it is compiled :-(
 
 \bigskip
 
 \begin{itemize}
 \item 
-$n < 32$ {\tt int} $\to 2^{15} - 3$ limit
+$n < 32$ {\tt int} $\to 2^{15} - 3$ bound
 \item 
-$n \leq 32$ {\tt int} $\to 2^{30}$ limit
+$n \leq 32$ {\tt int} $\to 2^{30}$ bound
 \end{itemize}
 
-These are limits on the number of vertices (the order of the graph)
+%These are limits on the number of vertices (the order of the graph)
 
 \end{frame}
 
@@ -251,10 +251,22 @@ int main(int argc, char *argv[]) {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile] {Graph6 (.g6) Format}
+{interfacing with other tools}
+
+\bigskip
+
+Let's look at some examples with Mathematica
+
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}[fragile] {What else?}
 {}
 
-Consult the manual! :-)
+Consult the manual or send me an email! :-)
 
 \end{frame}
 

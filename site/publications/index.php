@@ -19,9 +19,8 @@
         <div class="container">
             <div class="row-fluid">
                 <div class="span8">
-                    <!-- Example row of columns -->
                     <div class="span6 offset 1">
-                        TODO: more details description of work, website, etc
+                        Coming soon.
                     </div>
 
                     <hr>

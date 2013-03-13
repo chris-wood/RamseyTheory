@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  11 MAR 2013 15:48
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 MAR 2013 17:46
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**nauty_intro.tex
-(./nauty_intro.tex
+**nauty_advanced.tex
+(./nauty_advanced.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
 rman-x-2012-05-30, ngerman-x-2012-05-30, afrikaans, ancientgreek, ibycus, arabi
@@ -799,8 +799,8 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\\' on input line 39.
 
-(./nauty_intro.aux)
-\openout1 = `nauty_intro.aux'.
+(./nauty_advanced.aux)
+\openout1 = `nauty_advanced.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
 LaTeX Font Info:    ... okay on input line 52.
@@ -899,9 +899,9 @@ LaTeX Info: Redefining \ref on input line 52.
 LaTeX Info: Redefining \pageref on input line 52.
 LaTeX Info: Redefining \nameref on input line 52.
 
-(./nauty_intro.out) (./nauty_intro.out)
+(./nauty_advanced.out) (./nauty_advanced.out)
 \@outlinefile=\write5
-\openout5 = `nauty_intro.out'.
+\openout5 = `nauty_advanced.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 52.
@@ -973,158 +973,70 @@ Dictionary: translator-theorem-dictionary, Language: English
 LaTeX Info: Redefining \includegraphics on input line 52.
 \c@lstlisting=\count178
 
-(./nauty_intro.nav)
+(./nauty_advanced.nav)
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 56.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 73.
-LaTeX Font Info:    Try loading font information for OMS+phv on input line 73.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 75.
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 75.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/omsphv.fd
 File: omsphv.fd 
 )
 LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 75.
  [2
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./logo.
 jpg>]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 94.
-
-<automorphism.png, id=22, 421.575pt x 453.695pt>
-File: automorphism.png Graphic file (type png)
- <use automorphism.png>
-Package pdftex.def Info: automorphism.png used on input line 94.
-(pdftex.def)             Requested size: 126.47346pt x 136.10954pt.
-
-Overfull \vbox (11.2513pt too high) detected at line 94
- []
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 82.
 
 [3
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 111.
- (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2009/06/22 v3.00 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 111.
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <8> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 111.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 111.
- [4
-
- <./automorphism.png>] <canonical.png, id=38, 1046.91125pt x 516.93124pt>
-File: canonical.png Graphic file (type png)
-
-<use canonical.png>
-Package pdftex.def Info: canonical.png used on input line 123.
-(pdftex.def)             Requested size: 314.0758pt x 155.08057pt.
-
-Overfull \hbox (6.78593pt too wide) in paragraph at lines 123--123
- [] 
- []
-
-[5
-
-]
-\openout4 = `nauty_intro.vrb'.
-
- (./nauty_intro.vrb) [6
-
- <./canonical.png>]
-\openout4 = `nauty_intro.vrb'.
-
- (./nauty_intro.vrb
-<dreadnautExample.png, id=52, 250.9375pt x 183.68625pt>
-File: dreadnautExample.png Graphic file (type png)
-
-<use dreadnautExample.png>
-Package pdftex.def Info: dreadnautExample.png used on input line 4.
-(pdftex.def)             Requested size: 75.28181pt x 55.1063pt.
-)
-Overfull \vbox (8.41154pt too high) detected at line 172
- []
-
-[7
-
-]
-\openout4 = `nauty_intro.vrb'.
-
- (./nauty_intro.vrb) [8
-
- <./dreadnautExample.png>]
-\openout4 = `nauty_intro.vrb'.
-
- (./nauty_intro.vrb
-LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 18.
-)
-[9
-
-]
-\openout4 = `nauty_intro.vrb'.
-
- (./nauty_intro.vrb) [10
-
-]
-\openout4 = `nauty_intro.vrb'.
-
- (./nauty_intro.vrb) [11
-
-] [12
-
-]
 \tf@nav=\write6
-\openout6 = `nauty_intro.nav'.
+\openout6 = `nauty_advanced.nav'.
 
 \tf@toc=\write7
-\openout7 = `nauty_intro.toc'.
+\openout7 = `nauty_advanced.toc'.
 
 \tf@snm=\write8
-\openout8 = `nauty_intro.snm'.
+\openout8 = `nauty_advanced.snm'.
 
- [13
+ [4
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 273.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 273.
-
-(./nauty_intro.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 273.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 273.
-Package rerunfilecheck Info: File `nauty_intro.out' has not changed.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 86.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 86.
+ (./nauty_advanced.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 86.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 86.
+Package rerunfilecheck Info: File `nauty_advanced.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 273.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 86.
  ) 
 Here is how much of TeX's memory you used:
- 17846 strings out of 493488
- 322704 string characters out of 3141326
- 415287 words of memory out of 3000000
- 20681 multiletter control sequences out of 15000+200000
- 39028 words of font info for 57 fonts, out of 3000000 for 9000
+ 17434 strings out of 493488
+ 318092 string characters out of 3141326
+ 398261 words of memory out of 3000000
+ 20322 multiletter control sequences out of 15000+200000
+ 29307 words of font info for 35 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 49i,11n,53p,419b,1136s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 49i,11n,53p,422b,372s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
-xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/tex
-live/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
-ive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2012
-/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2012/texmf-
-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2012/texmf-dist/fo
-nts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on nauty_intro.pdf (12 pages, 130759 bytes).
+exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
+xlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
+12/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2012/texm
+f-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2012/texmf-dist/
+fonts/type1/urw/helvetic/uhvro8a.pfb>
+Output written on nauty_advanced.pdf (3 pages, 55383 bytes).
 PDF statistics:
- 122 PDF objects out of 1000 (max. 8388607)
- 87 compressed objects within 1 object stream
- 25 named destinations out of 1000 (max. 500000)
- 63 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 57 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 

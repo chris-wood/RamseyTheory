@@ -1,0 +1,86 @@
+\documentclass{beamer}
+\mode<presentation>
+{
+  \usetheme{default}
+  \useinnertheme{circles}
+  \usenavigationsymbolstemplate{} % no navigation symbols
+  \setbeamercovered{transparent}
+}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\setbeamertemplate
+{footline}
+{\hfill\insertframenumber/\inserttotalframenumber\quad\insertsection}
+%{\quad\strut\insertsection\hfill\insertframenumber/\inserttotalframenumber
+%\strut\quad}
+
+\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[letterpaper,border shrink=20mm]
+\pgfpagesuselayout{resize to}[letterpaper,border shrink=5mm,landscape]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\title
+{Nauty \\
+Digging Deeper}
+
+\author[caw rit]
+{Christopher A. Wood\\
+{\small Department of Computer Science}\\
+{\small Rochester Institute of Technology}\\
+{\small\tt caw4567@cs.rit.edu}}
+
+\date[] % (optional, should be abbreviation of conference name)
+%{CSC@RIT, 29 Jan 2010}
+%{TC@URCS, 1 Feb 2010}
+%{math@WVU, 2 Mar 2010}
+{RIT Folkman Group\\ \today}
+
+\pgfdeclareimage[height=0.5cm]{university-logo}{logo.jpg}
+\logo{\pgfuseimage{university-logo}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Nauty}
+{main functionality}
+
+A \textbf{graph canonical labeling} program with two main purposes
+
+\bigskip
+\begin{itemize}
+\item
+determine the automorphism group of a vertex-colored graph (\textbf{nauty} = no automorphisms, yes?)
+\item
+generate non-isomorphic graphs
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{frame}
+\begin{frame}{References}
+
+\begin{itemize}
+\item
+McKay, Brendan D., and Adolfo Piperno. \emph{nauty and Traces User's Guide (Version 2.5).} 2013.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
