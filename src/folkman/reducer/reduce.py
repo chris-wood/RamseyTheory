@@ -22,6 +22,11 @@ class GNR:
 						if (((x - y) % n) == ((alpha ** r) % n)):
 							self.graph.add_edge(x, y)
 
+	def removeIndependentSet(self):
+		iset = nx.maximal_independent_set(self.graph)
+		for v in iset:
+			self.graph.remove_node(v)
+
 	def getGraph(self):
 		return self.graph
 
@@ -85,6 +90,24 @@ def main():
 	output = makeDimacsCNF(numVars, cnf)
 	outFile.write(output)
 	#print(makeDimacsCNF(numVars, cnf))
+
+	G.removeIndependentSet()
+	numVars, cnf = reduce(G.graph)
+	outFile = open('out_1.cnf', 'w')
+	output = makeDimacsCNF(numVars, cnf)
+	outFile.write(output)
+
+	G.removeIndependentSet()
+	numVars, cnf = reduce(G.graph)
+	outFile = open('out_2.cnf', 'w')
+	output = makeDimacsCNF(numVars, cnf)
+	outFile.write(output)
+
+	G.removeIndependentSet()
+	numVars, cnf = reduce(G.graph)
+	outFile = open('out_3.cnf', 'w')
+	output = makeDimacsCNF(numVars, cnf)
+	outFile.write(output)
 
 if __name__ == "__main__":
 	main()
