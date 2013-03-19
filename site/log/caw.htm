@@ -1,3 +1,45 @@
+<hr/>
+<h3>Week 2</h3>
 <p>
-	Not yet started.
+	This week I worked on the following tasks:
+	<ul>
+		<li>
+			Began experimenting with techniques to reduce the order of $G_{127}$ to smaller graphs that can be 
+			reduced to 3-SAT formulas to check for satisfiability. Currently, induced subgraphs containing approximately
+			$80$ vertices can be solved very easily, but pushing this bound up towards $127$ becomes much more difficult.
+			In particular, I tried to remove three sets of independent sets in $V \subset V(G_{127})$ such that $|V(G)| = 11$.
+			After reducing this to an equivalent 3-SAT formula and running with Minisat I found that such reduction was not
+			sufficient to make the program finish in a reasonable amount of time.
+
+			The 3-SAT formula used for this reduction of $G_{127}$ is <a href="#">here</a>.
+		</li>
+		<li>
+			Continued my more in-depth exploration of nauty, with a focus on automorphism group generation and the underlying
+			canonical labeling algorithm, as explained in Brendan McKay's paper: McKay, Brendan D. "Practical graph isomorphism." (1981): 45-87.
+			I also started experimenting with Brendan McKay's new graph compression algorithm that was provided by Dr. Radziszowski.
+		</li>
+		<li>
+			Continued my literature survey on Folkman numbers. In particular, I read the following papers and collected their major
+			results in my survey paper.
+			<ul>
+				<li>
+					Nenov, Nedyalko Dimov. "Chromatic number of graphs and edge Folkman numbers." arXiv preprint arXiv:1002.4332 (2010).
+				</li>
+				<li>
+					Kolev, Nikolay. "New Upper Bound for the Edge Folkman Number $F_e(3,5;13)$." arXiv e-prints arXiv:0806.1403 (2008).
+				</li>
+				<li>
+					Nenov, Nedyalko Dimov. "On the triangle vertex Folkman numbers." Discrete mathematics 271.1 (2003): 327-334.
+				</li>
+			</ul>
+		</li>
+	</ul>
 </p>
+
+<p>
+	You may also find my source code for the graph arrowing property <a href="#">here</a>, as well
+	as the source code for generating a DIMACS-compliant 3-SAT CNF formula for the problem 
+	$G \to (3,3)^e$ <a href="#">here</a>.
+</p>
+
+<hr/>
