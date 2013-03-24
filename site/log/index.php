@@ -22,6 +22,9 @@
                 <li class="active"><a href="#spr" data-toggle="tab">Stanis&#322;aw Radziszowski</a></li>
                 <li><a href="#arl" data-toggle="tab">Alexander Lange</a></li>
                 <li><a href="#caw" data-toggle="tab">Christopher Wood</a></li>
+		<li><a href="#afw" data-toggle="tab">Alex Collins</a></li>
+		<li><a href="#axj" data-toggle="tab">Appurv Jain</a></li>
+		<li><a href="#yqsun" data-toggle="tab">Yongqi Sun</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane active" id="spr">
@@ -36,6 +39,18 @@
                   <h3>Christopher Wood Log</h3>
                   <?php include_once('./caw.htm'); ?>
                 </div>
+		<div class="tab-pane" id="afw">
+		  <h3>Alex Collins Log</h3>
+		  <?php include_once('./afw.htm'); ?>
+		</div>
+		<div class="tab-pane" id="axj">
+		  <h3>Appurv Jain Log</h3>
+		  <?php include_once('./axj.htm'); ?>
+		</div>
+		<div class="tab-pane" id="yqsun">
+		  <h3>Yongqi Sun Log</h3>
+		  <?php include_once('./yqsun.htm'); ?>
+		</div>
               </div>
             </div>
             
