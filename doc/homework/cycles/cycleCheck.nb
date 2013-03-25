@@ -1,0 +1,942 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     40121,        933]
+NotebookOptionsPosition[     39096,        894]
+NotebookOutlinePosition[     39453,        910]
+CellTagsIndexPosition[     39410,        907]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"FromAdjacencyMatrix", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.5731555468886213`*^9, 3.573155549413108*^9}, {
+  3.573155638904862*^9, 3.5731556395504017`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FromAdjacencyMatrix", "[", "]"}]], "Output",
+ CellChangeTimes->{3.57315563999959*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["From adjacency matrix", "WolframAlphaLong",
+ CellChangeTimes->{{3.573155641459125*^9, 3.57315564643783*^9}}],
+
+Cell[BoxData[
+ NamespaceBox["WolframAlphaQueryResults",
+  DynamicModuleBox[{Typeset`q$$ = "From adjacency matrix", Typeset`opts$$ = {
+   AppearanceElements -> {
+     "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+      "Sources"}, Asynchronous -> All, 
+    TimeConstraint -> {30, Automatic, Automatic, Automatic}, 
+    Method -> {
+     "Formats" -> {"cell", "minput", "msound", "dataformats"}, "Server" -> 
+      "http://api.wolframalpha.com/v1/"}}, Typeset`elements$$ = {
+   "Warnings", "Assumptions", "Brand", "Pods", "PodMenus", "Unsuccessful", 
+    "Sources"}, Typeset`pod1$$ = XMLElement[
+   "pod", {"title" -> "Input interpretation", "scanner" -> "Identity", "id" -> 
+     "Input", "position" -> "100", "error" -> "false", "numsubpods" -> "1"}, {
+    
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             FormBox[
+              TagBox[
+               TagBox["\"adjacency matrix\"", 
+                $CellContext`TagBoxWrapper[
+                "Entity" -> {$CellContext`MathWorldData, "AdjacencyMatrix"}]],
+                Identity], TraditionalForm], 
+             PolynomialForm[#, TraditionalOrder -> False]& ], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {"plaintext,computabledata,formatteddata"}]}]}], 
+   Typeset`pod2$$ = XMLElement[
+   "pod", {"title" -> "Illustration", "scanner" -> "Data", "id" -> 
+     "ImagePod:MathWorldData", "position" -> "200", "error" -> "false", 
+     "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> True, "string" -> False}, {
+         Cell[
+          BoxData[
+           FormBox[
+            GraphicsBox[{{}, {
+               InsetBox[
+                GraphicsBox[{{{{
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 1.}, {1., 0.5}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0., 0.5}, {1., 0.5}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 0.}, {1., 0.5}}], {
+                    GrayLevel[0]}}}, {{
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0.5, 1.}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["1", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0.5, 1.}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0., 0.5}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["2", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0., 0.5}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0.5, 0.}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["3", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0.5, 0.}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{1., 0.5}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["4", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {1., 0.5}], {1, 0}]}, {
+                    GrayLevel[0]}}}}, 
+                  InsetBox[
+                   BoxData[
+                    FormBox[
+                    RowBox[{"(", "\[NoBreak]", 
+                    
+                    GridBox[{{"0", "0", "0", "1"}, {"0", "0", "0", "1"}, {
+                    "0", "0", "0", "1"}, {"1", "1", "1", "0"}}, RowSpacings -> 
+                    1, ColumnSpacings -> 1, RowAlignments -> Baseline, 
+                    ColumnAlignments -> Center], "\[NoBreak]", ")"}], 
+                    TraditionalForm]], {0.5, -0.7}]}, AspectRatio -> 
+                 Automatic, PlotRange -> All], {193.5, -321.3}, 
+                ImageScaled[{0.5, 0.5}], {360., 612.0000000000001}], 
+               InsetBox[
+                GraphicsBox[{{{{
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 1.}, {0.5, 0.}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 1.}, {1., 0.5}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0., 0.5}, {0.5, 0.}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0., 0.5}, {1., 0.5}}], {
+                    GrayLevel[0]}}}, {{
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0.5, 1.}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["1", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0.5, 1.}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0., 0.5}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["2", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0., 0.5}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0.5, 0.}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["3", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0.5, 0.}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{1., 0.5}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["4", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {1., 0.5}], {1, 0}]}, {
+                    GrayLevel[0]}}}}, 
+                  InsetBox[
+                   BoxData[
+                    FormBox[
+                    RowBox[{"(", "\[NoBreak]", 
+                    
+                    GridBox[{{"0", "0", "1", "1"}, {"0", "0", "1", "1"}, {
+                    "1", "1", "0", "0"}, {"1", "1", "0", "0"}}, RowSpacings -> 
+                    1, ColumnSpacings -> 1, RowAlignments -> Baseline, 
+                    ColumnAlignments -> Center], "\[NoBreak]", ")"}], 
+                    TraditionalForm]], {0.5, -0.7}]}, AspectRatio -> 
+                 Automatic, PlotRange -> All], {580.5, -321.3}, 
+                ImageScaled[{0.5, 0.5}], {360., 612.0000000000001}], 
+               InsetBox[
+                GraphicsBox[{{{{
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 1.}, {0., 0.5}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 1.}, {0.5, 0.}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 1.}, {1., 0.5}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0., 0.5}, {0.5, 0.}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0., 0.5}, {1., 0.5}}], {
+                    GrayLevel[0]}}, {
+                    GrayLevel[0], 
+                    Thickness[0.005], 
+                    LineBox[{{0.5, 0.}, {1., 0.5}}], {
+                    GrayLevel[0]}}}, {{
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0.5, 1.}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["1", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0.5, 1.}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0., 0.5}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["2", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0., 0.5}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{0.5, 0.}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["3", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {0.5, 0.}], {1, 0}]}, {
+                    GrayLevel[0]}}, {
+                    RGBColor[1, 0, 0], {
+                    PointSize[0.1], 
+                    PointBox[{1., 0.5}]}, {
+                    GrayLevel[0], 
+                    InsetBox[
+                    BoxData[
+                    FormBox["4", TraditionalForm]], 
+                    Scaled[{-0.04, 0.04}, {1., 0.5}], {1, 0}]}, {
+                    GrayLevel[0]}}}}, 
+                  InsetBox[
+                   BoxData[
+                    FormBox[
+                    RowBox[{"(", "\[NoBreak]", 
+                    
+                    GridBox[{{"0", "1", "1", "1"}, {"1", "0", "1", "1"}, {
+                    "1", "1", "0", "1"}, {"1", "1", "1", "0"}}, RowSpacings -> 
+                    1, ColumnSpacings -> 1, RowAlignments -> Baseline, 
+                    ColumnAlignments -> Center], "\[NoBreak]", ")"}], 
+                    TraditionalForm]], {0.5, -0.7}]}, AspectRatio -> 
+                 Automatic, PlotRange -> All], {967.5, -321.3}, 
+                ImageScaled[{0.5, 0.5}], {360., 612.0000000000001}]}, {}}, {
+             GridLines -> Dynamic[
+                Map[{{#, 
+                   GrayLevel[0.7]}}& , 
+                 MousePosition[{"Graphics", Graphics}, None]]], 
+              Method -> {"GridLinesInFront" -> True}, 
+              ImageSize -> {{500}, {200}}, BaseStyle -> 14, ContentSelectable -> 
+              True, PlotRangePadding -> {6, 5}}], TraditionalForm]], 
+          "Output"]}], 
+       XMLElement["dataformats", {}, {}]}]}], Typeset`pod3$$ = XMLElement[
+   "pod", {"title" -> "Definition", "scanner" -> "Data", "id" -> 
+     "DefinitionPod:MathWorldData", "position" -> "300", "error" -> "false", 
+     "numsubpods" -> "1", "primary" -> "true"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             GridBox[{{
+                Cell[
+                 
+                 TextData[{
+                  "The adjacency matrix, sometimes also called the connection \
+matrix, of a simple graph is a matrix with rows and columns labeled by graph \
+vertices, with a 1 or 0 in position ", 
+                   Cell[
+                    BoxData[
+                    FormBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    SubscriptBox["v", "i"], ",", 
+                    SubscriptBox["v", "j"]}], ")"}], TraditionalForm]], 
+                    "InlineFormula"], " according to whether ", 
+                   Cell[
+                    BoxData[
+                    FormBox[
+                    SubscriptBox["v", "i"], TraditionalForm]], 
+                    "InlineFormula"], " and ", 
+                   Cell[
+                    BoxData[
+                    FormBox[
+                    SubscriptBox["v", "j"], TraditionalForm]], 
+                    "InlineFormula"], 
+                   " are adjacent or not. For a simple graph with no self\
+\[Hyphen]loops, the adjacency matrix must have 0s on the diagonal. For an \
+undirected graph, the adjacency matrix is symmetric. "}], 
+                 LineSpacing -> {1, 3}]}, {
+                Cell[
+                 
+                 TextData[{
+                  "The adjacency matrix of a graph can be computed in ", 
+                   StyleBox["Mathematica", FontSlant -> "Italic"], " using ", 
+                   
+                   StyleBox["AdjacencyMatrix", FontFamily -> "Courier"], "[", 
+                   
+                   StyleBox["g", FontSlant -> "Italic"], "], ", 
+                   StyleBox["AdjacencyMatrix", FontFamily -> "Courier"], "[", 
+                   
+                   StyleBox["g", FontSlant -> "Italic"], "] in the ", 
+                   StyleBox["Mathematica", FontSlant -> "Italic"], 
+                   " package ", 
+                   StyleBox["GraphUtilities \:0300", FontFamily -> "Courier"],
+                    " , or using ", 
+                   StyleBox["ToAdjacencyMatrix", FontFamily -> "Courier"], 
+                   "[", 
+                   StyleBox["g", FontSlant -> "Italic"], "] in the ", 
+                   StyleBox["Mathematica", FontSlant -> "Italic"], 
+                   " package ", 
+                   StyleBox["Combinatorica \:0300", FontFamily -> "Courier"], 
+                   " (as a full matrix)."}], LineSpacing -> {1, 3}]}}, 
+              GridBoxAlignment -> {"Columns" -> {{Left}}}, DefaultBaseStyle -> 
+              "Column", 
+              GridBoxItemSize -> {
+               "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+              GridBoxItemStyle -> {"Columns" -> {{
+                   Directive[SpanMaxSize -> DirectedInfinity[1]]}}, 
+                "Rows" -> {{
+                   Directive[SpanMaxSize -> DirectedInfinity[1]]}}}], 
+             "Column"], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {"plaintext,computabledata,formatteddata"}]}], 
+     XMLElement["infos", {"count" -> "1"}, {
+       XMLElement["info", {}, {
+         XMLElement[
+         "link", {
+          "url" -> "http://mathworld.wolfram.com/AdjacencyMatrix.html", 
+           "text" -> "More information"}, {}]}]}]}], Typeset`pod4$$ = 
+   XMLElement[
+   "pod", {"title" -> "Related topics", "scanner" -> "Data", "id" -> 
+     "RelatedTopicsPod:MathWorldData", "position" -> "400", "error" -> 
+     "false", "numsubpods" -> "1"}, {
+     XMLElement["subpod", {"title" -> ""}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            StyleBox[
+             RowBox[{
+               FormBox[
+                TagBox[
+                 TagBox["\"adjacency list\"", 
+                  $CellContext`TagBoxWrapper[
+                  "Entity" -> {$CellContext`MathWorldData, "AdjacencyList"}]],
+                  Identity], TraditionalForm], 
+               StyleBox[
+                RowBox[{"\[NoBreak]", 
+                  PaneBox[
+                  "\" | \"", BaselinePosition -> Baseline, BaseStyle -> 
+                   GrayLevel[0.6]]}], AutoSpacing -> True], 
+               FormBox[
+                TagBox[
+                 TagBox["\"incidence matrix\"", 
+                  $CellContext`TagBoxWrapper[
+                  "Entity" -> {$CellContext`MathWorldData, 
+                    "IncidenceMatrix"}]], Identity], TraditionalForm], 
+               StyleBox[
+                RowBox[{"\[NoBreak]", 
+                  PaneBox[
+                  "\" | \"", BaselinePosition -> Baseline, BaseStyle -> 
+                   GrayLevel[0.6]]}], AutoSpacing -> True], 
+               FormBox[
+                TagBox[
+                 TagBox["\"integer matrix\"", 
+                  $CellContext`TagBoxWrapper[
+                  "Entity" -> {$CellContext`MathWorldData, "IntegerMatrix"}]],
+                  Identity], TraditionalForm]}], 
+             LinebreakAdjustments -> {1, 10, 0, 0, 100}, LineIndent -> 0], 
+            TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {"plaintext,computabledata,formatteddata"}]}]}], 
+   Typeset`pod5$$ = XMLElement[
+   "pod", {"title" -> "Subject classifications", "scanner" -> "Data", "id" -> 
+     "SubjectPod:MathWorldData", "position" -> "500", "error" -> "false", 
+     "numsubpods" -> "2"}, {
+     XMLElement["subpod", {"title" -> "MathWorld"}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            StyleBox[
+             RowBox[{
+               TagBox[
+                TagBox["\"graph matrices\"", 
+                 $CellContext`TagBoxWrapper[
+                 "EntityClass" -> {$CellContext`MathWorldData, 
+                    "Discrete Mathematics:Graph Theory:Graph Properties:Graph \
+Matrices"}]], Identity], 
+               StyleBox[
+                RowBox[{"\[NoBreak]", 
+                  PaneBox[
+                  "\" | \"", BaselinePosition -> Baseline, BaseStyle -> 
+                   GrayLevel[0.6]]}], AutoSpacing -> True], 
+               TagBox[
+                TagBox["\"matrix types\"", 
+                 $CellContext`TagBoxWrapper[
+                 "EntityClass" -> {$CellContext`MathWorldData, 
+                    "Algebra:Linear Algebra:Matrices:Matrix Types"}]], 
+                Identity]}], LinebreakAdjustments -> {1, 10, 0, 0, 100}, 
+             LineIndent -> 0], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {"plaintext,computabledata,formatteddata"}]}], 
+     XMLElement["subpod", {"title" -> "MSC 2010"}, {
+       XMLElement["cell", {"compressed" -> False, "string" -> True}, {
+         Cell[
+          BoxData[
+           FormBox[
+            TagBox[
+             TagBox["\"15-XX\"", 
+              $CellContext`TagBoxWrapper[
+              "EntityClass" -> {$CellContext`MathWorldData, "15-XX"}]], 
+             Identity], TraditionalForm]], "Output"]}], 
+       XMLElement[
+       "dataformats", {}, {"plaintext,computabledata,formatteddata"}]}], 
+     XMLElement["states", {"count" -> "1"}, {
+       XMLElement[
+       "state", {
+        "name" -> "Show details", "input" -> 
+         "SubjectPod:MathWorldData__Show details"}, {}]}]}], 
+   Typeset`aux1$$ = {True, False, {False}, True}, Typeset`aux2$$ = {
+   True, False, {False}, True}, Typeset`aux3$$ = {True, False, {False}, True},
+    Typeset`aux4$$ = {True, False, {False}, True}, Typeset`aux5$$ = {
+   True, False, {False, False}, True}, Typeset`asyncpods$$ = {}, 
+   Typeset`nonpods$$ = {
+    XMLElement["warnings", {"count" -> "1"}, {
+      XMLElement[
+      "reinterpret", {
+       "text" -> "Using closest Wolfram|Alpha interpretation:", "new" -> 
+        "adjacency matrix", "score" -> "0.481027", "level" -> 
+        "medium"}, {}]}]}, Typeset`initdone$$ = True, Typeset`queryinfo$$ = {
+   "success" -> "true", "error" -> "false", "numpods" -> "5", "datatypes" -> 
+    "MathWorld", "timedout" -> "", "timedoutpods" -> "", "timing" -> "1.267", 
+    "parsetiming" -> "0.", "parsetimedout" -> "false", "recalculate" -> "", 
+    "id" -> "MSPa91521ceed66idciacc600004hb6c58b060ii4e3", "host" -> 
+    "http://www2.wolframalpha.com", "server" -> "14", "related" -> "", 
+    "version" -> "2.6"}, Typeset`sessioninfo$$ = {
+   "TimeZone" -> -4., 
+    "Date" -> {2013, 3, 24, 19, 14, 10.235026`7.762663936669073}, "Line" -> 6,
+     "SessionID" -> 23416920625700963758}, Typeset`showpods$$ = {1, 2, 3, 4, 
+   5}, Typeset`failedpods$$ = {}, Typeset`chosen$$ = {}, Typeset`open$$ = 
+   False, Typeset`newq$$ = "From adjacency matrix"}, 
+   DynamicBox[ToBoxes[
+     AlphaIntegration`FormatAlphaResults[
+      Dynamic[{
+       1, {Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$}, {
+        Typeset`aux1$$, Typeset`aux2$$, Typeset`aux3$$, Typeset`aux4$$, 
+         Typeset`aux5$$}, Typeset`chosen$$, Typeset`open$$, 
+        Typeset`elements$$, Typeset`q$$, Typeset`opts$$, Typeset`nonpods$$, 
+        Typeset`queryinfo$$, Typeset`sessioninfo$$, Typeset`showpods$$, 
+        Typeset`failedpods$$, Typeset`newq$$}]], StandardForm],
+    ImageSizeCache->{673., {366., 372.}},
+    TrackedSymbols:>{Typeset`showpods$$, Typeset`failedpods$$}],
+   DynamicModuleValues:>{},
+   Initialization:>If[
+     Not[Typeset`initdone$$], WolframAlphaClient`Private`doAsyncUpdates[
+       Hold[{
+        Typeset`pod1$$, Typeset`pod2$$, Typeset`pod3$$, Typeset`pod4$$, 
+         Typeset`pod5$$}], Typeset`asyncpods$$, 
+       Dynamic[Typeset`failedpods$$]]; Typeset`asyncpods$$ = {}; 
+     Typeset`initdone$$ = True],
+   SynchronousInitialization->False],
+  BaseStyle->{Deployed -> True},
+  DeleteWithContents->True,
+  Editable->False,
+  SelectWithContents->True]], "Print",
+ CellMargins->{{20, 10}, {Inherited, Inherited}},
+ CellChangeTimes->{3.5731556511317263`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{"01001", "\n", "10100", "\n", "01010", "\n", "00101", "\n", \
+"10010"}], "Input",
+ CellChangeTimes->{{3.5731557325828543`*^9, 3.573155732584741*^9}}],
+
+Cell[BoxData["1001"], "Output",
+ CellChangeTimes->{3.573155733349533*^9}],
+
+Cell[BoxData["10100"], "Output",
+ CellChangeTimes->{3.573155733351062*^9}],
+
+Cell[BoxData["1010"], "Output",
+ CellChangeTimes->{3.57315573335364*^9}],
+
+Cell[BoxData["101"], "Output",
+ CellChangeTimes->{3.573155733355619*^9}],
+
+Cell[BoxData["10010"], "Output",
+ CellChangeTimes->{3.5731557333574047`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ShowGraph", "[", 
+  RowBox[{"FromAdjacencyMatrix", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}]}], "}"}], 
+   "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.573155743349537*^9, 3.573155832140258*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.645841624856078, 0.9749143690630834}, {0.07280133647277633, 
+      0.788722292632364}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.645841624856078, 0.9749143690630834}, {1., 
+      0.4874571845315417}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.07280133647277633, 0.788722292632364}, {0.07280133647277627, 
+      0.18619207643071953`}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.07280133647277627, 0.18619207643071953`}, {
+      0.6458416248560779, 0.}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.6458416248560779, 0.}, {1., 0.4874571845315417}}], 
+     {GrayLevel[0]}}}, {
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{0.645841624856078, 0.9749143690630834}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{0.07280133647277633, 0.788722292632364}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], 
+      PointBox[{0.07280133647277627, 0.18619207643071953`}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{0.6458416248560779, 0.}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{1., 0.4874571845315417}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}}},
+  AlignmentPoint->Center,
+  AspectRatio->Automatic,
+  Axes->False,
+  AxesLabel->None,
+  AxesOrigin->Automatic,
+  AxesStyle->{},
+  Background->None,
+  BaseStyle->{},
+  BaselinePosition->Automatic,
+  ColorOutput->Automatic,
+  ContentSelectable->Automatic,
+  CoordinatesToolOptions:>Automatic,
+  DisplayFunction:>$DisplayFunction,
+  Epilog->{},
+  FormatType:>TraditionalForm,
+  Frame->False,
+  FrameLabel->None,
+  FrameStyle->{},
+  FrameTicks->Automatic,
+  FrameTicksStyle->{},
+  GridLines->None,
+  GridLinesStyle->{},
+  ImageMargins->0.,
+  ImagePadding->All,
+  ImageSize->Automatic,
+  ImageSizeRaw->Automatic,
+  LabelStyle->{},
+  Method->Automatic,
+  PlotLabel->None,
+  PlotRange->{{0.022801336472776268`, 1.05}, {-0.05, 1.0249143690630833`}},
+  PlotRangeClipping->False,
+  PlotRangePadding->Automatic,
+  PlotRegion->Automatic,
+  PreserveImageOptions->Automatic,
+  Prolog->{},
+  RotateLabel->True,
+  Ticks->Automatic,
+  TicksStyle->{}]], "Output",
+ CellChangeTimes->{{3.573155772195511*^9, 3.5731558324392853`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ShowGraph", "[", 
+  RowBox[{"FromAdjacencyMatrix", "[", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+    "\"\</Users/caw/Projects/RamseyTheory/doc/homework/cycles/m26.txt\>\"", 
+     ",", "\"\<Table\>\""}], "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.573155847293049*^9, 3.57315584921351*^9}, {
+  3.573155927717358*^9, 3.57315593147322*^9}, {3.573156168498674*^9, 
+  3.573156174297524*^9}, {3.573156441648658*^9, 3.573156464791539*^9}, {
+  3.573156798210165*^9, 3.57315695508022*^9}, {3.573157038019549*^9, 
+  3.573157039081978*^9}, {3.5732413830970507`*^9, 3.573241393276867*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.645841624856078, 0.9749143690630834}, {0.07280133647277633, 
+      0.788722292632364}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.645841624856078, 0.9749143690630834}, {0.6458416248560779, 
+      0.}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.07280133647277633, 0.788722292632364}, {1., 
+      0.4874571845315417}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.07280133647277627, 0.18619207643071953`}, {
+      0.6458416248560779, 0.}}], 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], Thickness[0.005], 
+     LineBox[{{0.07280133647277627, 0.18619207643071953`}, {1., 
+      0.4874571845315417}}], 
+     {GrayLevel[0]}}}, {
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{0.645841624856078, 0.9749143690630834}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{0.07280133647277633, 0.788722292632364}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], 
+      PointBox[{0.07280133647277627, 0.18619207643071953`}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{0.6458416248560779, 0.}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}, 
+    {GrayLevel[0], 
+     {PointSize[0.025], PointBox[{1., 0.4874571845315417}]}, 
+     {GrayLevel[0]}, 
+     {GrayLevel[0]}}}},
+  AlignmentPoint->Center,
+  AspectRatio->Automatic,
+  Axes->False,
+  AxesLabel->None,
+  AxesOrigin->Automatic,
+  AxesStyle->{},
+  Background->None,
+  BaseStyle->{},
+  BaselinePosition->Automatic,
+  ColorOutput->Automatic,
+  ContentSelectable->Automatic,
+  CoordinatesToolOptions:>Automatic,
+  DisplayFunction:>$DisplayFunction,
+  Epilog->{},
+  FormatType:>TraditionalForm,
+  Frame->False,
+  FrameLabel->None,
+  FrameStyle->{},
+  FrameTicks->Automatic,
+  FrameTicksStyle->{},
+  GridLines->None,
+  GridLinesStyle->{},
+  ImageMargins->0.,
+  ImagePadding->All,
+  ImageSize->Automatic,
+  ImageSizeRaw->Automatic,
+  LabelStyle->{},
+  Method->Automatic,
+  PlotLabel->None,
+  PlotRange->{{0.022801336472776268`, 1.05}, {-0.05, 1.0249143690630833`}},
+  PlotRangeClipping->False,
+  PlotRangePadding->Automatic,
+  PlotRegion->Automatic,
+  PreserveImageOptions->Automatic,
+  Prolog->{},
+  RotateLabel->True,
+  Ticks->Automatic,
+  TicksStyle->{}]], "Output",
+ CellChangeTimes->{{3.573156452634205*^9, 3.573156465368352*^9}, 
+   3.573156751513875*^9, {3.573156798619651*^9, 3.573156955402631*^9}, 
+   3.5731570398583612`*^9, {3.573241385960456*^9, 3.573241393524461*^9}},
+ ImageCache->GraphicsData["CompressedBitmap", "\<\
+eJzNXXm8lWMXPaluIjKPpUs0SQNRNCkaSKkMEVEqDTSoRKgoQ4iIiAxlnmcy
+JTJTZgmlRGgg88z+9nrvXsdzn85+up/vn+/+ftw67znrnPO+737W2mvv/dS5
+z6iB/Yf0GTWob5/iDiP6DB84qO/I4vbDRuhD5cvlcuUG6n9jinMV9M+Sy5X6
+H34G4X//f3/+IPtVSX7++WcZN26c1KxZU4qKirLf+Ls+nruo5KkLs1/ls6fu
+u+++2VerkP2/fPZ3PI5nTCr9dKDwTFS0p+Mx+8ldUPrpeOP46Xgsevr79vS/
+//5bKlQo+RhF9nR8/ujp72S/Ksiff/4pzzzzjAwePFi23377Df03eNNe8fvv
+v8vs2bOlX79+stVWW21gr6hSpYrUq1ev1PsW+FbzDeWXX36RBx54QHr16iWb
+bbbZBvY6/WP2EA7hKXZqK/pn9VUD/PHHH+Wuu+6SHj164LNsYFdDP2H2SfGJ
+9ZNXiK7uzjvvnJ3cDTfcML66Lxnwt99+KzfffLN07dpVKleuTGA9WdlJmzNn
+Dk5iZTv9+BgAbNWqVW5yCdDzBrRmzRq57rrr5KCDDsIVIdBOO+0kp5xyirzw
+wgvy119/VfGBnjWgL7/8Uq666io54IADcKl5BXbddVc57bTT5PXXX89t5qPM
+MZTly5fLlClTpEWLFrKB/hjK7rvvnp2Jt99+O7elj/KkoSxevFguvPBC2Xvv
+vaVcuXJE2XPPPeW8886TDz74ILeNjzLbDi1cuFAmTJggDRs2zPG8KJo0a9ZM
+Lr74YlmyZMn2PsojduiNN96QM888U+rUqZNHwRdr3bq1TJ06VT777LNqPsqD
+duiVV16RU089FSGQR0FAtWvXTq655hr56quvavgo99p50Sspzz33nAwdOlSq
+V69OIETiIYccIjfeeKN8/fXXu/hAdxnQH3/8IU899ZQMGDBAtttuOwLpnSiH
+HXaY3HbbbfLdd9/t5gPdbkC//fabPPLII9KnTx/ZcsstCbTJJpvI0UcfLffc
+c4/89NNPdXygWwwIsXPvvfdKz549pWrVqgTafPPNpXfv3vLwww/Lr7/+ursP
+NMuAfvjhB7n99tvl8MMPl4033phAW2+9dfZtn3zySYRsAx/oBgNau3atzJw5
+Uzp37oxIJtAOO+wgQ4YMkWeffRYh2tgHmmFAq1evzq5x+/btpWLFigQqLi6W
+UaNGycsvv4z1tYkPNN2AvvjiC7niiitk//33l/LlyzMsatWqJWeccQbu1Fwz
+H2WaoXz66acyefLkbNkLgqtBgwZyzjnnyHvvvZdr7qNMtUMff/yxnH/++YhJ
+/VsJBMJ10qRJ8uGHH+Za+RBT7JC+k4wfP17q169fKj6bN28ul156qSxdurSN
+jzLZDunCJKeffrrstttueRQ9OdK2bVuZNm2arFix4kAfZZKdFBDciy++KCNG
+jMDyTSC9XNKxY8dshV21alUHH+i8IERBfSeddJJUq1aNQJUqVZJDDz1Ubrrp
+Jvnmm28O9oEmBCH6+OOPZzyzzTbbEGijjTaSI488Uu688075/vvvO/tA4w1I
+w0YefPBBOe6442SLLbYg0KabbirHHnus3H///Qi+rj7QWQakgZwnQ301gRRT
++vbtK4899hje6zAfaIwB6eeWW265Rbp164bvQ6Btt902T3767Y/0gUYbkJ5J
+uf766+Xggw/GGSaQnncZPny4PP/887geR/tAIw1o5cqVefILQhREDvJ77bXX
+cIcc6wMNN6DPP/9cLrvsMmnZsmUYorVr15axY8dm/NfbRxliKHrnZ/y3zz77
+hCHauHFjOffcczP+6+ujDLZDGoYyceLEjP8YouQ+Dd/ciT7EADv05ptvylln
+nSV169YtFaL6VLn88suxlgzyUfrZIZJfHKIgv+nTp2NdO9lH6R2E6Lx582TY
+sGFSo0aNMEQ7deqUkZ+utMN8oF4GBHUK8hs4cCBWcwJBrXXv3l1uvfVWrP0j
+fKCeBgTR+uijj2bkp/xCIGWdPPkpG53qA/UIQvS+++6TY445BoxHIOVBOf74
+4+Whhx5CiJ7uAx0ehCjJTzmYQMrMcuKJJ8oTTzwBxj7TB+pmQMr+MmvWLOnS
+pUuoT1UrhOQ3zgfqYkCqR+Taa6+VDh06hPpU1YuMHDlSXnrpJYToOT5QJwNS
+hZQnv0CfIqcA+S1YsMDW4IIoHQ1F1Zpccsklst9++4X6VO9vOfvsszPym+Sj
+tDMUVY4Z+e21115hfDZp0kQuuOAC+eijj3IX+yht7ZCGcfam4D/GJ7lP3yF3
+qQ/R2g7Nnz9fxowZAwlQSpy2adNGrrzySsjxy32UFnaIxKdav5Q4BfPNmDED
+p/5KH6VZEJ9z586Vk08+GelHKE5xF4H5NFm52gfaO4hPMF///v1jcXrEEUfI
+HXfcgdvzWh9ozyA+ETtgvnxSWSFLKsl8+urrfaCGBoSk8e6775ajjjoqFKfI
+K0844YRsDdCnzPSB6hsQDpH5AnGKfHLQoEHy9NNP40Pf7APVNSDkjzfccEO2
+8gXiFPkjmU9P420+UC0DQv549dVXy4EHHhgyny6wMnr0aHn11VdxYe/0gWoa
+EPLHAsyna37GfG+99ZalMQVRig0F4vSiiy6Spk2bhpGF/BFUBuZ7wEepboeQ
+P+LpjRo1ykcWEIGMyHrYh6ia/Uo7NRXs5e+//3723Tx2/OSTTx7z32lTO7Su
+0VMxb0ng9OMyhGkj4htXC1dN5cYT63+Hdb2hStm9a49lsY4bCTeUKqHc0+uH
+DP0jGjNIQUGeqspyc9cPgbNa+lOVz8jcfsyYKPOnqBicHspR5boyfJBCpwd6
+nacHNMz1QsO8LKfHu6agVS5tqhhyoWTg2qaSIXFNy3J/lg8WUqzIyEUiocNc
+RIVO4hatFiztJIlIepEjVHoloqrYDpGvYiVIvlIlmAjvmnbonXfeWSdxxGUn
+eeoiklhqatmhRYsWkcTziwQZHPL4rvWvwtDpUBNRKr3HHnvkU+nbfRSSAnIG
+KptAk9SpUyevbG7xUchRSGEotPL6qILssssueaGllzHBUWRNJFX0PaKkitJP
+FVuCNcnjSPMoRqM0j2JU07wEj1NZQNVSHkeJJ+QxvCGN9ISyaG5A0Nl0q6JU
+mIJd4yehdVoZEP0zpBBRcs4UQr99Qnq1MSDYBUhq4OjtuOOOoV1AR0+vR0IJ
+HhiEKPOsyMBgmrVq1aqEKu1oh5jyacpaKkRJaitWrEgo5E52CNSY8l41chJq
+vYsdUiHNPDgfokyCYTJN8CGYyCxbtiyTJTCkgxBFUYGG9HgfhXkVnDf6A5Hz
+Zv6AuSTJNA9GIO2KyAikaNPLmEjzmHjCmmT1ILImg+pBIvFkKgyzlJZOZJaS
+Q1WPJlJhJuegI5pMkX0L6kTlRYMvkZz3NSAYyiwERYYybS9dDhJ2wYlBiNKI
+i7IIkp+yccK9GBSEKMgP5ZTIdEfRBdagJrkJM+XkIETpVipdh5kWzUrNtBLG
+znA7RP4LdWfIf5rkJkymkXYI/IdqChzcMETp4qp67eWjjLZDkNrmJudDlFYy
+1HpPH4J2IGpG4D9UVAL+g2eGwgts7R4+Ct1J5B902aP6lbnsFs1JsxTpEMkv
+KqeR/PQyJsxS2rdI0FBGQTklKvCxDKEhmrBvaSjjEAsjUQmShREN0YShTIsb
+SSzJL18cLUliQX54D31KwuK+2ICQVuPz43tEaTWLR/rqhOl+qQFBn7KcpScm
+1KckPz2NiRrA5UFkgfxwoSPrAbcDbgu9sImSxDQ7xGJf6ISA/Fjs05ssURuZ
+bodIfpq1lopPkp/e8Ik6zQw7hAoL4lDjMR9ZrIBq1JnMSpawNITz1dgomwb5
+LVy40FRfsqIGfQrywyIVxCciC0sZKsMNfRQW+KBPWagO4hP61ArVJoiT9UbY
+iWS+QJzCTiTz6XqdqDeyAopMDGQCUgniE+KUlX1lkEQFlDVZiFP2HESWK3sO
+lNMSNdkHDAjilMwXmMAQp/iQoGll2Ro+0MMGBObDicAJiWxpnDacPuX9RNH6
+MQMC86GBANcnyh/JfKpEEjX0J4L4BPNBK6naCcUpFBVuLtVGiZL+HDukci27
+c0O/E/GJGxw3uuq0RHsBHQUyn+ZpBZlPNWOi1eF5O4TgQjRrVOfjU+VuFvlw
+gDfxIdgFAnGKZQXLSxCfyPywCiF/3MhHYZOKKvJsiYPOD8QpilfIBnRhzFXy
+UeYbimYH2YqLlTcqgWF9xjqtl7G8D8RWHohTMl8+RCshu8kzH26sAghsH0Li
+iFwMtBQkjppoZWISr2rZsqW96H17ERQoyBCkGCSJUFegTtCbRtiFJS9aZC+C
+2oRszZW4YKHaxMdH9qrxfX7Jiz7MfhXlPzmcTggCCANdN8IkEPIBMkK/ycTw
+xaVP3AZBnKELAPQV1YxJX5oEnu0DFdljoC9YBrqoljLy4SxAYekaPNZHYbcR
+6vKQb3HHC1wOSD3lgzN8lCr2GOkrzgBJYZoBnuajVLXH4AdD0qq0zQdZ/fr1
+M/mLDHCUD7GFnV1AQFuDvoIggzEN+lIxnTvFR9naUCAvseDB7wqCDMIQrpgm
+CLmhPsp2hoIMEJkHMpDIbUeegnxFg2ywD7SjAUFekr4i/5/0pepqgA+0kwHh
+MRibCKyoIoFcDsGheq+fD7SzAUFeIl9E3hjVSJBdgr40/vr4QLsaEOQl6SvI
+ACEvQV8on+jLjvOBahsQ5CVyauTWUQaIDByZuKqAY3ygegYE+kILAOgrygBJ
+X6pLjvKB2G0E+kLBILTzQV9YSWBSaPp3hI/CViPUDeGA1KtXr1R8olsAbomm
+f919FPYZpegLNZJDfYim9hjKoLCE8BghUEmFfYTc7xAfYj87tajHwpsCdwXa
+EqoQ3IWq0UE+SktDQW0Y3IUiRqAtQTnoFpg3b16uvY+yv6FAW8K5g4MXlarh
+88Hv0zuhrQ90gAFBW5K/ouI5ki8kYXpvtvaB2hsQtCUKmHA5g9wP2hJeKDxR
+jZYWPtBBBgRtCb8VvmuQ+6GyAXcWPKfxu68PdEgQnOS8SFuC89AyoC/bxwc6
+1IDAefCk4U1H2hIONpxsXeP28oG6B8G5YMGCjPei2gRpT1fdRj4Q+4xAeyjH
+x7UJtArA5FcG2MNHYZMRLEtUEMLcD7SHVgFUG5SN6vko7DBK0R5qE7V9iOPt
+vKA2gZIKSisB7cGyRAVGc1RbcQuinGAo0JYo74D2gvgEYYH24M3s7KP0NxRo
+S9Ae+gCC+ERAoFtg7ty5xkcFUQYaCgoTKJChUBbkfohy1NNQV9O7agcf6CQD
+gr4k50X6kpynOVSJOktX2jb132yovRlejgYBNAoE+SGKF2gnAJ01bdq0UC96
+FR/8FAOHfkXTAJoHNGesbChhi/zGPsooewwJI2S5yuZcJYMIe/UTEPSYseQh
+WPDiQgMCCYgR9l2w/LKlQS9voaGBBMowQwEVgFBQIY/ahBDI4ecr41mifQuq
+Mrb7JxSK8oSHugl+EsMFiQtKsxmsXKD/oVGjRllDAxybiv/bfUmjmiqicePG
+pRYqqAh8gsWLF1f3UehSK0FniibWIlQ0y5cvL/ZR6FJDXKHNIW5AYpuDLr01
+fZRj7dyBCaj3IheQem/NmjW1fKCjDQjCkVEV+JIQjmjcQcgqN9X1gY40ILAl
+NXHklCL20VKkL6vvAx1mQBDXXLEi75Yrlj6loQ/U1YDwGNfQyE3mGqofek8f
+qLMBIQFhJhP528hk0Hagp3FvH+hgA4LjToaJHHdLrHBhm/lAHQwIGRryPBBe
+kKHBpgThzZ8/P5dQSqyjohhhzBsSHskX2WJrH4VeNaoiUAFNmjTJ8zcVwKJF
+i3IJEUmXGtMryMIbNGhQKj6xoECO6ErRzkehS01lFFZz8a0ojXRR6+ijNA0i
+CwYFxJpK8zBEKdZWrlzZyQdqYkBQfZSPQSYFp4OWidJAFx+osQGBsihoI++F
+glYpqZsP1MCAwKC0jaJ6IyW2qvDDfaDdDQjLMUV/VAGl6FcV3sMHqmNAqMky
+DQkycqgTpiEaoj19oN0MCEYcHb3AI4BegqOHtgMN0V4+0C4GBPnGJC2qW5vB
+iDuktw9Uw4CgJuF3gkKjMrpRaC7hNLAbCa6pZa4hRzJ5hbJNGB+0qyHUyX8M
+UWbQsG8TJgyNamQMYNxY68ONBvnpBx3io9CoprMQ15xoLehJG+6jVA1CFF49
+yC/q/yD56WUc6QNVCUKU9kvUkcLqgQrx0T5Q5SBESX5RjwwNIRXiY3ygIgNC
+8soKS1QYIflp8J3lA7EfDuk0TbNIitM00+VgfAhUKQTKEgeSnn6P/OVC1Yj+
+nX7tCSFCiXAEApaCqKEKlRUwnJ70knqvDeiWlMvoWuZDpaSdy4puuOQ2rvqu
+vQiVOpRBIvJCfOEDoNPNXPO37BXQm1Zk/CeWivImLSolwQmwFy+wc4yjpCiG
+EE1iZKmJYsFrdqjQdCVCCBUR8JMmwkU+yst2iOZ5nLrTPVdpUIZRWoQQyhwg
+p8hJIDmtXr26ig/EUVroRxbIo7o2C+Qqn6r6QJymhX4kOUVuC2sayhZb+EAc
+qIV+ZBNB5P+QnPQpW/tAsw0Ih1jciRypYLpyOx/oEQNCwkhyijwylpv0NO7o
+Az1oQNCP7PuI9CNuCZCTRtdOPtB9BoTMkcW4KHNkG0qiint3EOy4/0FOQQii
+34zklCgq32GH4KyyNyeerkRkJQrct9oh5HceOWGN0LdITNPeZIcKTVfiW2FZ
+Ajnp102M0t5oh1hEjqefWUXWU1+GOVqOVoKZIhuezKTisQxztIhPVtqjwgB7
+zPT2bOoDcZQW4pHMFJUqWPtXztnPB5oaxCf78KLiCZlJWbClDzTFgCAe2R8R
+NfSxP0Ljc38faLIBIb9ju0bUYsh9BfQ0HuADXWhAKHkVGK2Eg2j7CmDhbe8D
+nW9A6MFkM0s0YMJOzkQX1ERDgbNaYGsB5HdGeLlEU9bZdgjFTba3xqOVSqm5
+RIPYWDuEJiGP+bAMLV26NDFKe4YdYstvWPFFfHJfAVUEZZijJfNh5Q3EI0KU
+jVgqHsswR4sQ5b4CUSWbzKfisQxztBCPbFaLxCM7tVWMHe8DcZQWIUrmC1q+
+kd+xfU7F4wk+0GADQn7HbvagvwCijsyn79XfBxpgQBCRbDGM3Ge2GOq3H+gD
+9TMg+OFkvsgP574Cej1O8oH6GBDyu3VGK0taP2xfAdwhQ32g4wwI+R23Fog6
+OTkPkeglPsZQULmwrQXiDQrIf4nW5qPsEKafOSQST1fqIpBLtFkfYYfefffd
+dcgPIcpuXYVJjNJ2t0PB4Ewpccp9BXRdK8McLUKU7cyROGU7s660ZZijRYhy
+X4Go8EbyW7t27bk+EEdpEaJs+Y7EKaellI0u8IE4TYv8juQXiFPkd2xCV368
+yAdqa0DI7zhdGbXikfw0RC/xgVobEMQpG/Wj5sBguvIyH6iFAaGmQfKLSsrB
+vgJX+ED7GhDSQU5XRt2T3FcgMf+yj6EgP+S+AtH0M6wQ1OwT4zh72SHkjPG+
+AjBfSH6J0aBGdgiZI/cVIEQrGzDRD5lLjCntYYfQSxEzH4KT0y7Lly9PzNHW
+s0PcUEDJqlRwckcBVaZlGKJFcHIcKKo8cBxI05QyDNFCmXJHgUCZIjhJe3pv
+3uMDcY4WmSNHpqLKA3cU0Fff7wNVNyAoU9JeoEyROXKIS+P3IR+o7AO1Jdkl
+dx2ImpFIjfrFHvXfzJ+/LMpX4qBsOSgXtU5xUE4vw+Prf5N150Y3zGQt1mR7
+PEtDbYgPd8lT60ctNFkLp5XbE8xdP0ShyVpoOfv5d5O15TMVB/ZctmxZWSDC
+08NibrhDwpz1Q3hjtMhtuYuDxnyOCxkGL3GelLjN+vjXtyQ9Q0gatlFEG7qg
+qoThzNn+O9GyhsLiPRc11wbDmYkB2hoGBM3HCIk0n3VSgOATM7T09KFCUQiM
+tsmCCg2GMxNjtKwy4CQWGM6ELuZKowtEYpiWdQ8odTZKREqdxVIl+MQ8LSsx
+4XBmVBsKhjMTI7WsDXE40wgizGY4Lq/XY5YPxGoV+IGj/FH9DCVu0JUS/A0+
+EGc9OJwZt+YG3DnDR+HQCUqL3B4hpE5ukaAkPt1HYWkRObA3nIk0epoPwTFa
+JONUNZFZxj0jpvoonKGFMcAtLCJjACccw5lTfBQWfsPhzECqYUEPhjMTA7Ss
+Q4NfqEIj54R7fCi/JGZoWRmHl4O7Ptp8MhrOTIzRslYPDi8wnAl3KdjXIDFM
+y+4BhCi3L4hUBXcv0FeP94HYz8ANQtPDmYmRWnZYcDgTCVakvLgzgSqvMT4Q
+5xO5M0HcgoJ13yYzR/soHJTkZGbcDsPEU0XpSB+F7TBIXbkzQRifZM8lS5YM
+91E4SQsPObHPH1qJhvgoHKOFn11gcwLwHzcnGOyjsK0J3vo6mxOUqAzwH4Yz
+B/go7MBCNlVgOBPZVLAzQWKAlk1iyO8oaqPiA8lP79DEDC171nAI5Ad3Kco4
+6S5pzCTGaE81oHBngqhAQ+GvIZoYpj3dgCD8SX5RVk7y03UlMU97ZhCi9AQj
+n4Ce4Nq1axMjteMMKNyZIHIumKvp2tvNB+LCRPKLq3wgPzimygNdfBSukxzO
+jHedpH2rnNTJR+GyzR1qC5EfDKqOPgTHaGFzJYYzUSlq56NwhpbDmXAYouFM
+7kzQ1kfhAC3sBZJf5ACC/OD262VMDNBeaUDQpwXmM1HrDuYzEzO0VxsQ9ClN
+oWjzEJKf6rzEGO21BgRTCOSHgky0eUgwn5kYpr0+CFFWjaLNQ2icqRZOzNPO
+NKBwZ4LI2yb56bdPjNTebEDhfGbUqsHKml6P+j7QbUGIstIXNY/Q69QMpq4P
+RHlP/os3DwH/4V7XbKqWj8JsY307E2jk1PRRmPxAn3o7E2B0rNiH4CTteuYz
+kWZW91E4Rgt9Sp8+ms/kzgQ7+CicoYU+JflFTVggP5vPTMzQPm1A4XxmpE+D
+nQkSY7RzDQj6lKWVqNYY7EyQmKSdZ0BIIUF+eFXUOheMbibmaV80IOhTNl5E
+zXwsP+lykBipfcWAQvKL9CnJTzVE3Imd2Pf99SBk2a2Sr2FXKrVTAVQOfsz8
+yCW2qX/Tvgm7aP6pr5cYPrhvVQbnm/oLbJ3/jkGQFuHIcowg8Q8CIIVM9fv/
+u39u4F/+YwZl/KcS/ot/hCF7m/+jfz/C+3Ou3H8AzQveYA==\
+\>"]]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.573155797593248*^9, 3.573155799018094*^9}, 
+   3.5731559261407127`*^9}]
+},
+WindowSize->{740, 752},
+WindowMargins->{{Automatic, 10}, {Automatic, 30}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 186, 3, 27, "Input"],
+Cell[768, 27, 109, 2, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[914, 34, 114, 1, 37, "WolframAlphaLong"],
+Cell[1031, 37, 21420, 469, 748, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22488, 511, 163, 2, 88, "Input"],
+Cell[22654, 515, 73, 1, 27, "Output"],
+Cell[22730, 518, 74, 1, 27, "Output"],
+Cell[22807, 521, 72, 1, 27, "Output"],
+Cell[22882, 524, 72, 1, 27, "Output"],
+Cell[22957, 527, 76, 1, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23070, 533, 672, 16, 58, "Input"],
+Cell[23745, 551, 2516, 80, 392, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26298, 636, 610, 11, 58, "Input"],
+Cell[26911, 649, 12046, 238, 392, 2455, 80, "CachedBoxData", "BoxData", \
+"Output"]
+}, Open  ]],
+Cell[38972, 890, 120, 2, 27, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
