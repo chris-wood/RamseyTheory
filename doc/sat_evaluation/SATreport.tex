@@ -10,6 +10,7 @@
 \usepackage{sectsty} % Allows customizing section commands
 %\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
 
+\usepackage{color}
 \usepackage{fancyhdr} % Custom headers and footers
 \pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
 \fancyhead{} % No page header - if you want one, create it in the same way as the footers below
@@ -80,13 +81,57 @@ values to the variables such that substituting them into the literals of the for
 to evaluate to true (or 1). Expressed as a formal language, we have that 
 $3-SAT = \{\langle \phi \rangle : \phi \text{ is satisfiable }\}$.
 
-TODO: sat problem, sat competition, categories of evaluation, types of problems, graph arrowing...
+In 2002 Hans van Maaren of and John Franco initiated the public SAT competition in
+search of optimal performing SAT solvers judged by a variety of criteria and specializations, 
+including their ability to demonstrate satisfiability and exhaustively prove unsatisfiability.
+In addition, since $SAT$ is a problem that often arises in academia and the industry, 
+each of the candidate solvers are rigorously tested with massive application-specific, 
+crafted, and random Boolean formulas as input. With three different solver
+specializations tested against three different types of inputs, and a first, second, 
+and third place awarded to the candidates, a total of $27$ possible trophies are
+awarded each year. In the most recent competition held in 2011, solvers were
+tested using CPU time and world-clock time as a basis for their results, thus expanding
+the trophy space to $54$ slots. The next competition is slated to take place in 2013. 
+
+%TODO: sat problem, sat competition, categories of evaluation, types of problems, graph arrowing...
+The $SAT$ problem is particularly interesting when applied to graph arrowing. It can be shown
+how to reduce the question $G \overbrace{\to}^\text{?} \to (3,3)^e$ to an equivalent $3-CNF$ formula
+$\phi_G$ such that $G \not \to (3,3)^e \Leftrightarrow \phi_G$. Intuitively, this is a very promising
+technique for determining if $G \to (3,3)^e$ for $K_4$-free graphs $G$.
+
+The immediate application of this technique is to attack the upper bound of the Folkman number
+$F_e(3,3;4)$. In particular, to lower this bound, we will need to find a 
+graph $G$ on $n$ vertices where $G \to (3,3)^e$. It has been conjectured that 
+$G_{127} = G(127,3) = (\mathbb{Z}_{127}, E = \{(x,y) | x - y = \alpha^3 \mod 127\})$ is a
+prime candidate for witnessing an upper bound of $127$ because of its denseness and large number
+of triangles. To determine whether $G_{127}$ is indeed a witness we will decompose 
+the problem of arrowing into problems on subgraphs $H$ that witness $H \not \to (3,3)^e$, 
+and then carefully extend $H$ to encompass all of $G$. For each subgraph $H$ will generate
+a corresponding $3$-$CNF$ formula $\phi_G$ by mapping the edges in $E(H)$ to variables 
+in $\phi_H \in$ 3-SAT, and for edge adding the following clauses to $\phi_H$:
+\begin{align*}
+(x + y + z) \wedge (\bar{x} + \bar{y} + \bar{z})
+\end{align*}
+If $H$ can be extended to encompass all of $G$ and $\phi_G$ is 
+shown to be unsatisfiable, then $G \to (3,3)^e$, and so $F_e(3,3;4) = 127$.
+
+Unfortunately, while this approach seems simple upfront, the complexity of the formulas
+$\phi_H$ with $n \approx 85$ has proven to be very difficult for modern SAT solvers
+to handle. In this study, we will attempt to determine the structure of these formulas
+that makes them so difficult to solve. We will also present a comprehensive performance 
+comparison for the popular SAT solvers entered into the SAT competition, including
+Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
+
+\section{$k-SAT$ Algorithms}
+{\color{red} TODO}: most solvers use a Minisat variation - articulate that here for completeness
 
 \section{Selected $k-SAT$ Solvers}
-TODO: minisat, zchaff, glucose, ppfolio //, ppfolio seq, contrasat hack, 3S
+{\color{red} TODO}: discuss each 
+%TODO: minisat, zchaff, glucose, ppfolio //, ppfolio seq, contrasat hack, 3S
 
 \section{Performance}
-TODO: table
+{\color{red} TODO}: determine test cases first
+%TODO: performance results will go here
 
 %%%%% REFERENCES %%%%%
 

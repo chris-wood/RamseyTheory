@@ -1,0 +1,75 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      1838,         65]
+NotebookOptionsPosition[      1477,         47]
+NotebookOutlinePosition[      1832,         63]
+CellTagsIndexPosition[      1789,         60]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Import", "[", 
+  RowBox[{
+  "\"\</Users/caw/Projects/RamseyTheory/doc/homework/ramsey/k3k16n81.mat\>\"",
+    ",", " ", "\"\<MAT\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.5732984173031673`*^9, 3.573298487305964*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Import", "::", "fmterr"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Cannot import data as \[NoBreak]\\!\\(\\\"MAT\\\"\\)\
+\[NoBreak] format. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\
+\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/Import/fmterr\\\", ButtonNote -> \
+\\\"Import::fmterr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{
+  3.573298443167714*^9, {3.57329847741431*^9, 3.573298488126647*^9}}],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{
+  3.5732984431686974`*^9, {3.573298477417204*^9, 3.5732984881286173`*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 752},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 244, 5, 43, "Input"],
+Cell[826, 29, 503, 11, 23, "Message"],
+Cell[1332, 42, 129, 2, 27, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

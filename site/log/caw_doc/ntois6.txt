@@ -1,0 +1,125 @@
+// EXTRACTED FROM gtools.c in the nauty package (http://pallini.di.uniroma1.it/index.html)
+// I do not claim any ownership of this code - all rights go to Brendan McKay
+// I only put it here to comment the code for others to understand how it works
+
+char*
+ntois6(graph *g, graph *prevg, int m, int n)
+/* convert nauty graph to incremental sparse6 string, including \n and \0.
+   prevg == NULL implies there is no prior graph */
+{
+    int i,j,k;
+    char *p,x;
+    set *gj,*pgj;
+    setword gdiff;
+    size_t ii;
+    int r,rr,topbit,nb,lastj,iw,nwords;
+    char *plim;
+
+    if (!prevg) return ntos6(g,m,n);
+
+    DYNALLOC1(char,gcode,gcode_sz,5000,"ntos6");
+
+    plim = gcode + gcode_sz - 20;
+
+    gcode[0] = ';';
+    p = gcode+1;
+
+    for (i = n-1, nb = 0; i != 0 ; i >>= 1, ++nb)
+    {}
+    topbit = 1 << (nb-1);
+    k = 6;
+    x = 0;
+
+    lastj = 0;
+    for (j = 0; j < n; ++j)
+    {
+        gj = GRAPHROW(g,j,m);
+        pgj = GRAPHROW(prevg,j,m); 
+        nwords = SETWORDSNEEDED(j+1);
+	for (iw = 0; iw < nwords; ++iw)
+        {
+	    gdiff = gj[iw] ^ pgj[iw];
+            if (TIMESWORDSIZE(iw+1) > j+1) gdiff &= ALLMASK(SETBT(j+1));
+	    while (gdiff)
+	    {
+		TAKEBIT(i,gdiff);
+		i += TIMESWORDSIZE(iw);
+   
+                if (p >= plim)
+                {
+                    ii = p - gcode;
+                    DYNREALLOC(char,gcode,gcode_sz,
+                                       3*(gcode_sz/2)+10000,"ntos6");
+                    p = gcode + ii;
+                    plim = gcode + gcode_sz - 20;
+                }
+                if (j == lastj)
+                {
+                    x <<= 1;
+                    if (--k == 0)
+                    {
+                        *p++ = (char)(BIAS6 + x);
+                        k = 6;
+                        x = 0;
+                    }
+                }
+                else
+                {
+                    x = (x << 1) | (char)1;
+                    if (--k == 0)
+                    {
+                        *p++ = (char)(BIAS6 + x);
+                        k = 6;
+                        x = 0;
+                    }
+                    if (j > lastj+1)
+                    {
+                        for (r = 0, rr = j; r < nb; ++r, rr <<= 1)
+                        {
+                            if (rr & topbit) x = (x << 1) | (char)1;
+                            else             x <<= 1;
+                            if (--k == 0)
+                            {
+                                *p++ = (char)(BIAS6 + x);
+                                k = 6;
+                                x = 0;
+                            }
+                        }
+                        x <<= 1;
+                        if (--k == 0)
+                        {
+                            *p++ = (char)(BIAS6 + x);
+                            k = 6;
+                            x = 0;
+                        }
+                    }
+                    lastj = j;
+                }
+                for (r = 0, rr = i; r < nb; ++r, rr <<= 1)
+                {
+                    if (rr & topbit) x = (x << 1) | (char)1;
+                    else             x <<= 1;
+                    if (--k == 0)
+                    {
+                        *p++ = (char)(BIAS6 + x);
+                        k = 6;
+                        x = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    if (k != 6)
+    {
+        if (k >= nb+1 && lastj == n-2 && n == (1<<nb))
+	    *p++ = (char)(BIAS6 + ((x << k) | ((1 << (k-1)) - 1)));
+        else
+	    *p++ = (char)(BIAS6 + ((x << k) | ((1 << k) - 1)));
+    }
+
+    *p++ = '\n';
+    *p = '\0';
+    s6len = p - gcode;
+    return gcode;
+}
