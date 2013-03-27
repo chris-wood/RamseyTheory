@@ -27,6 +27,11 @@ class GNR:
 		for v in iset:
 			self.graph.remove_node(v)
 
+	def removeNodes(self, n):
+		if (n < len(self.graph.nodes())):
+			for i in range(n):
+				self.graph.remove_node(self.graph.nodes()[0])
+
 	def getGraph(self):
 		return self.graph
 
@@ -106,6 +111,13 @@ def main():
 	G.removeIndependentSet()
 	numVars, cnf = reduce(G.graph)
 	outFile = open('out_3.cnf', 'w')
+	output = makeDimacsCNF(numVars, cnf)
+	outFile.write(output)
+
+	G = GNR(127,3)
+	G.removeNodes(47)
+	numVars, cnf = reduce(G.graph)
+	outFile = open('g127_80.cnf', 'w')
 	output = makeDimacsCNF(numVars, cnf)
 	outFile.write(output)
 
