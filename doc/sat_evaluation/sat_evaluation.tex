@@ -1,0 +1,152 @@
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{sectsty} % Allows customizing section commands
+%\allsectionsfont{\normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{color}
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+
+\usepackage[compact]{titlesec}
+\titlespacing{\section}{0pt}{*0}{*0}
+\titlespacing{\subsection}{0pt}{*0}{*0}
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parsep}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\topmargin}{0pt}
+\setlength{\topsep}{0pt}
+\setlength{\partopsep}{0pt}
+
+%\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+%\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+%\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Department of Computer Science, Rochester Institute of Technology} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{2pt} \\[0.4cm] % Thin top horizontal rule
+\huge Performance Evaluation of $k-SAT$ Solvers\\ 
+\Large Applied to Graph Arrowing \\
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Christopher Wood \\ Advisor: Professor Stanis{\l}aw Radziszowski} % Your name
+
+\date{\normalsize \today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\section{Introduction}
+In his 1972 seminal paper entitled, ``Reducibility Among Combinatorial Problems,'' Karp introduced a 
+list of 21 NP-complete problems, including Boolean satisfiability, the maximum cut of a graph, 
+and 0-1 integer programming \cite{karp72}. The complexity of these problems was proven by deriving
+a polynomial-time reduction from CIRCUIT-SAT = $\{\langle C \rangle : C$ is a satisfiable Boolean combinational
+circuit $\}$, the first problem shown to be NP-complete by Cook in 1971 \cite{cook71-np}, starting
+the rush of complexity theory research. 
+
+The problem $3-SAT$, or more formally, $3-CNF SAT$, is a special case of satisfiability.
+It is a decision problem in which takes as input a 3-CNF Boolean formula and returns YES if 
+the formula is satisfiable, and NO otherwise \cite{clrs90-algorithms}. A 3-CNF formula, more formally known as a Boolean 
+formula in 3-conjunctive normal form, is expressed as the Boolean AND of arbitrarily many clauses,
+where each clause is the Boolean OR of three literals, which is a Boolean variable or its negation. 
+Such a Boolean formula is said to be satisfiable if and only if there exists an assignment of truth 
+values to the variables such that substituting them into the literals of the formula will cause it 
+to evaluate to true (or 1). Expressed as a formal language, we have that 
+$3-SAT = \{\langle \phi \rangle : \phi \text{ is satisfiable }\}$.
+
+In 2002 Hans van Maaren of and John Franco initiated the public SAT competition in
+search of optimal performing SAT solvers judged by a variety of criteria and specializations, 
+including their ability to demonstrate satisfiability and exhaustively prove unsatisfiability.
+In addition, since $SAT$ is a problem that often arises in academia and the industry, 
+each of the candidate solvers are rigorously tested with massive application-specific, 
+crafted, and random Boolean formulas as input. With three different solver
+specializations tested against three different types of inputs, and a first, second, 
+and third place awarded to the candidates, a total of $27$ possible trophies are
+awarded each year. In the most recent competition held in 2011, solvers were
+tested using CPU time and world-clock time as a basis for their results, thus expanding
+the trophy space to $54$ slots. The next competition is slated to take place in 2013. 
+
+%TODO: sat problem, sat competition, categories of evaluation, types of problems, graph arrowing...
+The $SAT$ problem is particularly interesting when applied to graph arrowing. It can be shown
+how to reduce the question $G \overbrace{\to}^\text{?} \to (3,3)^e$ to an equivalent $3-CNF$ formula
+$\phi_G$ such that $G \not \to (3,3)^e \Leftrightarrow \phi_G$. Intuitively, this is a very promising
+technique for determining if $G \to (3,3)^e$ for $K_4$-free graphs $G$.
+
+The immediate application of this technique is to attack the upper bound of the Folkman number
+$F_e(3,3;4)$. In particular, to lower this bound, we will need to find a 
+graph $G$ on $n$ vertices where $G \to (3,3)^e$. It has been conjectured that 
+$G_{127} = G(127,3) = (\mathbb{Z}_{127}, E = \{(x,y) | x - y = \alpha^3 \mod 127\})$ is a
+prime candidate for witnessing an upper bound of $127$ because of its denseness and large number
+of triangles. To determine whether $G_{127}$ is indeed a witness we will decompose 
+the problem of arrowing into problems on subgraphs $H$ that witness $H \not \to (3,3)^e$, 
+and then carefully extend $H$ to encompass all of $G$. For each subgraph $H$ will generate
+a corresponding $3$-$CNF$ formula $\phi_G$ by mapping the edges in $E(H)$ to variables 
+in $\phi_H \in$ 3-SAT, and for edge adding the following clauses to $\phi_H$:
+\begin{align*}
+(x + y + z) \wedge (\bar{x} + \bar{y} + \bar{z})
+\end{align*}
+If $H$ can be extended to encompass all of $G$ and $\phi_G$ is 
+shown to be unsatisfiable, then $G \to (3,3)^e$, and so $F_e(3,3;4) = 127$.
+
+Unfortunately, while this approach seems simple upfront, the complexity of the formulas
+$\phi_H$ with $n \approx 85$ has proven to be very difficult for modern SAT solvers
+to handle. In this study, we will attempt to determine the structure of these formulas
+that makes them so difficult to solve. We will also present a comprehensive performance 
+comparison for the popular SAT solvers entered into the SAT competition, including
+Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
+
+\section{$k-SAT$ Algorithms}
+{\color{red} TODO}: most solvers use a Minisat variation - articulate that here for completeness
+
+\section{Selected $k-SAT$ Solvers}
+{\color{red} TODO}: discuss each 
+%TODO: minisat, zchaff, glucose, ppfolio //, ppfolio seq, contrasat hack, 3S
+
+\section{Performance}
+{\color{red} TODO}: determine test cases first
+%TODO: performance results will go here
+
+%%%%% REFERENCES %%%%%
+
+\begin{thebibliography}{9}
+
+\bibitem{karp72} Richard Karp. Reducibility among combinatorial problems. \emph{Complexity of Computer Computations, (RE Miller and JM Thatcher, eds.)} (1972), 85–103.
+
+\bibitem{cook71-np} Stephen A. Cook. The Complexity of Theorem-Proving Procedures. \emph{In Proceedings of the third annual ACM symposium on Theory of computing (STOC '71)}. ACM, New York, NY, USA (1971), 151-158. DOI=10.1145/800157.805047. {\tt http://doi.acm.org/10.1145/800157.805047}
+
+\bibitem{clrs90-algorithms} Gormen, Thomas H., Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. Introduction to Algorithms. MIT Press 44 (1990), 97-138.
+
+\bibitem{minisat} Niklas S\"{o}rensson and Niklas E\`{e}n. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005} (2005) 53.
+
+\bibitem{zchaff} Yogesh Mahajan, Zhaohui Fu, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg (2005).
+
+\end{thebibliography}
+
+\end{document}
