@@ -89,37 +89,49 @@ def makeDimacsCNF(numVars, cnf):
 	return bucket
 
 def main():
-	G = GNR(127,3)
-	numVars, cnf = reduce(G.graph)
-	outFile = open('out.cnf', 'w')
-	output = makeDimacsCNF(numVars, cnf)
-	outFile.write(output)
-	#print(makeDimacsCNF(numVars, cnf))
+	# G = GNR(127,3)
+	# numVars, cnf = reduce(G.graph)
+	# outFile = open('out.cnf', 'w')
+	# output = makeDimacsCNF(numVars, cnf)
+	# outFile.write(output)
+	# #print(makeDimacsCNF(numVars, cnf))
 
-	G.removeIndependentSet()
-	numVars, cnf = reduce(G.graph)
-	outFile = open('out_1.cnf', 'w')
-	output = makeDimacsCNF(numVars, cnf)
-	outFile.write(output)
+	# G.removeIndependentSet()
+	# numVars, cnf = reduce(G.graph)
+	# outFile = open('out_1.cnf', 'w')
+	# output = makeDimacsCNF(numVars, cnf)
+	# outFile.write(output)
 
-	G.removeIndependentSet()
-	numVars, cnf = reduce(G.graph)
-	outFile = open('out_2.cnf', 'w')
-	output = makeDimacsCNF(numVars, cnf)
-	outFile.write(output)
+	# G.removeIndependentSet()
+	# numVars, cnf = reduce(G.graph)
+	# outFile = open('out_2.cnf', 'w')
+	# output = makeDimacsCNF(numVars, cnf)
+	# outFile.write(output)
 
-	G.removeIndependentSet()
-	numVars, cnf = reduce(G.graph)
-	outFile = open('out_3.cnf', 'w')
-	output = makeDimacsCNF(numVars, cnf)
-	outFile.write(output)
+	# G.removeIndependentSet()
+	# numVars, cnf = reduce(G.graph)
+	# outFile = open('out_3.cnf', 'w')
+	# output = makeDimacsCNF(numVars, cnf)
+	# outFile.write(output)
 
-	G = GNR(127,3)
-	G.removeNodes(47)
-	numVars, cnf = reduce(G.graph)
-	outFile = open('g127_80.cnf', 'w')
-	output = makeDimacsCNF(numVars, cnf)
-	outFile.write(output)
+	# G = GNR(127,3)
+	# n = 47
+	# G.removeNodes(47)
+	# numVars, cnf = reduce(G.graph)
+	# outFile = open('g127_' + str(n) + '.cnf', 'w')
+	# output = makeDimacsCNF(numVars, cnf)
+	# outFile.write(output)
+
+	n = 47
+	for i in range(20):
+		G = GNR(127,3)
+		numRemove = n - i
+		print("Removing " + str(numRemove) + " vertices")
+		G.removeNodes(numRemove)
+		numVars, cnf = reduce(G.graph)
+		outFile = open('g127_' + str(numRemove) + '.cnf', 'w')
+		output = makeDimacsCNF(numVars, cnf)
+		outFile.write(output)
 
 if __name__ == "__main__":
 	main()
