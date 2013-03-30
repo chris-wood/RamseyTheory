@@ -4,6 +4,9 @@
 \usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
 
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
@@ -123,37 +126,76 @@ comparison for the popular SAT solvers entered into the SAT competition, includi
 Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
 
 \section{$k-SAT$ Algorithms}
+The algorithms used in state-of-the-art $SAT$ solvers tend to be based on the famous
+DPLL backtracking algorithm proposed by David, Putnam, Logemann, and Loveland in \cite{DPLL}.
+The DPLL algorithm works by recursively splitting a CNF formula into smaller formulas
+by assigning truth values to individual variables and simplifying the resulting
+formula at each level of iteration. Simplification works by removing all clauses in $\phi$ that
+become true under the new assignment and all literals which are false. 
+This process continues recursively until the formula is deemed satisfiable
+or a conflict emerges. Satisfiability occurs when all variables have been assigned truth values 
+and the resulting formula has non-empty clauses remaining, or when all clauses can be
+evaluted to true. If a conflict arises, the algorithm backtracks to
+the last assigned truth value, attempts to substitute the negated truth value, and then proceeds
+as normal. A formula $\phi$ is deemed unsatisfiabile if this algorithm exhaustively
+checks all possible truth value assignments without yielding a satisfiable formula. 
+
+The DPLL algorithm further enhances the backtracking search through the use of two additional
+procedures, unit propagation and pure literal elimination. Unit propagation works by assigning
+an appropriate truth value to all unit clauses (i.e. all clauses with only a single literal) and
+then propagating this truth value to the rest of the formula. For example, unit propagation
+of the formula $\phi = [(x_1) \land (x_1 \lor x_2 \lor x_3)]$ yields $\phi = [(x_2 \lor x_3)]$ by
+assigning a value of true to $x_1$. Pure literal elimination works by finding variables
+with have uniform polarity (i.e. always positive or negative). For all such literals, there
+always a exists a truth assignment such that the containing clauses will evaluate to true.
+Therefore, such clauses are delete from $\phi$. For example, given the formula 
+$\phi = [(x_1 \lor x_2 \lor \lnot x_3) \land (x_2 \lor \lnot x_3 \lor x_4) \land (x_1 \lor x_2 \lor \lnot x_4)]$,
+performing pure literal elimination yields 
+$\phi = [(x_1 \lor x_2 \lor \lnot x_4)]$ because we can assign $x_3 = false$ and eliminate
+the first two clauses. These two procedures are shown in the pseudocode description shown
+in Algorithm \ref{alg:DPLL}.
+
+\begin{algorithm}[t] %[htb]
+\caption{DPLL Algorithm} \label{alg:DPLL}
+\begin{algorithmic}[1]
+\Require{$\phi$}
+\Ensure{$true$ or $false$}
+\State{TODO}
+\end{algorithmic}
+\end{algorithm}
+
+
+
 {\color{red} TODO}: most solvers use a Minisat variation - articulate that here for completeness
 
 \section{Selected $k-SAT$ Solvers}
-
-
-
-{\color{red} TODO}: discuss each 
-%TODO: minisat, zchaff, glucose, ppfolio //, ppfolio seq, contrasat hack, 3S
+{\color{red} TODO}: discuss Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S
 
 \section{Performance}
+The formula $\phi_G$ for $G_{127}$ experiences a peculiar phase transition when $m \approx 41$. That is,
+
+
 \begin{table}
-	\caption{Performance of Minisat solvers}
-	\begin{tabular}{|l|l|l|}
+	\caption{Performance of Minisat solver by removing $N_R$ vertices from $G_{127}$}
+	\begin{tabular}{c | c | c | c | c | c | c}
 		\hline
-		Number of vertices removed & $SAT$ running time \\ \hline
-		~ & ~ \\ 
-		~ & ~ \\
+		$N_R$ & CPU Time & Restarts & Conflicts & Decisions & Propagations & Conflict Literals \\ \hline
+		46 & 1228.97s & 28668 & 18968226 & 41661327 & 1999748077 & 930184526 \\ 
+		45 & 4362.29s & 66558 & 52952393 & 106164381 & 5779728314 & 2755169058 \\ 
+		44 & 5576.51s & 81915 & 62420966 & 126120884 & 6748259547 & 3254804365 \\ 
+		43 & 21681.5s & 245755 & 199022470 & 384078647 & 21687371442 & 10581492993 \\ 
 		\hline
 	\end{tabular}
 	\label{tab:performanceSat}
 \end{table}
 
 
-{\color{red} TODO}: determine test cases first
+%{\color{red} TODO}: determine test cases first
 %TODO: performance results will go here
-
-%%%%% REFERENCES %%%%%
 
 \begin{thebibliography}{9}
 
-\bibitem{karp72} Richard Karp. Reducibility among combinatorial problems. \emph{Complexity of Computer Computations, (RE Miller and JM Thatcher, eds.)} (1972), 85–103.
+\bibitem{karp72} Richard Karp. Reducibility among combinatorial problems. \emph{Complexity of Computer Computations, (RE Miller and JM Thatcher, eds.)} (1972), 85-103.
 
 \bibitem{cook71-np} Stephen A. Cook. The Complexity of Theorem-Proving Procedures. \emph{In Proceedings of the third annual ACM symposium on Theory of computing (STOC '71)}. ACM, New York, NY, USA (1971), 151-158. DOI=10.1145/800157.805047. {\tt http://doi.acm.org/10.1145/800157.805047}
 
@@ -162,6 +204,8 @@ Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
 \bibitem{minisat} Niklas S\"{o}rensson and Niklas E\`{e}n. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005} (2005) 53.
 
 \bibitem{zchaff} Yogesh Mahajan, Zhaohui Fu, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg (2005).
+
+\bibitem{DPLL} M. Davis, G. Logemann, and D. W. Loveland, A machine program for theorem-proving, \emph{Communications of the ACM} \textbf{5(7)} (1962), 394-397.
 
 \end{thebibliography}
 
