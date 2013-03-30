@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  30 MAR 2013 17:19
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  30 MAR 2013 17:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -593,38 +593,38 @@ LaTeX Font Info:    Font shape `U/futm/m/n' will be
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 159.
  [3]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 200.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 215.
 
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
 []\T1/futs/m/n/10.95 Stephen A. Cook. The Com-plex-ity of Theorem-Proving Pro-c
 e-dures. \T1/futs/m/it/10.95 In Pro-
  []
 
 
-Underfull \hbox (badness 5417) in paragraph at lines 200--201
+Underfull \hbox (badness 5417) in paragraph at lines 215--216
 \T1/futs/m/it/10.95 ceed-ings of the third an-nual ACM sym-po-sium on The-ory o
 f com-put-ing (STOC
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 200--201
+Underfull \hbox (badness 10000) in paragraph at lines 215--216
 \T1/futs/m/it/10.95 '71)\T1/futs/m/n/10.95 . ACM, New York, NY, USA (1971), 151
 -158. DOI=10.1145/800157.805047.
  []
 
 [4] (./SATreport.aux) ) 
 Here is how much of TeX's memory you used:
- 5500 strings out of 493488
- 76649 string characters out of 3141326
- 244677 words of memory out of 3000000
- 8678 multiletter control sequences out of 15000+200000
+ 5507 strings out of 493488
+ 76759 string characters out of 3141326
+ 243677 words of memory out of 3000000
+ 8685 multiletter control sequences out of 15000+200000
  89149 words of font info for 115 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 35i,11n,47p,424b,326s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 35i,12n,47p,424b,298s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-s
 uper/cm-super-t1.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8
 r.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/fourier/fourier-bb
@@ -636,7 +636,7 @@ usr/local/texlive/2012/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/loc
 al/texlive/2012/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb></usr/local/tex
 live/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texli
 ve/2012/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on SATreport.pdf (4 pages, 120231 bytes).
+Output written on SATreport.pdf (4 pages, 122137 bytes).
 PDF statistics:
  55 PDF objects out of 1000 (max. 8388607)
  39 compressed objects within 1 object stream

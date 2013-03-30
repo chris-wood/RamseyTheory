@@ -156,23 +156,38 @@ the first two clauses. These two procedures are shown in the pseudocode descript
 in Algorithm \ref{alg:DPLL}.
 
 \begin{algorithm}[t] %[htb]
-\caption{DPLL Algorithm} \label{alg:DPLL}
+\caption{DPLL Algorithm \cite{DPLL}} \label{alg:DPLL}
 \begin{algorithmic}[1]
 \Require{$\phi$}
 \Ensure{$true$ or $false$}
-\State{TODO}
+\If{$\phi$ is a tautology with the current assignment}
+	\Return{$true$}
+\EndIf
+\If{$\phi$ contains an empty clause or all literals in a clause are false (conflict)}
+	\Return{$false$}
+\EndIf
+\ForAll{unit clauses $c \in \phi$}
+	\State{$\phi \gets UnitPropagate(c, \phi)$}
+\EndFor
+\ForAll{pure literal $l \in \phi$}
+	\State{$\phi \gets PureLiteralElimination(l, \phi)$}
+\EndFor
+\State{$l \gets ChooseLiteral(\phi)$}\\
+\Return{$DPLL(\phi \land l) \lor DPLL(\phi \land \lnot l)$}
 \end{algorithmic}
 \end{algorithm}
 
+{\color{red} TODO}: conflict analysis, clause recording, boolean constraint propagation, conflict-driven SAT solvers
 
-
-{\color{red} TODO}: most solvers use a Minisat variation - articulate that here for completeness
+{\color{red} TODO}: Minisat algorithm with heuristics
 
 \section{Selected $k-SAT$ Solvers}
 {\color{red} TODO}: discuss Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S
 
 \section{Performance}
-The formula $\phi_G$ for $G_{127}$ experiences a peculiar phase transition when $m \approx 41$. That is,
+The formula $\phi_G$ for $G_{127}$ experiences a peculiar phase transition when $m \approx 41$. 
+
+TODO: describe the table.
 
 
 \begin{table}
