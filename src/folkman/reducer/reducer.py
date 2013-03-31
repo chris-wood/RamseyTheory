@@ -8,7 +8,7 @@ from GNR import GNR
 from networkx import nx
 
 class reducer:
-	def reduce(G):
+	def reduce(self, G):
 		''' Generate the CNF formula for the 3-SAT version of the reduction.
 		'''
 		triangleSet = []
@@ -45,21 +45,22 @@ class reducer:
 						triangleSet.append(vTuple)
 						cnf.append((edgeMap[edge], edgeMap[edge1], edgeMap[edge2])) # positive clause
 						cnf.append((edgeMap[edge] * -1, edgeMap[edge1] * -1, edgeMap[edge2] * -1)) # negative clause
-		print("number of triangles = " + str(triangleSet))
+		print("number of triangles = " + str(len(triangleSet)))
 
 		# return the CNF formula and number of variables 
 		return len(edgeMap), cnf
 
-	def makeDimacsCNF(numVars, cnf):
+	def makeDimacsCNF(self, numVars, cnf):
 		''' Generate the DIMACS CNF file string for the specified 3-SAT CNF formula.
 		'''
-		bucket = "p cnf " + str(numVars) + " " + str(len(cnf)) + "\n"
+		header = "p cnf " + str(numVars) + " " + str(len(cnf))
+		clauses = []
 		for clause in cnf:
 			v1 = str(clause[0])
 			v2 = str(clause[1])
 			v3 = str(clause[2])
-			bucket = bucket + v1 + " " + v2 + " " + v3 + " 0\n"
-		return bucket
+			clauses.append([v1,v2,v3])
+		return header, clauses
 
 def main():
 	# G = GNR(127,3)
@@ -101,10 +102,15 @@ def main():
 		numRemove = n - i
 		print("Removing " + str(numRemove) + " vertices")
 		G.removeNodes(numRemove)
-		numVars, cnf = reduce(G.graph)
+		r = reducer()
+		numVars, cnf = r.reduce(G.graph)
 		outFile = open('g127_' + str(numRemove) + '.cnf', 'w')
-		output = makeDimacsCNF(numVars, cnf)
-		outFile.write(output)
+
+		# TODO: write the CNF
+		# header, clauses = makeDimacsCNF(numVars, cnf)
+		# outFile.write(output)
+
+		# TODO: write the CNF file to the output
 
 if __name__ == "__main__":
 	main()

@@ -27,6 +27,10 @@ class GNR:
 		for v in iset:
 			self.graph.remove_node(v)
 
+	def dropNode(self, n):
+		if (n < len(self.graph.nodes())):
+			self.graph.remove_node(self.graph.nodes()[n])
+
 	def removeNodes(self, n):
 		if (n < len(self.graph.nodes())):
 			for i in range(n):
