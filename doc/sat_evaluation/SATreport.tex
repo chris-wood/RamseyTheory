@@ -18,8 +18,8 @@
 \pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
 \fancyhead{} % No page header - if you want one, create it in the same way as the footers below
 \fancyfoot[L]{} % Empty left footer
-\fancyfoot[C]{} % Empty center footer
-\fancyfoot[R]{\thepage} % Page numbering for right footer
+\fancyfoot[C]{\thepage} % Empty center footer
+\fancyfoot[R]{} % Page numbering for right footer
 \renewcommand{\headrulewidth}{0pt} % Remove header underlines
 \renewcommand{\footrulewidth}{0pt} % Remove footer underlines
 
@@ -48,6 +48,7 @@
 %----------------------------------------------------------------------------------------
 
 \newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+\newcommand{\TODO}{{\color{red}TODO}}
 
 \title{	
 \normalfont \normalsize 
@@ -117,15 +118,21 @@ in $\phi_H \in$ 3-SAT, and for edge adding the following clauses to $\phi_H$:
 \end{align*}
 If $H$ can be extended to encompass all of $G$ and $\phi_G$ is 
 shown to be unsatisfiable, then $G \to (3,3)^e$, and so $F_e(3,3;4) = 127$.
+Otherwise, if $\phi_G$ is satisfiable, then $G \not \to (3,3)^e$, disproving the
+conjecture made in by Radziszowski et al. \cite{Radziszowski07-1}.
 
-Unfortunately, while this approach seems simple upfront, the complexity of the formulas
+Unfortunately, while this approach seems simple at face, the complexity of the formulas
 $\phi_H$ with $n \approx 85$ has proven to be very difficult for modern SAT solvers
 to handle. In this study, we will attempt to determine the structure of these formulas
-that makes them so difficult to solve. We will also present a comprehensive performance 
-comparison for the popular SAT solvers entered into the SAT competition, including
-Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
+that makes them so difficult to solve, and as a result, discover the underlying
+cause for the phase transition that occurs at $n \approx 85$. 
+We will also present a performance comparison for the popular 
+SAT solvers entered into the SAT competition, including Minisat \cite{minisat}, 
+zChaff \cite{chaff, zchaff}, and glucose \cite{Audemard09-1}. 
 
-\section{$k-SAT$ Algorithms}
+%Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
+
+\section{$SAT$ Solver Algorithms}
 The algorithms used in state-of-the-art $SAT$ solvers tend to be based on the famous
 DPLL backtracking algorithm proposed by David, Putnam, Logemann, and Loveland in \cite{DPLL}.
 The DPLL algorithm works by recursively splitting a CNF formula into smaller formulas
@@ -177,18 +184,16 @@ in Algorithm \ref{alg:DPLL}.
 \end{algorithmic}
 \end{algorithm}
 
-{\color{red} TODO}: conflict analysis, clause recording, boolean constraint propagation, conflict-driven SAT solvers
+\subsection{Advanced Heuristics}
+\TODO: print SAT solver papers for reference
+\TODO: (4/1/13 evening) conflict analysis, clause recording, boolean constraint propagation, conflict-driven
 
-{\color{red} TODO}: Minisat algorithm with heuristics
-
-\section{Selected $k-SAT$ Solvers}
-{\color{red} TODO}: discuss Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S
-
-\section{Performance}
-The formula $\phi_G$ for $G_{127}$ experiences a peculiar phase transition when $m \approx 41$. 
-
-TODO: describe the table.
-
+\section{Experiments}
+In our experiments we denote the number of vertices removed from the graph $G_{127}$ as $m$.
+The CNF formula $\phi_G$ for $G_{127}$ experiences a peculiar phase transition when $m \approx 41$,
+making it seemingly intractable for modern SAT solvers to halt with an answer in a realistic 
+amount of time. Table \ref{tab:performanceSat} shows how the Minisat solver time increases 
+as $m$ decreases from $46$ to $43$. The CPU time continues to increase as $m$ decreases.
 
 \begin{table}
 	\caption{Performance of Minisat solver by removing $N_R$ vertices from $G_{127}$}
@@ -204,21 +209,46 @@ TODO: describe the table.
 	\label{tab:performanceSat}
 \end{table}
 
+To understand the nature of the phase transition, we conducted the experiments
+described in the following sections.
 
-%{\color{red} TODO}: determine test cases first
-%TODO: performance results will go here
+\subsection{Experiment 1: Subgraph Reduction and Variable Assignment Propagation}
+Breaking the problem of $G_{127} \to (3,3)^e$ into small graphs $H$ is a natural way
+to approach this problem. In addition, clause reduction and unbalancing through
+variable assignment may provider further simplifications to $\phi_H$.
+Therefore, for this experiment, we have the following parameters:
+\begin{itemize}
+	\item $m$ - the number of vertices in $V \subset V(G)$ such that $H = G[V]$. The selection of
+	these vertices will be both structured and unstructured. That is, we will experiment
+	with removing structured groups of vertices, such as those contained within independent 
+	sets, as well as unstructure groups composed of randomly selected vertices.
+	\item $r$ - the number of variables $x_i \in \phi_H$ assigned truth values that are
+	propogated through the rest of the formula. 
+	\item $p$ - the number of levels of recursive propagation that occur after assigning 
+	$r$ truth values.
+\end{itemize}
+Clause reduction will use the same unit propagation and pure literal elimination techniques
+presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it is run with a solver. 
+
+\TODO: run the experiments and drop data here for DIFFERENT solvers
 
 \begin{thebibliography}{9}
 
-\bibitem{karp72} Richard Karp. Reducibility among combinatorial problems. \emph{Complexity of Computer Computations, (RE Miller and JM Thatcher, eds.)} (1972), 85-103.
+\bibitem{karp72} R. Karp, Reducibility among combinatorial problems, \emph{Complexity of Computer Computations, (RE Miller and JM Thatcher, eds.)} (1972), 85-103.
 
-\bibitem{cook71-np} Stephen A. Cook. The Complexity of Theorem-Proving Procedures. \emph{In Proceedings of the third annual ACM symposium on Theory of computing (STOC '71)}. ACM, New York, NY, USA (1971), 151-158. DOI=10.1145/800157.805047. {\tt http://doi.acm.org/10.1145/800157.805047}
+\bibitem{cook71-np} S. A. Cook, The Complexity of Theorem-Proving Procedures, \emph{In Proceedings of the third annual ACM symposium on Theory of computing (STOC '71)}. ACM, New York, NY, USA (1971), 151-158. DOI=10.1145/800157.805047. {\tt http://doi.acm.org/10.1145/800157.805047}
 
-\bibitem{clrs90-algorithms} Gormen, Thomas H., Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein. Introduction to Algorithms. MIT Press 44 (1990), 97-138.
+\bibitem{clrs90-algorithms} T. H. Gormen, C. E. Leiserson, R. L. Rivest, C. Stein, Introduction to Algorithms, \emph{MIT Press} \textbf{44} (1990), 97-138.
 
-\bibitem{minisat} Niklas S\"{o}rensson and Niklas E\`{e}n. Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization. \emph{SAT 2005} (2005) 53.
+\bibitem{Radziszowski07-1} S. P. Radziszowski, X. Xu, On the Most Wanted Folkman Graph, \emph{Geocombinatiorics} \textbf{16} (4) (2007), 367-381.
 
-\bibitem{zchaff} Yogesh Mahajan, Zhaohui Fu, and Sharad Malik. Zchaff2004: An Efficient SAT Solver. \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg (2005).
+\bibitem{minisat} N. S\"{o}rensson, N. E\`{e}n, Minisat v1.13 - A SAT Solver with Conflict-Clause Minimization, \emph{SAT 2005} (2005) 53.
+
+\bibitem{zchaff} Y. Mahajan, Z. Fu, S. Malik, Zchaff2004: An Efficient SAT Solver, \emph{Theory and Applications of Satisfiability Testing}. Springer Berlin/Heidelberg (2005).
+
+\bibitem{chaff} M. W. Moskewicz, C. F. Madigan, Y. Zhao, L. Zhang, S. Malik, Chaff: Engineering an efficient SAT solver, \emph{Proceedings of the 38th annual Design Automation Conference} ACM (2001).
+
+\bibitem{Audemard09-1} G. Audemard, L. Simon, GLUCOSE: a solver that predicts learnt clauses quality, \emph{SAT Competition} (2009), 7-8.
 
 \bibitem{DPLL} M. Davis, G. Logemann, and D. W. Loveland, A machine program for theorem-proving, \emph{Communications of the ACM} \textbf{5(7)} (1962), 394-397.
 
