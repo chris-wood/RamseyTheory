@@ -36,8 +36,8 @@ class injector:
 		r = reducer()
 		numVars, cnf = r.reduce(self.graph.getGraph())
 
-		# Propogate assignments
-		self.propogate(numVars, cnf)
+		# Assign values and propagate
+		self.assignValues(numVars, cnf)
 
 	def strip(self):
 		for i in range(self.nrr):
@@ -47,19 +47,45 @@ class injector:
 		for i in range(self.nisr):
 			self.graph.removeIndependentSet()
 
-	def propogate(self, numVars, cnf):
-		for i in range(self.pl):
+	def assignValues(self, numVars, cnf):
+		# list of random variables to remove
+		varsToAssign = []
+		for i in range(sekf.na):
+			var = random.randint(0, numVars)
+			if (var not in varsToAssign):
+				varsToAssign.append(var)
+
+		# list of all possible variable assignments, start with all false
+		assign = [] 
+		for i in range(numVars):
+			assign.append(False)
+
+		for config in range(2 ** numVars):
+			newCnf = []
+			for i in range(self.pl):
+				for c in cnf: # for each clause
+					isTrue = False
+					for l in c: # for each literal
+						if (l < 0 and (l * -1) in vars and assign[(l * -1) - 1] == True):
+							isTrue = True
+						elif (l > 0 and l in vars and assign[(l * -1) - 1] == True):
+							isTrue = True
+					if not isTrue:
+						newCnf.append(c)
+
 			# TODO: pick  a random variable
 			# do two different assignments (true and false)
 			# node: there will be 2^na resulting variables
-			print("performing variable assignment for PL " + str(i))
+
+	def propagate(self, numVars, cnf):
+		raise Exception("NOT IMPLEMENTED")
 
 def main():
 	parser = argparse.ArgumentParser(prog='injector')
 	parser.add_argument('-n', type=int)
 	parser.add_argument('-r', type=int)
 	parser.add_argument('-na', '--num_assigned', type=int, default=0)
-	parser.add_argument('-pl', '--propagation_level', type=int, default=0)
+	parser.add_argument('-pl', '--propagation_level', type=int, default=1)
 	parser.add_argument('-nrr', '--number_random_removed', type=int, default=0)
 	parser.add_argument('-nisr', '--number_independet_sets_removed', type=int, default=0)
 	parser.add_argument('-s', '--seed', type=int)
