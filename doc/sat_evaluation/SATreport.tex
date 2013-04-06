@@ -183,13 +183,40 @@ in Algorithm \ref{alg:DPLL}.
 \Return{$DPLL(\phi \land l) \lor DPLL(\phi \land \lnot l)$}
 \end{algorithmic}
 \end{algorithm}
-
+ 
 \subsection{Advanced Heuristics}
-%\TODO: print SAT solver papers for reference
-\TODO: conflict analysis, clause recording, boolean constraint propagation, conflict-driven
+The Boolean Constraint Propagation (BCP) algorithm in \cite{chaff} was a significant improvement
+on the traditional DPLL algorithm which seeks to minimize the number of times
+each clause is visited using \emph{variable decisions} and \emph{clause implications}. 
+This procedure consists of modifying $\phi$ after assigning a variable,
+or deciding its truth value, by implying further assignments for unit clauses when
+detected. If a conflict emerges during propagation, then the algorithm must backtrack 
+to the most recent literal decision, negate the value, and then continue down the search tree.
+
+Generally speaking, most SAT solvers that employ this algorithm spend the majority of their time in this procedures. 
+Chatt \cite{chaff} introduced more advanced heuristics to optimize this part of the 
+DPLL algorithm. Variable watching, which is an optimization that seeks to maintain some 
+knowledge about which clauses recently become unit clauses after a variable assignment, helps
+reduce the number of clauses that are visited during the BCP procedure. 
+
+Another optimization is the Variable State Independent Decaying Sum (VSIDS) decision heuristic, which helps guide
+the solver when selecting a variable to assign at each layer in the search tree \cite{chaff}.
+This procedure works by preprocessing $\phi$ at the beginning of the solve function
+to create a collection of counters for the number of times each literal appears
+in the formula. As the solver progresses, variables for decision are selected based on
+their count, and the solver will periodically reduce each count by a constant value.
+As a result, frequently occurring variables are selected first as they will propagate 
+through $\phi$ more. 
+
+\TODO: perform more literature survey and add more heurstics here!
+
+%\subsection{Balanced Formulas}
+%\cite{randomBalanced}
 
 \section{$3$-$SAT$ Phase Transition}
-\TODO
+\TODO: information about the ratio and why/where it occurs
+
+Phase Transitions in the Regular Random 3-SAT Problem*
 
 \section{Experiments}
 In our experiments we denote the number of vertices removed from the graph $G_{127}$ as $m$.
@@ -231,7 +258,12 @@ Therefore, for this experiment, we have the following parameters:
 	$r$ truth values.
 \end{itemize}
 Clause reduction will use the same unit propagation and pure literal elimination techniques
-presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it is run with a solver. 
+presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it is run with a solver.
+The hardness of solving $\phi_H$ can be estimated by summing together the time for
+all individual $2^r$ truth value assignments. In particular, if $\phi_H^i$ is the
+resulting formula after assigning the $i$th variable configuration, and $T(\phi_H^i)$ 
+is the time required to decide $\phi_H^i$, then the hardness (estimated decision time)
+for $\phi_H$ is $\sum_{i = 1}^{2^r} T(\phi_H^i)$.
 
 \TODO: run the experiments and drop data here for DIFFERENT solvers
 
@@ -254,6 +286,10 @@ presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it i
 \bibitem{Audemard09-1} G. Audemard, L. Simon, GLUCOSE: a solver that predicts learnt clauses quality, \emph{SAT Competition} (2009), 7-8.
 
 \bibitem{DPLL} M. Davis, G. Logemann, and D. W. Loveland, A machine program for theorem-proving, \emph{Communications of the ACM} \textbf{5(7)} (1962), 394-397.
+
+\bibitem{randomBalanced} Y. Boufkhad, O. Dubois, Y. Interian, B. Selman. Regular Random k-SAT: Properties of Balanced Formulas, \emph{Journal of Automated Reasoning} \textbf{35.1-3} (2005), 181-200.
+
+\bibitem{satThreshold} Random k-SAT: Two moments suffice to cross a sharp threshold
 
 \end{thebibliography}
 
