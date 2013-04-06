@@ -7,18 +7,6 @@
 from GNR import GNR
 from networkx import nx
 
-def makeDimacsCNF(numVars, cnf):
-	''' Generate the DIMACS CNF file string for the specified 3-SAT CNF formula.
-	'''
-	header = "p cnf " + str(numVars) + " " + str(len(cnf))
-	clauses = []
-	for clause in cnf:
-		c = []
-		for l in clause:
-			c.append(str(l))
-		clauses.append(c)
-	return header, clauses
-
 class reducer:
 	def reduce(self, G):
 		''' Generate the CNF formula for the 3-SAT version of the reduction.
@@ -55,12 +43,24 @@ class reducer:
 					vTuple = (vSet[0], vSet[1], vSet[2])
 					if not (vTuple in triangleSet):
 						triangleSet.append(vTuple)
-						cnf.append([edgeMap[edge], edgeMap[edge1], edgeMap[edge2]]) # positive clause
-						cnf.append([edgeMap[edge] * -1, edgeMap[edge1] * -1, edgeMap[edge2] * -1]) # negative clause
+						cnf.append((edgeMap[edge], edgeMap[edge1], edgeMap[edge2])) # positive clause
+						cnf.append((edgeMap[edge] * -1, edgeMap[edge1] * -1, edgeMap[edge2] * -1)) # negative clause
 		print("number of triangles = " + str(len(triangleSet)))
 
 		# return the CNF formula and number of variables 
 		return len(edgeMap), cnf
+
+	def makeDimacsCNF(self, numVars, cnf):
+		''' Generate the DIMACS CNF file string for the specified 3-SAT CNF formula.
+		'''
+		header = "p cnf " + str(numVars) + " " + str(len(cnf))
+		clauses = []
+		for clause in cnf:
+			v1 = str(clause[0])
+			v2 = str(clause[1])
+			v3 = str(clause[2])
+			clauses.append([v1,v2,v3])
+		return header, clauses
 
 def main():
 	# G = GNR(127,3)
