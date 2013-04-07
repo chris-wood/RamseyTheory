@@ -23,6 +23,7 @@ class reducer:
 		''' Generate the CNF formula for the 3-SAT version of the reduction.
 		'''
 		triangleSet = []
+		k5set = []
 		edgeMap = {}
 		cnf = []
 
@@ -115,35 +116,39 @@ class reducer:
 									edgeList.append(edge53)
 									edgeList.append(edge54)
 
-									if (self.containsEdges(edgeList, G)):
-										formula = []
-										formula.append(edgeMap[edge12] * -1)
-										formula.append(edgeMap[edge13] * -1)
-										formula.append(edgeMap[edge14] * -1)
-										formula.append(edgeMap[edge15] * -1)
+									k5TupleSet = sorted([u, v, vTuple[0], vTuple[1], vTuple[2]])
+									ts = (k5TupleSet[0], k5TupleSet[1], k5TupleSet[2], k5TupleSet[3], k5TupleSet[4])
+									if not (ts in k5set):
+										k5set.append(ts)
+										if (self.containsEdges(edgeList, G)):
+											formula = []
+											formula.append(edgeMap[edge12] * -1)
+											formula.append(edgeMap[edge13] * -1)
+											formula.append(edgeMap[edge14] * -1)
+											formula.append(edgeMap[edge15] * -1)
 
-										formula.append(edgeMap[edge21] * -1)
-										formula.append(edgeMap[edge23] * -1)
-										formula.append(edgeMap[edge24] * -1)
-										formula.append(edgeMap[edge25] * -1)
+											#formula.append(edgeMap[edge21] * -1)
+											formula.append(edgeMap[edge23] * -1)
+											formula.append(edgeMap[edge24] * -1)
+											formula.append(edgeMap[edge25] * -1)
 
-										formula.append(edgeMap[edge31] * -1)
-										formula.append(edgeMap[edge32] * -1)
-										formula.append(edgeMap[edge34] * -1)
-										formula.append(edgeMap[edge35] * -1)
+											#formula.append(edgeMap[edge31] * -1)
+											#formula.append(edgeMap[edge32] * -1)
+											formula.append(edgeMap[edge34] * -1)
+											formula.append(edgeMap[edge35] * -1)
 
-										formula.append(edgeMap[edge41] * -1)
-										formula.append(edgeMap[edge42] * -1)
-										formula.append(edgeMap[edge43] * -1)
-										formula.append(edgeMap[edge45] * -1)
+											#formula.append(edgeMap[edge41] * -1)
+											#formula.append(edgeMap[edge42] * -1)
+											#formula.append(edgeMap[edge43] * -1)
+											formula.append(edgeMap[edge45] * -1)
 
-										formula.append(edgeMap[edge51] * -1)
-										formula.append(edgeMap[edge52] * -1)
-										formula.append(edgeMap[edge53] * -1)
-										formula.append(edgeMap[edge54] * -1)
+											#formula.append(edgeMap[edge51] * -1)
+											#formula.append(edgeMap[edge52] * -1)
+											#formula.append(edgeMap[edge53] * -1)
+											#formula.append(edgeMap[edge54] * -1)
 
-										# Finally, append the formula...
-										cnf.append(formula)
+											# Finally, append the formula...
+											cnf.append(formula)
 
 						# TODO: search for all other pairs of vertices and see if K_5 is formed, and if so, add negative of their clauses...
 
@@ -203,9 +208,17 @@ def main():
 	print(len(K8.edges()))
 
 	# TODO: RUN THE REDUCTION CODE TONIGHT!
-	# r = reducer()
-	# numVars, cnf = r.reduce(G.graph)
-	# outFile = open('nenov_arrow_3_5.cnf', 'w')
+	r = reducer()
+	numVars, cnf = r.reduce35(K8)
+	outFile = open('nenov_arrow_3_5.cnf', 'w')
+	header, clauses = makeDimacsCNF(numVars, cnf)
+	print(header)
+	print(clauses)
+	outFile.write(header + "\n")
+	for c in clauses:
+		for l in c:		
+			outFile.write(str(l) + " ")
+		outFile.write("0 \n")
 
 if __name__ == "__main__":
 	main()
