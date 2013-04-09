@@ -1,7 +1,7 @@
 \documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
 
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
-\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{algorithm}
@@ -54,7 +54,7 @@
 \normalfont \normalsize 
 \textsc{Department of Computer Science, Rochester Institute of Technology} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{2pt} \\[0.4cm] % Thin top horizontal rule
-\huge Performance Evaluation of $k-SAT$ Solvers\\ 
+\huge Performance Evaluation of $k$-SAT Solvers\\ 
 \Large Applied to Graph Arrowing \\
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
@@ -75,7 +75,7 @@ a polynomial-time reduction from CIRCUIT-SAT = $\{\langle C \rangle : C$ is a sa
 circuit $\}$, the first problem shown to be NP-complete by Cook in 1971 \cite{cook71-np}, starting
 the rush of complexity theory research. 
 
-The problem $3-SAT$, or more formally, $3-CNF SAT$, is a special case of satisfiability.
+The problem 3-SAT, or more formally, 3-CNFSAT, is a special case of satisfiability.
 It is a decision problem in which takes as input a 3-CNF Boolean formula and returns YES if 
 the formula is satisfiable, and NO otherwise \cite{clrs90-algorithms}. A 3-CNF formula, more formally known as a Boolean 
 formula in 3-conjunctive normal form, is expressed as the Boolean AND of arbitrarily many clauses,
@@ -83,12 +83,12 @@ where each clause is the Boolean OR of three literals, which is a Boolean variab
 Such a Boolean formula is said to be satisfiable if and only if there exists an assignment of truth 
 values to the variables such that substituting them into the literals of the formula will cause it 
 to evaluate to true (or 1). Expressed as a formal language, we have that 
-$3-SAT = \{\langle \phi \rangle : \phi \text{ is satisfiable }\}$.
+3-SAT $= \{\langle \phi \rangle : \phi \text{ is satisfiable }\}$.
 
 In 2002 Hans van Maaren of and John Franco initiated the public SAT competition in
 search of optimal performing SAT solvers judged by a variety of criteria and specializations, 
 including their ability to demonstrate satisfiability and exhaustively prove unsatisfiability.
-In addition, since $SAT$ is a problem that often arises in academia and the industry, 
+In addition, since SAT is a problem that often arises in academia and the industry, 
 each of the candidate solvers are rigorously tested with massive application-specific, 
 crafted, and random Boolean formulas as input. With three different solver
 specializations tested against three different types of inputs, and a first, second, 
@@ -98,8 +98,8 @@ tested using CPU time and world-clock time as a basis for their results, thus ex
 the trophy space to $54$ slots. The next competition is slated to take place in 2013. 
 
 %TODO: sat problem, sat competition, categories of evaluation, types of problems, graph arrowing...
-The $SAT$ problem is particularly interesting when applied to graph arrowing. It can be shown
-how to reduce the question $G \overbrace{\to}^\text{?} \to (3,3)^e$ to an equivalent $3-CNF$ formula
+The SAT problem is particularly interesting when applied to graph arrowing. It can be shown
+how to reduce the question $G \overbrace{\to}^\text{?} (3,3)^e$ to an equivalent 3-CNF formula
 $\phi_G$ such that $G \not \to (3,3)^e \Leftrightarrow \phi_G$. Intuitively, this is a very promising
 technique for determining if $G \to (3,3)^e$ for $K_4$-free graphs $G$.
 
@@ -132,8 +132,8 @@ zChaff \cite{chaff, zchaff}, and glucose \cite{Audemard09-1}.
 
 %Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
 
-\section{$SAT$ Solver Algorithms}
-The algorithms used in state-of-the-art $SAT$ solvers tend to be based on the famous
+\section{SAT Solver Algorithms}
+The algorithms used in state-of-the-art SAT solvers tend to be based on the famous
 DPLL backtracking algorithm proposed by David, Putnam, Logemann, and Loveland in \cite{DPLL}.
 The DPLL algorithm works by recursively splitting a CNF formula into smaller formulas
 by assigning truth values to individual variables and simplifying the resulting
@@ -213,12 +213,12 @@ through $\phi$ more.
 %\subsection{Balanced Formulas}
 %\cite{randomBalanced}
 
-\section{$3$-$SAT$ Phase Transition}
+\section{3-SAT Phase Transitions}
 \TODO: information about the ratio and why/where it occurs
 
 Phase Transitions in the Regular Random 3-SAT Problem*
 
-\section{Experiments}
+\section{Estimating the Hardness of $\phi_G$}
 In our experiments we denote the number of vertices removed from the graph $G_{127}$ as $m$.
 The CNF formula $\phi_G$ for $G_{127}$ experiences a peculiar phase transition when $m \approx 41$,
 making it seemingly intractable for modern SAT solvers to halt with an answer in a realistic 
@@ -239,8 +239,8 @@ as $m$ decreases from $46$ to $43$. The CPU time continues to increase as $m$ de
 	\label{tab:performanceSat}
 \end{table}
 
-To understand the nature of the phase transition, we conducted the experiments
-described in the following sections.
+To understand the nature of the phase transition, and estimate the hardness, we conducted 
+the following experiment:
 
 \subsection{Experiment 1: Subgraph Reduction and Variable Assignment Propagation}
 Breaking the problem of $G_{127} \to (3,3)^e$ into small graphs $H$ is a natural way
