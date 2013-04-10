@@ -10,7 +10,7 @@
 			$\phi_G$ is manually modified to aid the SAT solver in deciding the formula. Modifications include dropping
 			clauses that evaluate to true, literals that evaluate to false, and performing unit literal propagation 
 			throughout the entire formula. Once all $2^m$ modified formulas are generated, they are then run through Minisat
-			(or another popular solver). Then, the estimated hardness is $\sum_{i=1}^{2^m}T(\phi_G^i}$, where
+			(or another popular solver). Then, the estimated hardness is $\sum_{i=1}^{2^m}T(\phi_G^i)$, where
 			$T(\phi_G^i)$ is the time for the solver to run for the $i$th configuration of the $m$ edge colorings.
 			Unfortunately, for $n = 30$ and $m = 20$, these formulas still take a long time to run, and the average
 			time collected over a small set of outputs yields an expected value of approximately 270 CPU years to complete.
