@@ -11,6 +11,7 @@ from reducer import makeDimacsCNF
 import sys
 import argparse
 import random
+import time
 
 # Usage: python injector.py -n -r -na -pl -nrr -nisr 
 # -n = n
@@ -37,9 +38,11 @@ class injector:
 
 		# Generate the CNF formula
 		r = reducer()
+		print >> sys.stderr, 'Creating the CNF formula'
 		numVars, cnf = r.reduce(self.graph.getGraph())
 
 		# Assign values and propagate
+		print >> sys.stderr, 'Assigning the random variables'
 		self.assignValues(numVars, cnf)
 
 	def strip(self):
@@ -66,9 +69,11 @@ class injector:
 		assign = {}
 		for i in range(self.na):
 			assign[varsToAssign[i]] = False
+		print("Assigning variables...")
 
 		configIndex = 0
 		for config in range(2 ** self.na):
+			print("Config " + str(configIndex))
 			newCnf = []
 			for c in cnf: # for each clause
 				include = True
@@ -105,8 +110,12 @@ class injector:
 			# Now that we have all of the unit literals with their truth values, perform the walk again...
 			finalCnf = []
 
+			# compute average time for each of the results
+			# multiple by 2^20 for hardness!
+
 			# TODO: Make this into a method? (oldCnf, variable list with assignments, ...)
 
+			sizeTwoClauses = 0
 			for c in newCnf: # for each clause
 				include = True
 				clause = c[:] # Copy over the clause
@@ -125,11 +134,15 @@ class injector:
 								include = False
 							else:
 								clause.remove(l) # remove the literal, it evaluated to false...
-				if include:
+				if include and len(clause) > 0: # do not append empty clauses, they cause immediate unsatisfiability...
+					if (len(clause) == 2):
+						sizeTwoClauses = sizeTwoClauses + 1
 					finalCnf.append(clause)
+				elif (len(clause) == 0):
+					print("Found unsatisfiable clause in variable configuration " + str(configIndex) + ", discarding formula.")
 
 			# Write the output file
-			self.write(configIndex, numVars, finalCnf)
+			self.write(configIndex, numVars, finalCnf, sizeTwoClauses)
 			configIndex = configIndex + 1
 
 			# advance the configuration
@@ -140,21 +153,19 @@ class injector:
 					assign[k] = True
 					break # hop out early...
 
-			# values substituted and clauses filtered, now propagate
-			# maybe store assignments in separate collection for use in propagate?
-			#self.propagate(numVars, newCnf)
-
-	def write(self, index, numVars, cnf):
+	def write(self, index, numVars, cnf, numTwoClauses):
+		print("Writing: " + str(self.out + "_" + str(index)))
 		f = open(self.out + "_" + str(index), 'wb')
 		header, clauses = makeDimacsCNF(numVars, cnf)
+		f.write('c ' + str(numTwoClauses) + "\n")
 		f.write(header + "\n")
 		for c in clauses:
 			for l in c:
 				f.write(str(l) + " ")
-			f.write("\n")
+			f.write("0 \n")
 
-	def propagate(self, numVars, cnf):
-		raise Exception("NOT IMPLEMENTED")
+def timestampMilli(msg, start, end):
+	print(msg + str((end - start) * 1000) + "ms")
 
 def main():
 	parser = argparse.ArgumentParser(prog='injector')
@@ -186,7 +197,10 @@ def main():
 		random.seed(seed)
 
 		# Create the injector...
+		start = time.time()
 		inject = injector(n, r, na, pl, nrr, nisr, out)
+		end = time.time()
+		timestampMilli("Total time: ", start, end)
 
 if __name__ == "__main__":
 	main()

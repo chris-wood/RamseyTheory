@@ -1,12 +1,13 @@
 \documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
 
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
-\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+%\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
 \usepackage{algorithm}
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
+\usepackage{todonotes}
 
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
@@ -54,12 +55,11 @@
 \normalfont \normalsize 
 \textsc{Department of Computer Science, Rochester Institute of Technology} \\ [25pt] % Your university, school and/or department name(s)
 \horrule{2pt} \\[0.4cm] % Thin top horizontal rule
-\huge Performance Evaluation of $k-SAT$ Solvers\\ 
-\Large Applied to Graph Arrowing \\
+\huge Ramsey Arrowing with $k$-SAT Solvers\\ 
 \horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
 }
 
-\author{Christopher Wood \\ Advisor: Professor Stanis{\l}aw Radziszowski} % Your name
+\author{Christopher A. Wood \\ Advisor: Professor Stanis{\l}aw Radziszowski} % Your name
 
 \date{\normalsize \today} % Today's date or a custom date
 
@@ -68,14 +68,14 @@
 \maketitle % Print the title
 
 \section{Introduction}
-In his 1972 seminal paper entitled, ``Reducibility Among Combinatorial Problems,'' Karp introduced a 
+In his 1972 seminal paper entitled, ``Reducibility Among Combinatorial Problems,'' Richard Karp introduced a 
 list of 21 NP-complete problems, including Boolean satisfiability, the maximum cut of a graph, 
 and 0-1 integer programming \cite{karp72}. The complexity of these problems was proven by deriving
 a polynomial-time reduction from CIRCUIT-SAT = $\{\langle C \rangle : C$ is a satisfiable Boolean combinational
 circuit $\}$, the first problem shown to be NP-complete by Cook in 1971 \cite{cook71-np}, starting
 the rush of complexity theory research. 
 
-The problem $3-SAT$, or more formally, $3-CNF SAT$, is a special case of satisfiability.
+The problem 3-SAT, or more formally, 3-CNFSAT, is a special case of satisfiability.
 It is a decision problem in which takes as input a 3-CNF Boolean formula and returns YES if 
 the formula is satisfiable, and NO otherwise \cite{clrs90-algorithms}. A 3-CNF formula, more formally known as a Boolean 
 formula in 3-conjunctive normal form, is expressed as the Boolean AND of arbitrarily many clauses,
@@ -83,12 +83,12 @@ where each clause is the Boolean OR of three literals, which is a Boolean variab
 Such a Boolean formula is said to be satisfiable if and only if there exists an assignment of truth 
 values to the variables such that substituting them into the literals of the formula will cause it 
 to evaluate to true (or 1). Expressed as a formal language, we have that 
-$3-SAT = \{\langle \phi \rangle : \phi \text{ is satisfiable }\}$.
+3-SAT $= \{\langle \phi \rangle : \phi \text{ is satisfiable }\}$.
 
 In 2002 Hans van Maaren of and John Franco initiated the public SAT competition in
 search of optimal performing SAT solvers judged by a variety of criteria and specializations, 
 including their ability to demonstrate satisfiability and exhaustively prove unsatisfiability.
-In addition, since $SAT$ is a problem that often arises in academia and the industry, 
+In addition, since SAT is a problem that often arises in academia and the industry, 
 each of the candidate solvers are rigorously tested with massive application-specific, 
 crafted, and random Boolean formulas as input. With three different solver
 specializations tested against three different types of inputs, and a first, second, 
@@ -98,10 +98,11 @@ tested using CPU time and world-clock time as a basis for their results, thus ex
 the trophy space to $54$ slots. The next competition is slated to take place in 2013. 
 
 %TODO: sat problem, sat competition, categories of evaluation, types of problems, graph arrowing...
-The $SAT$ problem is particularly interesting when applied to graph arrowing. It can be shown
-how to reduce the question $G \overbrace{\to}^\text{?} \to (3,3)^e$ to an equivalent $3-CNF$ formula
-$\phi_G$ such that $G \not \to (3,3)^e \Leftrightarrow \phi_G$. Intuitively, this is a very promising
-technique for determining if $G \to (3,3)^e$ for $K_4$-free graphs $G$.
+The SAT problem is particularly interesting when applied to the classical Ramsey arrowing operator. 
+In particular, it is possible to reduce the question $G \overbrace{\to}^\text{?} (3,3)^e$ to an equivalent 3-CNF formula
+$\phi_G$ such that $G \not \to (3,3)^e \Leftrightarrow \phi_G$ is satisfiable. Intuitively, this is a very promising
+technique for determining if $G \to (3,3)^e$ for $K_4$-free graphs $G$. The result can also be applied
+to other arrowing parameters, as is discussed in Section \ref{sec:arrowComputations}.
 
 The immediate application of this technique is to attack the upper bound of the Folkman number
 $F_e(3,3;4)$. In particular, to lower this bound, we will need to find a 
@@ -121,19 +122,17 @@ shown to be unsatisfiable, then $G \to (3,3)^e$, and so $F_e(3,3;4) = 127$.
 Otherwise, if $\phi_G$ is satisfiable, then $G \not \to (3,3)^e$, disproving the
 conjecture made in by Radziszowski et al. \cite{Radziszowski07-1}.
 
-Unfortunately, while this approach seems simple at face, the complexity of the formulas
+Unfortunately, while this approach seems simple at first, the complexity of the formulas
 $\phi_H$ with $n \approx 85$ has proven to be very difficult for modern SAT solvers
 to handle. In this study, we will attempt to determine the structure of these formulas
 that makes them so difficult to solve, and as a result, discover the underlying
 cause for the phase transition that occurs at $n \approx 85$. 
 We will also present a performance comparison for the popular 
 SAT solvers entered into the SAT competition, including Minisat \cite{minisat}, 
-zChaff \cite{chaff, zchaff}, and glucose \cite{Audemard09-1}. 
+zChaff \cite{chaff, zchaff}, and glucose \cite{Audemard09-1} (which is based heavily on Minisat). 
 
-%Minisat, zChaff, glucose, ppfolio //, ppfolio seq, contrasat hack, and 3S.
-
-\section{$SAT$ Solver Algorithms}
-The algorithms used in state-of-the-art $SAT$ solvers tend to be based on the famous
+\section{SAT Solver Algorithms}
+The algorithms used in state-of-the-art SAT solvers tend to be based on the famous
 DPLL backtracking algorithm proposed by David, Putnam, Logemann, and Loveland in \cite{DPLL}.
 The DPLL algorithm works by recursively splitting a CNF formula into smaller formulas
 by assigning truth values to individual variables and simplifying the resulting
@@ -259,8 +258,8 @@ as $m$ decreases from $46$ to $43$. The CPU time continues to increase as $m$ de
 	\label{tab:performanceSat}
 \end{table}
 
-To understand the nature of the phase transition, we conducted the experiments
-described in the following sections.
+To understand the nature of the phase transition, and estimate the hardness, we conducted 
+the following experiment:
 
 \subsection{Experiment 1: Subgraph Reduction and Variable Assignment Propagation}
 Breaking the problem of $G_{127} \to (3,3)^e$ into small graphs $H$ is a natural way
@@ -287,6 +286,21 @@ for $\phi_H$ is $\sum_{i = 1}^{2^r} T(\phi_H^i)$.
 
 \TODO: estimate CPU hours (rough), average ratio of clauses to variables after the reduction
 
+\section{Arrowing Problems}
+\label{sec:arrowComputations}
+\subsection{$F_e(3,5;13) = 18$}
+The problem of determining if $G = K_8 + C_5 + C_5 \to (3,5)^e$ was proved by Nenov \cite{Nenov83-1}
+to determine equality in the bound $F_e(3,5;13) \geq 18$. Using SAT reduction techniques, it is easy to
+reduce this problem to an equivalent SAT formula as follows. For each triangle $xyz$ in $G$, add
+$(xy + xz + yz)$ to $\phi_G$. Then, search for all other pairs of vertices $u,v$ such that $\{x,y,z,u,v\}$ is a clique
+of size $5$. For all such sets of vertices, add $(\bar{xy} + \bar{xz} + \bar{xu} + \bar{xv} + \bar{yz} + \bar{yu} + \bar{yv} + \bar{zu} + \bar{zv} + \bar{uv})$
+to $\phi_G$. The resulting formula has $143$ variables, each one corresponding to an edge in $G$,
+and $4982$ clauses. Minisat was able to prove that this formula is unsatisfiable in 0.83s, thus
+showing that $G \to (3,5)^e$, and therefore $F_e(3,5;13) = 18$.
+
+\todo[inline]{Is this true?}
+
+
 \begin{thebibliography}{9}
 
 \bibitem{karp72} R. Karp, Reducibility among combinatorial problems, \emph{Complexity of Computer Computations, (RE Miller and JM Thatcher, eds.)} (1972), 85-103.
@@ -310,6 +324,8 @@ for $\phi_H$ is $\sum_{i = 1}^{2^r} T(\phi_H^i)$.
 \bibitem{randomBalanced} Y. Boufkhad, O. Dubois, Y. Interian, B. Selman. Regular Random k-SAT: Properties of Balanced Formulas, \emph{Journal of Automated Reasoning} \textbf{35.1-3} (2005), 181-200.
 
 \bibitem{satThreshold} Random k-SAT: Two moments suffice to cross a sharp threshold
+
+\bibitem{Nenov83-1} N. Nenov, On the Zykov numbers and some of their applications in Ramsey theory (in Russian), \emph{Serdica} \textbf{9(2)} (1983), 161-167.
 
 \end{thebibliography}
 
