@@ -182,7 +182,7 @@ class reducer:
 				return True
 		return False
 
-def main():
+def testK8C5C5():
 	K8 = nx.complete_graph(8)
 	C1 = nx.cycle_graph(5)
 	C2 = nx.cycle_graph(5)
@@ -222,6 +222,41 @@ def main():
 		for l in c:		
 			outFile.write(str(l) + " ")
 		outFile.write("0 \n")
+
+def testK8C5():
+	K8 = nx.complete_graph(8)
+	C1 = nx.cycle_graph(5)
+
+	# Go through the old things here...
+	oldNodes = K8.nodes()[:]
+	index = len(K8.nodes())
+	for v in C1.nodes():
+		K8.add_node(v + index)
+		for old in oldNodes:
+			K8.add_edge(old, v + index)
+	for e in C1.edges():
+		K8.add_edge(e[0] + index, e[1] + index)
+
+	print(index)
+	print(K8.nodes())
+	print(K8.edges())
+	print(len(K8.edges()))
+
+	# TODO: RUN THE REDUCTION CODE TONIGHT!
+	r = reducer()
+	numVars, cnf = r.reduce35(K8)
+	outFile = open('nenov_arrow_3_5_k5c5.cnf', 'w')
+	header, clauses = makeDimacsCNF(numVars, cnf)
+	print(header)
+	print(clauses)
+	outFile.write(header + "\n")
+	for c in clauses:
+		for l in c:		
+			outFile.write(str(l) + " ")
+		outFile.write("0 \n")
+
+def main():
+	testK8C5()
 
 if __name__ == "__main__":
 	main()

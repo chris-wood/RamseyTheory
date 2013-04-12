@@ -267,14 +267,15 @@ to approach this problem. In addition, clause reduction and unbalancing through
 variable assignment may provider further simplifications to $\phi_H$.
 Therefore, for this experiment, we have the following parameters:
 \begin{itemize}
-	\item $m$ - the number of vertices in $V \subset V(G)$ such that $H = G[V]$. The selection of
+	\item $m_s$ - the number of maximal independent sets $V \subset V(G)$ removed from $G$. This a structured removal of vertices that doesn't impact the symmetry of the graph in a signifcant way.
+	\item $m_r$ - the number of vertices in $V \subset V(G)$ such that $H = G[V]$. The selection of
 	these vertices will be both structured and unstructured. That is, we will experiment
 	with removing structured groups of vertices, such as those contained within independent 
 	sets, as well as unstructure groups composed of randomly selected vertices.
 	\item $r$ - the number of variables $x_i \in \phi_H$ assigned truth values that are
 	propogated through the rest of the formula. 
 	\item $p$ - the number of levels of recursive propagation that occur after assigning 
-	$r$ truth values.
+	$r$ truth values. By default, $p = 1$, indicating a single pass of unit propagation.
 \end{itemize}
 Clause reduction will use the same unit propagation and pure literal elimination techniques
 presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it is run with a solver.
@@ -282,24 +283,62 @@ The hardness of solving $\phi_H$ can be estimated by summing together the time f
 all individual $2^r$ truth value assignments. In particular, if $\phi_H^i$ is the
 resulting formula after assigning the $i$th variable configuration, and $T(\phi_H^i)$ 
 is the time required to decide $\phi_H^i$, then the hardness (estimated decision time)
-for $\phi_H$ is $\sum_{i = 1}^{2^r} T(\phi_H^i)$.
+for $\phi_H$ is $\sum_{i = 1}^{2^r} T(\phi_H^i)$. Table \ref{tab:guidanceExperiment}
+lists some of the results from these experiments and the estimated computation time
+required to decide $\phi_H$ for various $H = G[n]$.
 
-\TODO: estimate CPU hours (rough), average ratio of clauses to variables after the reduction
+\begin{table}
+	\caption{SAT solver guidance experimental results. Values of NA indicate that the computation
+	could not be complete (i.e. the SAT solver could not decide a formula instance in a reasonable
+	amount of time).}
+	\begin{tabular}{c | c | c | c | c | c}
+		\hline
+		$m_s$ & $m_r$ & $r$ & Average SAT time (s) & Minimum SAT time (s) & Total computation time (CPU years)\\ \hline
+		0 & 37 & 18 & NA & NA \\ \hline
+		0 & 30 & 20 & NA & 8334.8s & 276.9 (based on minimum time) \\ \hline
+		0 & 37 & 22 & ~ & ~ & ~ \\
+		\hline
+	\end{tabular}
+	\label{tab:guidanceExperiment}
+\end{table}
+
+\todo[inline]{List final estimation complexity here}
+
+\section{Modifications to $G_{127}$}
+TODO: adding edges and then checking for clique of size 4...
+TODO: write the code to do this.
+
+\section{The Tur\'{a}n Graph}
+TODO: description, picture, and rationale...
+TODO: write the code to construct these graphs.
+
+% SAT has proven to be a very effective technique for proving the two-color Ramsey arrow
+% operator for certain graphs. In this section we describe graph constructions that
+% were used to generate candidate graphs for arrowing problems of interest.
+% TODO: experiments with circulant graphs and $L(n,r)$ graphs, define both here.
+% A circulant graph is a graph $G = (\mathbb{Z}_n, \{uv : u - v \in S\})$, where
+% $S \subset \mathbb{Z}_n$ satisfying $-S = S$ and $0 \in S$. An example of such
+% a graph is shown in Figure \ref{fig:circulant}.
+% TODO: figure of small circulant.
 
 \section{Arrowing Problems}
+In this section we present some recent results for edge Folkman numbers, some of which are improvements
+upon results found in the literature.
+
 \label{sec:arrowComputations}
 \subsection{$F_e(3,5;13) = 18$}
 The problem of determining if $G = K_8 + C_5 + C_5 \to (3,5)^e$ was proved by Nenov \cite{Nenov83-1}
-to determine equality in the bound $F_e(3,5;13) \geq 18$. Using SAT reduction techniques, it is easy to
-reduce this problem to an equivalent SAT formula as follows. For each triangle $xyz$ in $G$, add
+to determine equality in the bound $F_e(3,5;13) \geq 18$. According to Kolev in 2008 \cite{Kolev08-2},
+no one has been able to solve this arrowing problem. Using SAT reduction techniques, we have 
+reduced this problem to an equivalent SAT formula as follows. For each triangle $xyz$ in $G$, add
 $(xy + xz + yz)$ to $\phi_G$. Then, search for all other pairs of vertices $u,v$ such that $\{x,y,z,u,v\}$ is a clique
 of size $5$. For all such sets of vertices, add $(\bar{xy} + \bar{xz} + \bar{xu} + \bar{xv} + \bar{yz} + \bar{yu} + \bar{yv} + \bar{zu} + \bar{zv} + \bar{uv})$
 to $\phi_G$. The resulting formula has $143$ variables, each one corresponding to an edge in $G$,
 and $4982$ clauses. Minisat was able to prove that this formula is unsatisfiable in 0.83s, thus
 showing that $G \to (3,5)^e$, and therefore $F_e(3,5;13) = 18$.
 
-\todo[inline]{Is this true?}
-
+\subsection{What else?}
+% Find other candidate graphs (dense ones!) that avoid cliques of size n and think of two-color parameters to try...
 
 \begin{thebibliography}{9}
 
@@ -326,6 +365,8 @@ showing that $G \to (3,5)^e$, and therefore $F_e(3,5;13) = 18$.
 \bibitem{satThreshold} Random k-SAT: Two moments suffice to cross a sharp threshold
 
 \bibitem{Nenov83-1} N. Nenov, On the Zykov numbers and some of their applications in Ramsey theory (in Russian), \emph{Serdica} \textbf{9(2)} (1983), 161-167.
+
+\bibitem{Kolev08-2} N. Kolev, New Upper Bound for the Edge Folkman Number $F_e(3,5;13)$, arXiv:0806.1403 (2008).
 
 \end{thebibliography}
 
