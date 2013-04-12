@@ -21,6 +21,7 @@ def makeDimacsCNF(numVars, cnf):
 class reducer:
 
 	# TODO: need to add (3,4) (4,5) (2,3) (2,4) (2,5) - for generating SAT formulas
+	# TODO: make s,t parameters for this method.
 
 	def reduce35(self, G):
 		''' Generate the CNF formula for the 3-SAT version of the reduction.
