@@ -233,7 +233,6 @@ evidence. The theoretical, probabilistic estimation technique presented by
 
 \subsection{Probabilistic Estimation of the Hardness}
 \TODO: read the paper section
-
 %\TODO: information about the ratio and why/where it occurs
 %Phase Transitions in the Regular Random 3-SAT Problem*
 
@@ -258,10 +257,12 @@ as $m$ decreases from $46$ to $43$. The CPU time continues to increase as $m$ de
 	\label{tab:performanceSat}
 \end{table}
 
-To understand the nature of the phase transition, and estimate the hardness, we conducted 
-the following experiment:
+To understand the nature of the phase transition for $G_{127}$ we conducted the following
+experiments: random subgraph selection and variable fixation, induced subgraph modifications
+by adding edges without creating cliques of size 4, and induced subgraph modification
+by removing edges. Before discussing the results of these experiments, we first describe
+the software tools that were used to aid in these experiments.
 
-\subsection{Experiment 1: Subgraph Reduction and Variable Assignment Propagation}
 Breaking the problem of $G_{127} \to (3,3)^e$ into small graphs $H$ is a natural way
 to approach this problem. In addition, clause reduction and unbalancing through
 variable assignment may provider further simplifications to $\phi_H$.
@@ -276,9 +277,12 @@ Therefore, for this experiment, we have the following parameters:
 	propogated through the rest of the formula. 
 	\item $p$ - the number of levels of recursive propagation that occur after assigning 
 	$r$ truth values. By default, $p = 1$, indicating a single pass of unit propagation.
+	\item $ne$ - the number of edges randomly added to $H$ such that no $K_4$ is formed. 
 \end{itemize}
 Clause reduction will use the same unit propagation and pure literal elimination techniques
 presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it is run with a solver.
+
+\subsection{Experiment 1: induced subgraph generation with SAT guided variable fixation}
 The hardness of solving $\phi_H$ can be estimated by summing together the time for
 all individual $2^r$ truth value assignments. In particular, if $\phi_H^i$ is the
 resulting formula after assigning the $i$th variable configuration, and $T(\phi_H^i)$ 
@@ -304,7 +308,14 @@ required to decide $\phi_H$ for various $H = G[n]$.
 
 \todo[inline]{List final estimation complexity here}
 
-\section{Modifications to $G_{127}$}
+\subsection{Experiment 2: Structural induced subgraph gneration and variable fixation}
+In this set of experiments we combine the structural removal of vertices from $G_{127}$
+with the random removal of vertices. In particular, we specify the minimum size of 
+the induced subgraph $H$ and a number of maximal independent sets to remove from $G_{127}$.
+If the removal of these independent sets does not meet the designated order of $H$,
+then the remaining vertices that need to be removed are done so at random. 
+
+\subsection{Experiment 3 Induced subgraph modification.}
 TODO: adding edges and then checking for clique of size 4...
 TODO: write the code to do this.
 
