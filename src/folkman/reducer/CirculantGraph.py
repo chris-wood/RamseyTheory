@@ -1,12 +1,12 @@
-# File: GNR.py
+# File: CirculanhtGrap.py
 # Author: Christopher Wood
 
 from networkx import nx
 
-class GNR:
-	''' Class for the graph G(n,r) = (Z_n, {(u,v) | u - v = alpha^r mod n}).
+class CirculantGraph:
+	''' Class for the ciculant graph.
 	'''
-	def __init__(self, n, r):
+	def __init__(self, n, jumps):
 		self.graph = nx.Graph()
 
 		# Add the vertices
@@ -16,11 +16,7 @@ class GNR:
 		# Add the edges
 		for x in range(0, n):
 			for y in range(0, n):
-				if (x != y):
-					for alpha in range(0, n):
-						# E(G) = {(x,y) | x-y = alpha^r mod n}
-						if (((x - y) % n) == ((alpha ** r) % n)):
-							self.graph.add_edge(x, y)
+				
 
 	def removeIndependentSet(self):
 		iset = nx.maximal_independent_set(self.graph)

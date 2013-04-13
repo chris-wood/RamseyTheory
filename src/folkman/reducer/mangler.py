@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# File: injector.py
+# File: mangler.py
 # Author: Christopher Wood
 
 from networkx import nx
@@ -13,7 +13,7 @@ import argparse
 import random
 import time
 
-# Usage: python injector.py -n -r -na -ne -pl -nrr -nisr 
+# Usage: python mangler.py -n -r -na -ne -pl -nrr -nisr 
 # -n = n
 # -r = r
 # -na = number variables assigned
@@ -23,7 +23,7 @@ import time
 # -nisr = number of maximum independent sets removed
 # -out = out files for the CNFs
 
-class injector:
+class mangler:
 	def __init__(self, n, r, na, ne, pl, nrr, nisr, out):
 		self.n = n
 		self.r = r
@@ -171,7 +171,7 @@ def timestampMilli(msg, start, end):
 	print(msg + str((end - start) * 1000) + "ms")
 
 def main():
-	parser = argparse.ArgumentParser(prog='injector')
+	parser = argparse.ArgumentParser(prog='mangler')
 	parser.add_argument('-n', type=int)
 	parser.add_argument('-r', type=int)
 	parser.add_argument('-na', '--num_assigned', type=int, default=0)
