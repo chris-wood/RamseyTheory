@@ -223,13 +223,14 @@ which is well beyond this threshold. However, it is estimated that
 the difficulty of deciding $\phi_{G_{127}}$ reaches a point of singularity
 on the phase transition boundary. Therefore, analyzing the difficulty of solving
 reduced formulas beyond this threshold may offer insight into the overall computational 
-difficulty of deciding $\phi_{G_{127}}$.
-
+difficulty of deciding $\phi_{G_{127}}$. 
 Estimating the hardness of Ramsey arrowing problems converted to SAT formulas 
-is the primary interest of this report. Therefore, we propose two separate
-techniques for approaching this task based on theoretical results and empirical
-evidence. The theoretical, probabilistic estimation technique presented by 
-\cite{same as above} is used and modified for this particular task. 
+is the primary interest of this report. 
+
+% Therefore, we propose two separate
+% techniques for approaching this task based on theoretical results and empirical
+% evidence. The theoretical, probabilistic estimation technique presented by 
+% \cite{same as above} is used and modified for this particular task. 
 
 \subsection{Probabilistic Estimation of the Hardness}
 \TODO: read the paper section
@@ -277,7 +278,7 @@ Therefore, for this experiment, we have the following parameters:
 	propogated through the rest of the formula. 
 	\item $p$ - the number of levels of recursive propagation that occur after assigning 
 	$r$ truth values. By default, $p = 1$, indicating a single pass of unit propagation.
-	\item $ne$ - the number of edges randomly added to $H$ such that no $K_4$ is formed. 
+	\item $n_e$ - the number of edges randomly added to $H$ such that no $K_4$ is formed. 
 \end{itemize}
 Clause reduction will use the same unit propagation and pure literal elimination techniques
 presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it is run with a solver.
@@ -297,14 +298,36 @@ required to decide $\phi_H$ for various $H = G[n]$.
 	amount of time).}
 	\begin{tabular}{c | c | c | c | c | c}
 		\hline
-		$m_s$ & $m_r$ & $r$ & Average SAT time (s) & Minimum SAT time (s) & Total computation time (CPU years)\\ \hline
-		0 & 37 & 18 & NA & NA \\ \hline
-		0 & 30 & 20 & NA & 8334.8s & 276.9 (based on minimum time) \\ \hline
-		0 & 37 & 22 & ~ & ~ & ~ \\
+		$m_s$ & $m_r$ & $r$ & Average time [s] & Minimum time [s] & Estimated CPU years\\ \hline
+		0 & 37 & 18 & NA & NA & NA\\ \hline
+		0 & 30 & 20 & NA & 8334.8 & 276.9 (based on minimum time) \\ \hline
+		0 & 37 & 22 & NA & 1858.1 & 246.9 (based on minimum time) \\
 		\hline
 	\end{tabular}
 	\label{tab:guidanceExperiment}
 \end{table}
+
+\begin{table}
+	\caption{SAT solver guidance experimental results. Values of NA indicate that the computation
+	could not be complete (i.e. the SAT solver could not decide a formula instance in a reasonable
+	amount of time).}
+	\begin{tabular}{c | c | c | c | c | c}
+		\hline
+		$m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
+		0 & 37 & 18 & NA & NA & NA \\ \hline
+		0 & 30 & 20 & NA & NA & NA \\ \hline
+		0 & 37 & 22 & NA & NA & NA \\
+		\hline
+	\end{tabular}
+	\label{tab:guidanceExperiment}
+\end{table}
+
+During this experiment we intuitively assumed that those formulas with a 
+higher ratio of clauses of length two as compared to clauses of length 
+three will be decided faster. Therefore, to aid the SAT solver in its
+decision for all $1 \leq i \leq 2^{r}$ possible $\phi_H^i$ formulas
+we have sorted list of $\phi_H^i$ in descending order based on this ratio. 
+These results have aided in the evaluation of these small experiments. 
 
 \todo[inline]{List final estimation complexity here}
 

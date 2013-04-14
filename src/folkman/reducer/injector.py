@@ -16,36 +16,47 @@ import time
 # Usage: python injector.py -n -r -na -ne -pl -nrr -nisr 
 # -n = n
 # -r = r
+# -sample = number of random variable configurations to choose from (enter 2^na to cover them all...)
 # -na = number variables assigned
 # -ne = number of edges to add to H
 # -pl = variable propagation levels
 # -nrr = number of randomly removed vertices
+# -nerr = number of edges randomly removed
 # -nisr = number of maximum independent sets removed
 # -out = out files for the CNFs
 
 class injector:
-	def __init__(self, n, r, na, ne, pl, nrr, nisr, out):
+	def __init__(self, n, r, sample, na, ne, pl, nrr, nerr, nisr, out):
 		self.n = n
 		self.r = r
+		self.sample = sample
 		self.graph = GNR(n, r)
 		self.na = na
 		self.ne = ne
 		self.pl = pl
 		self.nrr = nrr
+		self.nerr = nerr
 		self.nisr = nisr
 		self.out = out
 
-		# Start down to the induced subgraph
-		self.strip()
-
 		# Generate the CNF formula
 		r = reducer()
-		print >> sys.stderr, 'Creating the CNF formula'
+		print >> sys.stderr, 'Creating the original CNF formula'
 		numVars, cnf = r.reduce(self.graph.getGraph())
+		self.write("reduced", numVars, cnf, 0)
+
+		# Strip down to the induced subgraph
+		# using the structural/random properties, as specified
+		# by the command cmd line arguments
+		print >> sys.stderr, 'Creating the reduced CNF formula'
+		self.strip()
+		r = reducer()
+		numVars, cnf = r.reduce(self.graph.getGraph())
+		self.write("reduced", numVars, cnf, 0)
 
 		# Assign values and propagate
 		print >> sys.stderr, 'Assigning the random variables'
-		self.assignValues(numVars, cnf)
+		self.assignAndWrite(numVars, cnf)
 
 	def strip(self):
 		for i in range(self.nrr):
@@ -54,8 +65,21 @@ class injector:
 			self.n = self.n - 1
 		for i in range(self.nisr):
 			self.graph.removeIndependentSet()
+		for i in range(self.nerr):
+			edge = random.randint(0, len(self.graph.getGraph().edges()))
 
-	def assignValues(self, numVars, cnf):
+	def assignAndWrite(self, numVars, cnf):
+		# Statistic vars
+		numClauses = len(cnf)
+		numFormulas = 0
+		minTwoClauses = numClauses
+		totalTwoClauses = 0
+		maxTwoClauses = 0
+		minThreeClauses = numClauses
+		maxThreeClauses = 0
+		totalThreeClauses = 0
+		totalRatio = 0
+
 		# list of random variables to remove
 		varsToAssign = []
 		for i in range(self.na):
@@ -73,9 +97,27 @@ class injector:
 			assign[varsToAssign[i]] = False
 		print("Assigning variables...")
 
+		configSamples = []
 		configIndex = 0
-		for config in range(2 ** self.na):
-			print("Config " + str(configIndex))
+		#for config in range(2 ** self.na):
+		numSamples = 2 ** self.na
+		while (configIndex < self.sample):
+
+			# Select a random configuration not already in the set
+			c = random.randint(0, numSamples)
+			while (c in configSamples):
+				c = random.randint(0, numSamples)
+			configSamples.append(c)
+
+			# Initialize the configuration array
+			for i in range(len(assign.keys())):
+				if (((1 << i) & c) > 0):
+					assign[assign.keys()[i]] = True
+				else:
+					assign[assign.keys()[i]] = False
+
+			# Print out the configuration we're on...
+			print >> sys.stderr, "Config " + str(configIndex)
 			newCnf = []
 			for c in cnf: # for each clause
 				include = True
@@ -106,19 +148,14 @@ class injector:
 					literal = c[0]
 					if (literal < 0):
 						units[literal * -1] = False
-						# unitAssigns.append(False) # must be false
 					else:
 						units[literal] = True
-						# unitAssigns.append(True)
 			# Now that we have all of the unit literals with their truth values, perform the walk again...
 			finalCnf = []
 
-			# compute average time for each of the results
-			# multiply by 2^20 for hardness!
-
-			# TODO: Make this into a method? (oldCnf, variable list with assignments, ...)
-
 			sizeTwoClauses = 0
+			sizeThreeClauses = 0
+			write = True
 			for c in newCnf: # for each clause
 				include = True
 				clause = c[:] # Copy over the clause
@@ -140,21 +177,49 @@ class injector:
 				if include and len(clause) > 0: # do not append empty clauses, they cause immediate unsatisfiability...
 					if (len(clause) == 2):
 						sizeTwoClauses = sizeTwoClauses + 1
+					elif (len(clause) == 3):
+						sizeThreeClauses = sizeThreeClauses + 1
 					finalCnf.append(clause)
 				elif (len(clause) == 0):
 					print("Found unsatisfiable clause in variable configuration " + str(configIndex) + ", discarding formula.")
+					write = False
 
-			# Write the output file
-			self.write(configIndex, numVars, finalCnf, sizeTwoClauses)
 			configIndex = configIndex + 1
 
-			# advance the configuration
-			for k in assign.keys():
-				if (assign[k] == True): # propagate to the next clause!
-					assign[k] = False
-				else:
-					assign[k] = True
-					break # hop out early...
+			# Write the output file
+			if (write):
+				self.write(configIndex, numVars, finalCnf, sizeTwoClauses)
+
+				# Compound the statistics for the two clauses
+				if (sizeTwoClauses < minTwoClauses):
+					minTwoClauses = sizeTwoClauses
+				if (sizeTwoClauses > maxTwoClauses):
+					maxTwoClauses = sizeTwoClauses
+				totalTwoClauses = totalTwoClauses + sizeTwoClauses
+
+				# Compound stats for three clauses
+				if (sizeThreeClauses < minThreeClauses):
+					minThreeClauses = sizeThreeClauses
+				if (sizeThreeClauses > maxThreeClauses):
+					maxThreeClauses = sizeThreeClauses
+				totalThreeClauses = totalThreeClauses + sizeThreeClauses
+
+				# Compound ratio
+				totalRatio = totalRatio + (float(totalTwoClauses) / float(totalThreeClausess))
+
+				# Compound total number of formulas
+				numFormulas = numFormulas + 1
+
+		# Output the stats (if we actually wrote anything...)
+		if (numFormulas > 0):
+			print("Total number of formulas: " + str(numFormulas))
+			print("Minimum number of 2-clauses: " + str(minTwoClauses))
+			print("Maximum number of 2-clauses: " + str(maxTwoClauses))
+			print("Average number of 2-clauses: " + str(totalTwoClauses / numFormulas))
+			print("Minimum number of 3-clauses: " + str(minThreeClauses))
+			print("Maximum number of 3-clauses: " + str(maxThreeClauses))
+			print("Average number of 3-clauses: " + str(totalThreeClauses / numFormulas))
+			print("Average ratio of 2-to-3 clauses: " + str(totalRatio / numFormulas))
 
 	def write(self, index, numVars, cnf, numTwoClauses):
 		print("Writing: " + str(self.out + "_" + str(index)))
@@ -174,11 +239,13 @@ def main():
 	parser = argparse.ArgumentParser(prog='injector')
 	parser.add_argument('-n', type=int)
 	parser.add_argument('-r', type=int)
+	parser.add_argument('-sample', type=int, default=100)
 	parser.add_argument('-na', '--num_assigned', type=int, default=0)
 	parser.add_argument('-ne', '--num_edges_to_add', type=int, default=0)
 	parser.add_argument('-pl', '--propagation_level', type=int, default=1)
 	parser.add_argument('-nrr', '--number_random_removed', type=int, default=0)
 	parser.add_argument('-nisr', '--number_independet_sets_removed', type=int, default=0)
+	parser.add_argument('-nerr', type=int, default=0)
 	parser.add_argument('-s', '--seed', type=int)
 	parser.add_argument('-out', '--out_file', type=str, default="reducedCnf")
 	args = parser.parse_args()
@@ -190,10 +257,12 @@ def main():
 	else:
 		n = args.n
 		r = args.r
+		sample = args.sample
 		na = args.num_assigned
 		ne = args.num_edges_to_add
 		pl = args.propagation_level
 		nrr = args.number_random_removed
+		nerr = args.nerr
 		nisr = args.number_independet_sets_removed
 		seed = args.seed
 		out = args.out_file
@@ -203,7 +272,7 @@ def main():
 
 		# Create the injector...
 		start = time.time()
-		inject = injector(n, r, na, ne, pl, nrr, nisr, out)
+		inject = injector(n, r, sample, na, ne, pl, nrr, nerr, nisr, out)
 		end = time.time()
 		timestampMilli("Total time: ", start, end)
 
