@@ -32,7 +32,6 @@ class reducer:
 		for edge in G.edges():
 			edgeIndex = edgeIndex + 1
 			edgeMap[edge] = edgeIndex
-		print("number of edges = " + str(edgeIndex))
 
 		# Walk the edges, search for triangles, and add clauses to the CNF formula
 		edgeIndex = 0
@@ -57,46 +56,12 @@ class reducer:
 						triangleSet.append(vTuple)
 						cnf.append([edgeMap[edge], edgeMap[edge1], edgeMap[edge2]]) # positive clause
 						cnf.append([edgeMap[edge] * -1, edgeMap[edge1] * -1, edgeMap[edge2] * -1]) # negative clause
-		print("number of triangles = " + str(len(triangleSet)))
 
 		# return the CNF formula and number of variables 
 		return len(edgeMap), cnf
 
 def main():
-	# G = GNR(127,3)
-	# numVars, cnf = reduce(G.graph)
-	# outFile = open('out.cnf', 'w')
-	# output = makeDimacsCNF(numVars, cnf)
-	# outFile.write(output)
-	# #print(makeDimacsCNF(numVars, cnf))
-
-	# G.removeIndependentSet()
-	# numVars, cnf = reduce(G.graph)
-	# outFile = open('out_1.cnf', 'w')
-	# output = makeDimacsCNF(numVars, cnf)
-	# outFile.write(output)
-
-	# G.removeIndependentSet()
-	# numVars, cnf = reduce(G.graph)
-	# outFile = open('out_2.cnf', 'w')
-	# output = makeDimacsCNF(numVars, cnf)
-	# outFile.write(output)
-
-	# G.removeIndependentSet()
-	# numVars, cnf = reduce(G.graph)
-	# outFile = open('out_3.cnf', 'w')
-	# output = makeDimacsCNF(numVars, cnf)
-	# outFile.write(output)
-
-	# G = GNR(127,3)
-	# n = 47
-	# G.removeNodes(47)
-	# numVars, cnf = reduce(G.graph)
-	# outFile = open('g127_' + str(n) + '.cnf', 'w')
-	# output = makeDimacsCNF(numVars, cnf)
-	# outFile.write(output)
-
-	n = 47
+	n = 47 # test...
 	for i in range(20):
 		G = GNR(127,3)
 		numRemove = n - i
@@ -105,12 +70,6 @@ def main():
 		r = reducer()
 		numVars, cnf = r.reduce(G.graph)
 		outFile = open('g127_' + str(numRemove) + '.cnf', 'w')
-
-		# TODO: write the CNF
-		# header, clauses = makeDimacsCNF(numVars, cnf)
-		# outFile.write(output)
-
-		# TODO: write the CNF file to the output
 
 if __name__ == "__main__":
 	main()

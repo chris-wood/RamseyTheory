@@ -13,31 +13,35 @@ import argparse
 import random
 import time
 
-# Usage: python injector.py -n -r -na -ne -pl -nrr -nisr 
+# Usage: python injector.py -n -r -sample -na -ne -pl -nrr -nerr -nisr 
 # -n = n
 # -r = r
 # -sample = number of random variable configurations to choose from (enter 2^na to cover them all...)
 # -na = number variables assigned
 # -ne = number of edges to add to H
-# -pl = variable propagation levels
 # -nrr = number of randomly removed vertices
 # -nerr = number of edges randomly removed
 # -nisr = number of maximum independent sets removed
 # -out = out files for the CNFs
 
 class injector:
-	def __init__(self, n, r, sample, na, ne, pl, nrr, nerr, nisr, out):
+	def __init__(self, n, r, sample, na, ne, nrr, nerr, nisr, out):
 		self.n = n
 		self.r = r
 		self.sample = sample
 		self.graph = GNR(n, r)
 		self.na = na
 		self.ne = ne
-		self.pl = pl
 		self.nrr = nrr
 		self.nerr = nerr
 		self.nisr = nisr
 		self.out = out
+
+		# Preliminary error checking
+		if (self.graph.getGraph().edges() < self.na):
+			raise Exception("Cannot remove more edges than the graph contains.")
+		if (n < (nrr + nisr)):
+			raise Exception("Cannot remove more vertices than the graph contains.")
 
 		# Generate the CNF formula
 		r = reducer()
@@ -95,7 +99,7 @@ class injector:
 		assign = {}
 		for i in range(self.na):
 			assign[varsToAssign[i]] = False
-		print("Assigning variables...")
+		print >> sys.stderr, "Assigning variables..."
 
 		configSamples = []
 		configIndex = 0
@@ -181,7 +185,7 @@ class injector:
 						sizeThreeClauses = sizeThreeClauses + 1
 					finalCnf.append(clause)
 				elif (len(clause) == 0):
-					print("Found unsatisfiable clause in variable configuration " + str(configIndex) + ", discarding formula.")
+					print >> sys.stderr, "Found unsatisfiable clause in variable configuration " + str(configIndex) + ", discarding formula."
 					write = False
 
 			configIndex = configIndex + 1
@@ -212,17 +216,17 @@ class injector:
 
 		# Output the stats (if we actually wrote anything...)
 		if (numFormulas > 0):
-			print("Total number of formulas: " + str(numFormulas))
-			print("Minimum number of 2-clauses: " + str(minTwoClauses))
-			print("Maximum number of 2-clauses: " + str(maxTwoClauses))
-			print("Average number of 2-clauses: " + str(totalTwoClauses / numFormulas))
-			print("Minimum number of 3-clauses: " + str(minThreeClauses))
-			print("Maximum number of 3-clauses: " + str(maxThreeClauses))
-			print("Average number of 3-clauses: " + str(totalThreeClauses / numFormulas))
-			print("Average ratio of 2-to-3 clauses: " + str(totalRatio / numFormulas))
+			print >> sys.stderr, "Total number of formulas: " + str(numFormulas)
+			print >> sys.stderr, "Minimum number of 2-clauses: " + str(minTwoClauses)
+			print >> sys.stderr, "Maximum number of 2-clauses: " + str(maxTwoClauses)
+			print >> sys.stderr, "Average number of 2-clauses: " + str(totalTwoClauses / numFormulas)
+			print >> sys.stderr, "Minimum number of 3-clauses: " + str(minThreeClauses)
+			print >> sys.stderr, "Maximum number of 3-clauses: " + str(maxThreeClauses)
+			print >> sys.stderr, "Average number of 3-clauses: " + str(totalThreeClauses / numFormulas)
+			print >> sys.stderr, "Average ratio of 2-to-3 clauses: " + str(totalRatio / numFormulas)
 
 	def write(self, index, numVars, cnf, numTwoClauses):
-		print("Writing: " + str(self.out + "_" + str(index)))
+		print(str(self.out + "_" + str(index)))
 		f = open(self.out + "_" + str(index), 'wb')
 		header, clauses = makeDimacsCNF(numVars, cnf)
 		f.write('c ' + str(numTwoClauses) + "\n")
@@ -232,8 +236,20 @@ class injector:
 				f.write(str(l) + " ")
 			f.write("0 \n")
 
+def showUsage():
+	print >> sys.stderr, "Usage: python injector.py [args]"
+	print >> sys.stderr, "  -n = num vertices in G(n,r) (REQUIRED)"
+	print >> sys.stderr, "  -r = r in G(n,r) (REQUIRED)"
+	print >> sys.stderr, "  -sample = number of random variable configurations to choose from (enter 2^na to cover them all...)"
+	print >> sys.stderr, "  -na = number variables assigned"
+	print >> sys.stderr, "  -ne = number of edges to add to H"
+	print >> sys.stderr, "  -nrr = number of randomly removed vertices"
+	print >> sys.stderr, "  -nerr = number of edges randomly removed"
+	print >> sys.stderr, "  -nisr = number of maximum independent sets removed"
+	print >> sys.stderr, "  -out = out files for the CNFs"
+
 def timestampMilli(msg, start, end):
-	print(msg + str((end - start) * 1000) + "ms")
+	print >> sys.stderr, msg + str((end - start) * 1000) + "ms"
 
 def main():
 	parser = argparse.ArgumentParser(prog='injector')
@@ -242,25 +258,23 @@ def main():
 	parser.add_argument('-sample', type=int, default=100)
 	parser.add_argument('-na', '--num_assigned', type=int, default=0)
 	parser.add_argument('-ne', '--num_edges_to_add', type=int, default=0)
-	parser.add_argument('-pl', '--propagation_level', type=int, default=1)
 	parser.add_argument('-nrr', '--number_random_removed', type=int, default=0)
 	parser.add_argument('-nisr', '--number_independet_sets_removed', type=int, default=0)
 	parser.add_argument('-nerr', type=int, default=0)
 	parser.add_argument('-s', '--seed', type=int)
 	parser.add_argument('-out', '--out_file', type=str, default="reducedCnf")
 	args = parser.parse_args()
-	print(args)
 
 	# Check the command line arguments first...
 	if (args.n == None or args.r == None):
-		print("Error: n and r are required.")
+		showUsage()
+		return -1
 	else:
 		n = args.n
 		r = args.r
 		sample = args.sample
 		na = args.num_assigned
 		ne = args.num_edges_to_add
-		pl = args.propagation_level
 		nrr = args.number_random_removed
 		nerr = args.nerr
 		nisr = args.number_independet_sets_removed
@@ -271,10 +285,15 @@ def main():
 		random.seed(seed)
 
 		# Create the injector...
-		start = time.time()
-		inject = injector(n, r, sample, na, ne, pl, nrr, nerr, nisr, out)
-		end = time.time()
-		timestampMilli("Total time: ", start, end)
+		try:
+			start = time.time()
+			inject = injector(n, r, sample, na, ne, nrr, nerr, nisr, out)
+			end = time.time()
+			timestampMilli("Total time: ", start, end)
+		except Exception as e:
+			print >> sys.stderr, "Error: " + str(e) + "\n"
+			showUsage()
+			return -1
 
 if __name__ == "__main__":
 	main()
