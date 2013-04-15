@@ -209,7 +209,7 @@ class injector:
 				totalThreeClauses = totalThreeClauses + sizeThreeClauses
 
 				# Compound ratio
-				totalRatio = totalRatio + (float(totalTwoClauses) / float(totalThreeClausess))
+				totalRatio = totalRatio + (float(totalTwoClauses) / float(totalThreeClauses))
 
 				# Compound total number of formulas
 				numFormulas = numFormulas + 1
