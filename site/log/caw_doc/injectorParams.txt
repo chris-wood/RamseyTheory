@@ -1,0 +1,17 @@
+python injector.py -n 127 -r 3 -sample 1000 -na 20 -nrr 37 -out g127_3_37_20
+python injector.py -n 127 -r 3 -sample 1000 -na 21 -nrr 37 -out g127_3_37_21
+python injector.py -n 127 -r 3 -sample 1000 -na 22 -nrr 37 -out g127_3_37_22
+python injector.py -n 127 -r 3 -sample 1000 -na 23 -nrr 37 -out g127_3_37_23
+python injector.py -n 127 -r 3 -sample 1000 -na 24 -nrr 37 -out g127_3_37_24
+
+python injector.py -n 127 -r 3 -sample 1000 -na 21 -nrr 38 -out g127_3_38_21
+python injector.py -n 127 -r 3 -sample 1000 -na 22 -nrr 38 -out g127_3_38_22
+python injector.py -n 127 -r 3 -sample 1000 -na 23 -nrr 38 -out g127_3_38_23
+python injector.py -n 127 -r 3 -sample 1000 -na 24 -nrr 38 -out g127_3_38_24
+python injector.py -n 127 -r 3 -sample 1000 -na 25 -nrr 38 -out g127_3_38_25
+
+python injector.py -n 127 -r 3 -sample 1000 -na 21 -nrr 39 -out g127_3_38_21
+python injector.py -n 127 -r 3 -sample 1000 -na 22 -nrr 39 -out g127_3_38_22
+python injector.py -n 127 -r 3 -sample 1000 -na 23 -nrr 39 -out g127_3_38_23
+python injector.py -n 127 -r 3 -sample 1000 -na 24 -nrr 39 -out g127_3_38_24
+python injector.py -n 127 -r 3 -sample 1000 -na 25 -nrr 39 -out g127_3_38_25
