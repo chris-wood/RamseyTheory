@@ -207,7 +207,7 @@ their count, and the solver will periodically reduce each count by a constant va
 As a result, frequently occurring variables are selected first as they will propagate 
 through $\phi$ more. 
 
-\TODO: perform more literature survey and add more heurstics here!
+%\TODO: perform more literature survey and add more heurstics here!
 
 %\subsection{Balanced Formulas}
 %\cite{randomBalanced}
@@ -215,7 +215,7 @@ through $\phi$ more.
 \section{$3$-$SAT$ Phase Transitions}
 The phase transition for the SAT decision problem, or any constraint satisfaction
 problem, is defined as the \emph{sharp} change in probability that
-the input problem instance has a satisfying solution \cite{exploiting a theory of phase transitions in 3-satisfiability problems}.
+the input problem instance has a satisfying solution \cite{3satphase}.
 In the case of 3-SAT, the phase transition, which is proportional to the ratio of
 clauses to variables, has been empirically determined to be approximately 4.2.
 In the case of $G_{127}$, the ratio of clauses to variables is roughly 7.483, 
@@ -233,7 +233,7 @@ is the primary interest of this report.
 % \cite{same as above} is used and modified for this particular task. 
 
 \subsection{Probabilistic Estimation of the Hardness}
-\TODO: read the paper section
+%\TODO: read the paper section
 %\TODO: information about the ratio and why/where it occurs
 %Phase Transitions in the Regular Random 3-SAT Problem*
 
@@ -339,12 +339,82 @@ If the removal of these independent sets does not meet the designated order of $
 then the remaining vertices that need to be removed are done so at random. 
 
 \subsection{Experiment 3 Induced subgraph modification.}
-TODO: adding edges and then checking for clique of size 4...
-TODO: write the code to do this.
+% TODO: adding edges and then checking for clique of size 4...
+% TODO: write the code to do this.
 
-\section{The Tur\'{a}n Graph}
-TODO: description, picture, and rationale...
-TODO: write the code to construct these graphs.
+\begin{algorithm}[t] %[htb]
+\caption{Algorithm for constructing candidate graphs for $G_{127}$ SAT hardness experiments} \label{alg:experimentGraphBuilder}
+\begin{algorithmic}[1]
+\Require{Non-negative integers $m_s$, $m_r$, and $n_e$}
+\Ensure{$H \subset G_{127}$}
+\State $H \gets G_{127}$
+\For{$i = 0 \to m_s$}
+	\State $H \gets H - V$, where $V \subset V(H)$ is a maximal independent set in $H$
+\EndFor
+\For{$i = 0 \to m_r$}
+	\State $H \gets H - v$, where $v$ is a randomly selected vertex $v \in V(H)$
+\EndFor
+\For{$i = 0 \to n_e$}
+	\State $e \gets (u,v)$, where $u,v \in V(H)$ are two randomly selected vertices
+	\State $cc \gets 0$
+	\While{$e \cup E(H)$ forms a $K_4$ and $cc < $ THRESHOLD}
+		\State $e \gets (u,v)$, where $u,v \in V(H)$ are two randomly selected vertices
+		\State $cc \gets cc + 1$
+	\EndWhile
+	\If{$cc = $ THRESHOLD}
+		\Return{$H$}
+	\Else
+		\State $H \gets (V(H), E(H) \cup e)$
+	\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+\section{Exploring Other Candidate Graphs}
+While the residue graph $G_{127} = G(127,3)$ is one potential candidate for a 
+graph witnessing $G \to (3,3;4)^e$, it is natural to consider of other types of
+graphs for this property. In particular, we consider distance-based circulant graphs,
+GCD circulant graph, random graphs that are $K_4$-free, and Lu's circulant graphs
+$L(m,s)$. A typical circulant graph is defined by the pair $(\mathbb{Z}_n, \{xy : x - y \in S\})$. GCD circulant graphs are very similar, but are simply characterized
+by the fact that $E(G) = \{xy : (x,y) = 1\}$. 
+The graph $L(m,s)$, where $m$ and $s$ are relatively prime integers,
+is defined as the pair $(\mathbb{Z}_n, \{xy : x - y \in s^i \mod m \})$.
+
+\begin{table}
+	\caption{SAT solver guidance experimental results for circulant graphs.}
+	\begin{tabular}{c | c | c | c | c | c}
+		\hline
+		$n$ & $m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
+		~ & NA & NA & NA & NA & NA & NA \\
+		\hline
+	\end{tabular}
+	\label{tab:guidanceExperiment-circulant}
+\end{table}
+
+\begin{table}
+	\caption{SAT solver guidance experimental results for $L(m,s)$ circulant graphs.}
+	\begin{tabular}{c | c | c | c | c | c}
+		\hline
+		$m$ & $s$ & $m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
+		~ & ~ & 0 & NA & NA & NA & NA & NA \\ 
+		\hline
+	\end{tabular}
+	\label{tab:guidanceExperiment-lms}
+\end{table}
+
+\begin{table}
+	\caption{SAT solver guidance experimental results for random $K_4$-free graphs.}
+	\begin{tabular}{c | c | c | c | c | c}
+		\hline
+		$n$ & $p$ & $m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
+		~ & ~ & NA & NA & NA & NA & NA & NA \\
+		\hline
+	\end{tabular}
+	\label{tab:guidanceExperiment-random}
+\end{table}
+
+% TODO: description, picture, and rationale...
+% TODO: write the code to construct these graphs.
 
 % SAT has proven to be a very effective technique for proving the two-color Ramsey arrow
 % operator for certain graphs. In this section we describe graph constructions that
@@ -371,7 +441,7 @@ to $\phi_G$. The resulting formula has $143$ variables, each one corresponding t
 and $4982$ clauses. Minisat was able to prove that this formula is unsatisfiable in 0.83s, thus
 showing that $G \to (3,5)^e$, and therefore $F_e(3,5;13) = 18$.
 
-\subsection{What else?}
+%\subsection{What else?}
 % Find other candidate graphs (dense ones!) that avoid cliques of size n and think of two-color parameters to try...
 
 \begin{thebibliography}{9}
@@ -401,6 +471,8 @@ showing that $G \to (3,5)^e$, and therefore $F_e(3,5;13) = 18$.
 \bibitem{Nenov83-1} N. Nenov, On the Zykov numbers and some of their applications in Ramsey theory (in Russian), \emph{Serdica} \textbf{9(2)} (1983), 161-167.
 
 \bibitem{Kolev08-2} N. Kolev, New Upper Bound for the Edge Folkman Number $F_e(3,5;13)$, arXiv:0806.1403 (2008).
+
+\bibitem{3satphase} D. M. Pennock, Q. F. Stout, Exploiting a theory of phase transitions in three-satisfiability problems, \emph{Ann Arbor} \textbf{1001} (1996), 48109.
 
 \end{thebibliography}
 
