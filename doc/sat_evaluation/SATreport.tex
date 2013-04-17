@@ -307,21 +307,6 @@ required to decide $\phi_H$ for various $H = G[n]$.
 	\label{tab:guidanceExperiment}
 \end{table}
 
-\begin{table}
-	\caption{SAT solver guidance experimental results. Values of NA indicate that the computation
-	could not be complete (i.e. the SAT solver could not decide a formula instance in a reasonable
-	amount of time).}
-	\begin{tabular}{c | c | c | c | c | c}
-		\hline
-		$m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
-		0 & 37 & 18 & NA & NA & NA \\ \hline
-		0 & 30 & 20 & NA & NA & NA \\ \hline
-		0 & 37 & 22 & NA & NA & NA \\
-		\hline
-	\end{tabular}
-	\label{tab:guidanceExperiment}
-\end{table}
-
 During this experiment we intuitively assumed that those formulas with a 
 higher ratio of clauses of length two as compared to clauses of length 
 three will be decided faster. Therefore, to aid the SAT solver in its
@@ -338,9 +323,13 @@ the induced subgraph $H$ and a number of maximal independent sets to remove from
 If the removal of these independent sets does not meet the designated order of $H$,
 then the remaining vertices that need to be removed are done so at random. 
 
+\todo[inline]{This experiment has not been started yet.}
+
 \subsection{Experiment 3 Induced subgraph modification.}
 % TODO: adding edges and then checking for clique of size 4...
 % TODO: write the code to do this.
+
+
 
 \begin{algorithm}[t] %[htb]
 \caption{Algorithm for constructing candidate graphs for $G_{127}$ SAT hardness experiments} \label{alg:experimentGraphBuilder}
@@ -370,6 +359,8 @@ then the remaining vertices that need to be removed are done so at random.
 \end{algorithmic}
 \end{algorithm}
 
+\todo[inline]{This experiment has not been started yet.}
+
 \section{Exploring Other Candidate Graphs}
 While the residue graph $G_{127} = G(127,3)$ is one potential candidate for a 
 graph witnessing $G \to (3,3;4)^e$, it is natural to consider of other types of
@@ -380,38 +371,38 @@ by the fact that $E(G) = \{xy : (x,y) = 1\}$.
 The graph $L(m,s)$, where $m$ and $s$ are relatively prime integers,
 is defined as the pair $(\mathbb{Z}_n, \{xy : x - y \in s^i \mod m \})$.
 
-\begin{table}
+\begin{table*}[t]
 	\caption{SAT solver guidance experimental results for circulant graphs.}
-	\begin{tabular}{c | c | c | c | c | c}
+	\begin{tabular}{c | c | c | c | c | c | c}
 		\hline
-		$n$ & $m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
+		$n$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
 		~ & NA & NA & NA & NA & NA & NA \\
 		\hline
 	\end{tabular}
 	\label{tab:guidanceExperiment-circulant}
-\end{table}
+\end{table*}
 
-\begin{table}
+\begin{table*}[t]
 	\caption{SAT solver guidance experimental results for $L(m,s)$ circulant graphs.}
-	\begin{tabular}{c | c | c | c | c | c}
+	\begin{tabular}{c | c | c | c | c | c | c | c}
 		\hline
-		$m$ & $s$ & $m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
+		$m$ & $s$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
 		~ & ~ & 0 & NA & NA & NA & NA & NA \\ 
 		\hline
 	\end{tabular}
 	\label{tab:guidanceExperiment-lms}
-\end{table}
+\end{table*}
 
-\begin{table}
+\begin{table*}[t]
 	\caption{SAT solver guidance experimental results for random $K_4$-free graphs.}
-	\begin{tabular}{c | c | c | c | c | c}
+	\begin{tabular}{c | c | c | c | c | c | c | c}
 		\hline
-		$n$ & $p$ & $m_s$ & $m_r$ & $r$ & Variables (min, avg, max) & Clauses (min, avg, max) & Ratio (min, avg, max) \\ \hline
+		$n$ & $p$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
 		~ & ~ & NA & NA & NA & NA & NA & NA \\
 		\hline
 	\end{tabular}
 	\label{tab:guidanceExperiment-random}
-\end{table}
+\end{table*}
 
 % TODO: description, picture, and rationale...
 % TODO: write the code to construct these graphs.

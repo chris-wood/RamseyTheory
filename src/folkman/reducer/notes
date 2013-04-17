@@ -1,0 +1,4 @@
+1. select variables that are edge-disjoint
+2. more parameters
+3. compare with SDP (Alex) - do these results agree with SAT?
+
