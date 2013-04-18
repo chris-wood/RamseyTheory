@@ -1,0 +1,156 @@
+experimentFiles/g127_3_37_25_995
+Config 995
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Config 996
+Found unsatisfiable clause in variable configuration 996, discarding formula.
+Found unsatisfiable clause in variable configuration 996, discarding formula.
+Config 997
+Found unsatisfiable clause in variable configuration 997, discarding formula.
+Found unsatisfiable clause in variable configuration 997, discarding formula.
+Found unsatisfiable clause in variable configuration 997, discarding formula.
+Found unsatisfiable clause in variable configuration 997, discarding formula.
+Config 998
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Config 999
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Total number of formulas: 259
+Minimum number of 2-clauses: 70
+Maximum number of 2-clauses: 238
+Average number of 2-clauses: 157
+Minimum number of 3-clauses: 6532
+Maximum number of 3-clauses: 6532
+Average number of 3-clauses: 6532
+Average ratio of 2-to-3 clauses: 0.0248915438134
+Total time: 648952.226877ms
+
+experimentFiles/g127_3_37_26_999
+Config 999
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Total number of formulas: 508
+Minimum number of 2-clauses: 82
+Maximum number of 2-clauses: 306
+Average number of 2-clauses: 175
+Minimum number of 3-clauses: 6654
+Maximum number of 3-clauses: 6654
+Average number of 3-clauses: 6654
+Average ratio of 2-to-3 clauses: 0.0264431704937
+Total time: 713232.496977ms
+
+experimentFiles/g127_3_37_24_1000
+Total number of formulas: 745
+Minimum number of 2-clauses: 74
+Maximum number of 2-clauses: 270
+Average number of 2-clauses: 173
+Minimum number of 3-clauses: 6610
+Maximum number of 3-clauses: 6610
+Average number of 3-clauses: 6610
+Average ratio of 2-to-3 clauses: 0.0264439716354
+Total time: 734346.64607ms
+
+experimentFiles/g127_3_37_23_1000
+Total number of formulas: 453
+Minimum number of 2-clauses: 68
+Maximum number of 2-clauses: 222
+Average number of 2-clauses: 147
+Minimum number of 3-clauses: 6404
+Maximum number of 3-clauses: 6404
+Average number of 3-clauses: 6404
+Average ratio of 2-to-3 clauses: 0.0229038372207
+Total time: 681010.388136ms
+
+perimentFiles/g127_3_37_22_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 46
+Maximum number of 2-clauses: 288
+Average number of 2-clauses: 166
+Minimum number of 3-clauses: 6476
+Maximum number of 3-clauses: 6476
+Average number of 3-clauses: 6476
+Average ratio of 2-to-3 clauses: 0.0255002763639
+Total time: 934961.317062ms
+
+
+experimentFiles/g127_3_37_21_998
+Config 998
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Config 999
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Total number of formulas: 757
+Minimum number of 2-clauses: 46
+Maximum number of 2-clauses: 284
+Average number of 2-clauses: 167
+Minimum number of 3-clauses: 6748
+Maximum number of 3-clauses: 6748
+Average number of 3-clauses: 6748
+Average ratio of 2-to-3 clauses: 0.0244253989742
+Total time: 787103.698969ms
+
+
+experimentFiles/g127_3_37_20_993
+Config 993
+Found unsatisfiable clause in variable configuration 993, discarding formula.
+Found unsatisfiable clause in variable configuration 993, discarding formula.
+Config 994
+Found unsatisfiable clause in variable configuration 994, discarding formula.
+Found unsatisfiable clause in variable configuration 994, discarding formula.
+Found unsatisfiable clause in variable configuration 994, discarding formula.
+Found unsatisfiable clause in variable configuration 994, discarding formula.
+Config 995
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Found unsatisfiable clause in variable configuration 995, discarding formula.
+Config 996
+Found unsatisfiable clause in variable configuration 996, discarding formula.
+Found unsatisfiable clause in variable configuration 996, discarding formula.
+Config 997
+Found unsatisfiable clause in variable configuration 997, discarding formula.
+Found unsatisfiable clause in variable configuration 997, discarding formula.
+Config 998
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Config 999
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Total number of formulas: 275
+Minimum number of 2-clauses: 42
+Maximum number of 2-clauses: 228
+Average number of 2-clauses: 129
+Minimum number of 3-clauses: 7014
+Maximum number of 3-clauses: 7014
+Average number of 3-clauses: 7014
+Average ratio of 2-to-3 clauses: 0.0188270009378
+Total time: 666583.288908ms
+
+experimentFiles/g127_3_38_26_1000
+Total number of formulas: 580
+Minimum number of 2-clauses: 88
+Maximum number of 2-clauses: 320
+Average number of 2-clauses: 198
+Minimum number of 3-clauses: 6734
+Maximum number of 3-clauses: 6734
+Average number of 3-clauses: 6734
+Average ratio of 2-to-3 clauses: 0.0293645582479
+Total time: 718767.613888ms
+
+Config 999
+experimentFiles/g127_3_38_25_1000
+Total number of formulas: 769
+Minimum number of 2-clauses: 66
+Maximum number of 2-clauses: 296
+Average number of 2-clauses: 182
+Minimum number of 3-clauses: 6452
+Maximum number of 3-clauses: 6452
+Average number of 3-clauses: 6452
+Average ratio of 2-to-3 clauses: 0.028616837486
+Total time: 756673.676014ms
