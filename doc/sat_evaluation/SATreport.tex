@@ -8,6 +8,10 @@
 \usepackage{algorithmicx}
 \usepackage{algpseudocode}
 \usepackage{todonotes}
+\usepackage{rotating,booktabs}
+
+\usepackage[verbose]{placeins}
+\usepackage{blindtext}
 
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
@@ -301,11 +305,43 @@ required to decide $\phi_H$ for various $H = G[n]$.
 		$m_s$ & $m_r$ & $r$ & Average time [s] & Minimum time [s] & Estimated CPU years\\ \hline
 		0 & 37 & 18 & NA & NA & NA\\ \hline
 		0 & 30 & 20 & NA & 8334.8 & 276.9 (based on minimum time) \\ \hline
-		0 & 37 & 22 & NA & 1858.1 & 246.9 (based on minimum time) \\
+		0 & 37 & 22 & NA & 1858.1 & 246.9 (based on minimum time) \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ \hline
+		~ & ~ & ~ & ~ & ~ & ~ \\ 
 		\hline
 	\end{tabular}
 	\label{tab:guidanceExperiment}
 \end{table}
+
+%% BEGIN EXPERIMENTAL RESULTS
+% \begin{sidewaystable}[htbf]
+%     \caption{Gross errors found using plausible value check}
+%     \label{tab:gr}
+%   \bigskip
+%     \centering\small\setlength\tabcolsep{2pt}
+%         \hspace*{-1cm}\begin{tabular}{l  c c c c c c c c c c c c c c c c c c c c c c c  }
+%            \toprule
+%              \textbf{Name} &\textbf{2} &\textbf{3} &\textbf{4} &\textbf{5} &\textbf{6} &\textbf{7} &\textbf{8} &\textbf{9} &\textbf{10} &\textbf{11} &\textbf{12} &\textbf{13} &\textbf{14} &\textbf{15} &\textbf{17} &\textbf{18} &\textbf{19} &\textbf{20} &\textbf{25} &\textbf{28} &\textbf{29} &\textbf{31} &\textbf{32} \\
+%            \midrule
+%              \textbf{Total Number Observations} 33 & 34 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33  \\
+%              \textbf{Number of Faults} & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33 & 33  \\
+%            \bottomrule
+%         \end{tabular}\hspace*{-1cm}
+% \end{sidewaystable}
 
 During this experiment we intuitively assumed that those formulas with a 
 higher ratio of clauses of length two as compared to clauses of length 

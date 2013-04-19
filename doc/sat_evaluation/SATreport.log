@@ -1,9 +1,8 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  17 APR 2013 09:21
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  18 APR 2013 22:43
 entering extended mode
- \write18 enabled.
- file:line:error style messages enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**SATreport.tex
+**SATreport
 (./SATreport.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
@@ -567,66 +566,122 @@ LaTeX Info: Redefining \addtolength on input line 77.
 )
 \c@@todonotes@numberoftodonotes=\count134
 )
+(/usr/local/texlive/2012/texmf-dist/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+\c@r@tfl@t=\count135
+\rotFPtop=\skip59
+\rotFPbot=\skip60
+\rot@float@box=\box40
+\rot@mess@toks=\toks40
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen160
+\lightrulewidth=\dimen161
+\cmidrulewidth=\dimen162
+\belowrulesep=\dimen163
+\belowbottomsep=\dimen164
+\aboverulesep=\dimen165
+\abovetopsep=\dimen166
+\cmidrulesep=\dimen167
+\cmidrulekern=\dimen168
+\defaultaddspace=\dimen169
+\@cmidla=\count136
+\@cmidlb=\count137
+\@aboverulesep=\dimen170
+\@belowrulesep=\dimen171
+\@thisruleclass=\count138
+\@lastruleclass=\count139
+\@thisrulewidth=\dimen172
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
+(/usr/local/texlive/2012/texmf-dist/tex/latex/blindtext/blindtext.sty
+Package: blindtext 2012/01/06 V2.0 blindtext-Package
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/tools/xspace.sty
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
+)
+\c@blindtext=\count140
+\c@Blindtext=\count141
+\c@blind@countparstart=\count142
+\blind@countxx=\count143
+\blindtext@numBlindtext=\count144
+\blind@countyy=\count145
+\c@blindlist=\count146
+\c@blindlistlevel=\count147
+\c@blindlist@level=\count148
+\blind@listitem=\count149
+\c@blind@listcount=\count150
+\c@blind@levelcount=\count151
+\blind@mathformula=\count152
+\blind@Mathformula=\count153
+\c@blind@randomcount=\count154
+\c@blind@randommax=\count155
+\c@blind@pangramcount=\count156
+\c@blind@pangrammax=\count157
+)
 (/usr/local/texlive/2012/texmf-dist/tex/latex/lipsum/lipsum.sty
 Package: lipsum 2011/04/14 v1.2 150 paragraphs of Lorem Ipsum dummy text
-\c@lips@count=\count135
+\c@lips@count=\count158
 )
 (/usr/local/texlive/2012/texmf-dist/tex/latex/sectsty/sectsty.sty
 Package: sectsty 2002/02/25 v2.0.2 Commands to change all sectional heading sty
 les
 )
 (/usr/local/texlive/2012/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-\fancy@headwidth=\skip59
-\f@ncyO@elh=\skip60
-\f@ncyO@erh=\skip61
-\f@ncyO@olh=\skip62
-\f@ncyO@orh=\skip63
-\f@ncyO@elf=\skip64
-\f@ncyO@erf=\skip65
-\f@ncyO@olf=\skip66
-\f@ncyO@orf=\skip67
+\fancy@headwidth=\skip61
+\f@ncyO@elh=\skip62
+\f@ncyO@erh=\skip63
+\f@ncyO@olh=\skip64
+\f@ncyO@orh=\skip65
+\f@ncyO@elf=\skip66
+\f@ncyO@erf=\skip67
+\f@ncyO@olf=\skip68
+\f@ncyO@orf=\skip69
 )
 (/usr/local/texlive/2012/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
-\ttl@box=\box40
-\beforetitleunit=\skip68
-\aftertitleunit=\skip69
-\ttl@plus=\dimen160
-\ttl@minus=\dimen161
-\ttl@toksa=\toks40
-\titlewidth=\dimen162
-\titlewidthlast=\dimen163
-\titlewidthfirst=\dimen164
+\ttl@box=\box41
+\beforetitleunit=\skip70
+\aftertitleunit=\skip71
+\ttl@plus=\dimen173
+\ttl@minus=\dimen174
+\ttl@toksa=\toks41
+\titlewidth=\dimen175
+\titlewidthlast=\dimen176
+\titlewidthfirst=\dimen177
 )
 (./SATreport.aux)
 \openout1 = `SATreport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
-LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 70.
+LaTeX Font Info:    ... okay on input line 70.
 
 (/usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count136
-\scratchdimen=\dimen165
-\scratchbox=\box41
-\nofMPsegments=\count137
-\nofMParguments=\count138
-\everyMPshowfont=\toks41
-\MPscratchCnt=\count139
-\MPscratchDim=\dimen166
-\MPnumerator=\count140
-\makeMPintoPDFobject=\count141
-\everyMPtoPDFconversion=\toks42
+\scratchcounter=\count159
+\scratchdimen=\dimen178
+\scratchbox=\box42
+\nofMPsegments=\count160
+\nofMParguments=\count161
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count162
+\MPscratchDim=\dimen179
+\MPnumerator=\count163
+\makeMPintoPDFobject=\count164
+\everyMPtoPDFconversion=\toks43
 ) ABD: EveryShipout initializing macros
 (/usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
@@ -676,22 +731,22 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 69.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 73.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 69.
+LaTeX Font Info:    Try loading font information for U+msa on input line 73.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 69.
+LaTeX Font Info:    Try loading font information for U+msb on input line 73.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-Overfull \hbox (6.00572pt too wide) in paragraph at lines 71--77
+Overfull \hbox (6.00572pt too wide) in paragraph at lines 75--81
 []\T1/cmr/m/n/10.95 In his 1972 sem-i-nal pa-per en-ti-tled, ``Re-ducibil-ity A
 mong Com-bi-na-to-rial Prob-lems,'' Richard
  []
@@ -701,96 +756,92 @@ mong Com-bi-na-to-rial Prob-lems,'' Richard
 
 {/usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 [2] [3] [4]
-Overfull \hbox (10.49pt too wide) in paragraph at lines 249--259
+Overfull \hbox (10.49pt too wide) in paragraph at lines 253--263
 [][]
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 272.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 276.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 272.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 276.
  [5]
-Overfull \hbox (5.7759pt too wide) in paragraph at lines 299--308
+Overfull \hbox (5.7759pt too wide) in paragraph at lines 303--328
 [][]
  []
 
-[6]
-Overfull \hbox (5.46437pt too wide) in paragraph at lines 387--394
+[6] [7]
+Overfull \hbox (5.46437pt too wide) in paragraph at lines 423--430
 [][]
  []
 
 
-Overfull \hbox (5.07635pt too wide) in paragraph at lines 398--405
+Overfull \hbox (5.07635pt too wide) in paragraph at lines 434--441
 [][]
  []
 
-[7]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 442.
+[8]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 478.
 
  (/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 2503) in paragraph at lines 442--443
+Underfull \hbox (badness 2503) in paragraph at lines 478--479
 []\T1/cmr/m/n/10.95 S. A. Cook, The Com-plex-ity of Theorem-Proving Pro-ce-dure
 s, \T1/cmr/m/it/10.95 In Pro-ceed-
  []
 
 
-Underfull \hbox (badness 1931) in paragraph at lines 442--443
+Underfull \hbox (badness 1931) in paragraph at lines 478--479
 \T1/cmr/m/it/10.95 ings of the third an-nual ACM sym-po-sium on The-ory of com-
 put-ing (STOC
  []
 
-[8]
-Underfull \hbox (badness 1990) in paragraph at lines 464--465
+[9]
+Underfull \hbox (badness 1990) in paragraph at lines 500--501
 []\T1/cmr/m/n/10.95 N. Kolev, New Up-per Bound for the Edge Folk-man Num-ber $\
 OML/cmm/m/it/10.95 F[]\OT1/cmr/m/n/10.95 (3\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/1
 0.95 5; 13)$\T1/cmr/m/n/10.95 ,
  []
 
-[9] (./SATreport.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[10] (./SATreport.aux) ) 
 Here is how much of TeX's memory you used:
- 14166 strings out of 493488
- 253873 string characters out of 3141326
- 415764 words of memory out of 3000000
- 17145 multiletter control sequences out of 15000+200000
+ 14505 strings out of 493488
+ 259373 string characters out of 3141326
+ 428884 words of memory out of 3000000
+ 17465 multiletter control sequences out of 15000+200000
  27212 words of font info for 73 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 74i,11n,78p,428b,579s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
-</usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><
-/usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></
-usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></u
-sr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/l
-ocal/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
-/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
-xlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
-ve/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/te
-xlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texl
-ive/2012/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/local/texliv
-e/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/
-2012/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/20
-12/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2012
-/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2012/t
-exmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/local/texlive/2012/tex
-mf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/local/texlive/2012/texmf
--dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/local/texlive/2012/texmf-d
-ist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2012/texmf-dis
-t/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on SATreport.pdf (9 pages, 332845 bytes).
+ 74i,11n,78p,454b,579s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-
+super/cm-super-t1.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmex10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
+.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
+m10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbx109
+5.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfcc1095.
+pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pf
+b></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
+</usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></
+usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></us
+r/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/
+local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/lo
+cal/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/loca
+l/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/
+texlive/2012/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on SATreport.pdf (10 pages, 333681 bytes).
 PDF statistics:
- 126 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
+ 129 PDF objects out of 1000 (max. 8388607)
+ 94 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

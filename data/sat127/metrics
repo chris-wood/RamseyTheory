@@ -154,3 +154,35 @@ Maximum number of 3-clauses: 6452
 Average number of 3-clauses: 6452
 Average ratio of 2-to-3 clauses: 0.028616837486
 Total time: 756673.676014ms
+
+experimentFiles/g127_3_37_27_1000
+Total number of formulas: 301
+Minimum number of 2-clauses: 96
+Maximum number of 2-clauses: 308
+Average number of 2-clauses: 187
+Minimum number of 3-clauses: 6622
+Maximum number of 3-clauses: 6622
+Average number of 3-clauses: 6622
+Average ratio of 2-to-3 clauses: 0.0288008879199
+Total time: 686195.42408ms
+
+experimentFiles/g127_3_37_28_998
+Config 998
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Found unsatisfiable clause in variable configuration 998, discarding formula.
+Config 999
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Found unsatisfiable clause in variable configuration 999, discarding formula.
+Total number of formulas: 302
+Minimum number of 2-clauses: 78
+Maximum number of 2-clauses: 264
+Average number of 2-clauses: 181
+Minimum number of 3-clauses: 6542
+Maximum number of 3-clauses: 6542
+Average number of 3-clauses: 6542
+Average ratio of 2-to-3 clauses: 0.0273662620887
+Total time: 702610.677004ms
