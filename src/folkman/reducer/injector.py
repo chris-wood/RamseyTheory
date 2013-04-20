@@ -112,8 +112,8 @@ class injector:
 			while (c in configSamples):
 				c = random.randint(0, numSamples)
 			configSamples.append(c)
-
-			# Initialize the configuration array
+			
+			# Advance the configuration array...
 			for i in range(len(assign.keys())):
 				if (((1 << i) & c) > 0):
 					assign[assign.keys()[i]] = True
@@ -137,9 +137,11 @@ class injector:
 							index = l
 							inVars = True
 						if inVars:
-							if (assign[index] == True): # the literal is true, so drop the clauses
+							if (assign[index] == True): # the literal is true, so drop the clause
+								print >> sys.stderr, "Dropping clause because " + str(index) + " was assigned to " + str(assign[index])
 								include = False
 							else:
+								print >> sys.stderr, "Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index])
 								clause.remove(l) # remove the literal, it evaluated to false...
 				if include:
 					newCnf.append(clause)
@@ -170,7 +172,7 @@ class injector:
 						if (l < 0 and (l * -1) in units.keys()):
 							index = (l * -1)
 							inVars = True
-						elif (l > 1 and l in units.keys()):
+						elif (l > 0 and l in units.keys()):
 							index = l
 							inVars = True
 						if inVars:
@@ -187,6 +189,7 @@ class injector:
 				elif (len(clause) == 0):
 					print >> sys.stderr, "Found unsatisfiable clause in variable configuration " + str(configIndex) + ", discarding formula."
 					write = False
+					break
 
 			configIndex = configIndex + 1
 
@@ -285,15 +288,15 @@ def main():
 		random.seed(seed)
 
 		# Create the injector...
-		try:
-			start = time.time()
-			inject = injector(n, r, sample, na, ne, nrr, nerr, nisr, out)
-			end = time.time()
-			timestampMilli("Total time: ", start, end)
-		except Exception as e:
-			print >> sys.stderr, "Error: " + str(e) + "\n"
-			showUsage()
-			return -1
+		#try:
+		start = time.time()
+		inject = injector(n, r, sample, na, ne, nrr, nerr, nisr, out)
+		end = time.time()
+		timestampMilli("Total time: ", start, end)
+		#except Exception as e:
+		#	print >> sys.stderr, "\nError: " + str(e) + "\n"
+		#	showUsage()
+		#	return -1
 
 if __name__ == "__main__":
 	main()
