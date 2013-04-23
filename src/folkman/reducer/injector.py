@@ -52,8 +52,10 @@ class injector:
 		# Strip down to the induced subgraph
 		# using the structural/random properties, as specified
 		# by the command cmd line arguments
-		print >> sys.stderr, 'Creating the reduced CNF formula'
+		print >> sys.stderr, 'Stripping the graph'
 		self.strip()
+		print >> sys.stderr, 'Filling out edges'
+		self.fill() # Let exceptions carry up to -main-
 		r = reducer()
 		numVars, cnf = r.reduce(self.graph.getGraph())
 		self.write("reduced", numVars, cnf, 0)
@@ -71,6 +73,10 @@ class injector:
 			self.graph.removeIndependentSet()
 		for i in range(self.nerr):
 			edge = random.randint(0, len(self.graph.getGraph().edges()))
+
+	def fill(self):
+		for i in range(self.ne):
+			self.graph.addRandomEdgeAvoidK4()
 
 	def assignAndWrite(self, numVars, cnf):
 		# Statistic vars
