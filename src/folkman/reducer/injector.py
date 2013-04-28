@@ -25,12 +25,13 @@ import time
 # -out = out files for the CNFs
 
 class injector:
-	def __init__(self, n, r, sample, na, ne, nrr, nerr, nisr, out):
+	def __init__(self, n, r, sample, na, smart, ne, nrr, nerr, nisr, out):
 		self.n = n
 		self.r = r
 		self.sample = sample
 		self.graph = GNR(n, r)
 		self.na = na
+		self.smart = smart
 		self.ne = ne
 		self.nrr = nrr
 		self.nerr = nerr
@@ -78,8 +79,14 @@ class injector:
 		for i in range(self.ne):
 			self.graph.addRandomEdgeAvoidK4()
 
+	def edgesIntersect(self, e, vars, cnf):
+		for c in cnf:
+			for v in vars:
+				if (v in c) and (e in c):
+					return True
+		return False
+
 	def assignAndWrite(self, numVars, cnf):
-		# Statistic vars
 		numClauses = len(cnf)
 		numFormulas = 0
 		minTwoClauses = numClauses
@@ -92,14 +99,31 @@ class injector:
 
 		# list of random variables to remove
 		varsToAssign = []
-		for i in range(self.na):
-			var = random.randint(0, numVars)
-			if (var not in varsToAssign):
-				varsToAssign.append(var)
-			else:
-				while (var in varsToAssign):
+		if (self.smart):
+			loop = 0
+			THRESHOlD = 100 # There has to be a way to determine the maximum number of disjoint things...
+			for i in range(self.na):
+				if loop > THRESHOlD:
+					break
+				else:
 					var = random.randint(0, numVars)
-				varsToAssign.append(var)
+					loop = 0
+					while (self.edgesIntersect(var, varsToAssign, cnf) and loop < THRESHOlD):
+						loop = loop + 1
+						var = random.randint(0, numVars)
+					if (loop < THRESHOlD):
+						varsToAssign.append(var)
+		else:
+			for i in range(self.na):
+				var = random.randint(0, numVars)
+				if (var not in varsToAssign):
+					varsToAssign.append(var)
+				else:
+					while (var in varsToAssign):
+						var = random.randint(0, numVars)
+					varsToAssign.append(var)
+
+		print >> sys.stderr, "Variables to assign: " + str(varsToAssign)
 
 		# list of all possible variable assignments, start with all false
 		assign = {}
@@ -111,7 +135,7 @@ class injector:
 		configIndex = 0
 		#for config in range(2 ** self.na):
 		numSamples = 2 ** self.na
-		while (configIndex < self.sample):
+		while (configIndex < self.sample or numFormulas == 0):
 
 			# Select a random configuration not already in the set
 			c = random.randint(0, numSamples)
@@ -127,7 +151,8 @@ class injector:
 					assign[assign.keys()[i]] = False
 
 			# Print out the configuration we're on...
-			print >> sys.stderr, "Config " + str(configIndex)
+			if (configIndex % 500 == 0):
+				print >> sys.stderr, "Config " + str(configIndex)
 			newCnf = []
 			for c in cnf: # for each clause
 				include = True
@@ -144,10 +169,10 @@ class injector:
 							inVars = True
 						if inVars:
 							if (assign[index] == True): # the literal is true, so drop the clause
-								print >> sys.stderr, "Dropping clause because " + str(index) + " was assigned to " + str(assign[index])
+								# print >> sys.stderr, "Dropping clause because " + str(index) + " was assigned to " + str(assign[index])
 								include = False
 							else:
-								print >> sys.stderr, "Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index])
+								# print >> sys.stderr, "Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index])
 								clause.remove(l) # remove the literal, it evaluated to false...
 				if include:
 					newCnf.append(clause)
@@ -193,7 +218,7 @@ class injector:
 						sizeThreeClauses = sizeThreeClauses + 1
 					finalCnf.append(clause)
 				elif (len(clause) == 0):
-					print >> sys.stderr, "Found unsatisfiable clause in variable configuration " + str(configIndex) + ", discarding formula."
+					# print >> sys.stderr, "Found unsatisfiable clause in variable configuration " + str(configIndex) + ", discarding formula."
 					write = False
 					break
 
@@ -201,6 +226,8 @@ class injector:
 
 			# Write the output file
 			if (write):
+				# Compound total number of formulas
+				numFormulas = numFormulas + 1
 				self.write(configIndex, numVars, finalCnf, sizeTwoClauses)
 
 				# Compound the statistics for the two clauses
@@ -220,9 +247,6 @@ class injector:
 				# Compound ratio
 				totalRatio = totalRatio + (float(totalTwoClauses) / float(totalThreeClauses))
 
-				# Compound total number of formulas
-				numFormulas = numFormulas + 1
-
 		# Output the stats (if we actually wrote anything...)
 		if (numFormulas > 0):
 			print >> sys.stderr, "Total number of formulas: " + str(numFormulas)
@@ -235,7 +259,7 @@ class injector:
 			print >> sys.stderr, "Average ratio of 2-to-3 clauses: " + str(totalRatio / numFormulas)
 
 	def write(self, index, numVars, cnf, numTwoClauses):
-		print(str(self.out + "_" + str(index)))
+		print >> sys.stderr, str(self.out + "_" + str(index))
 		f = open(self.out + "_" + str(index), 'wb')
 		header, clauses = makeDimacsCNF(numVars, cnf)
 		f.write('c ' + str(numTwoClauses) + "\n")
@@ -272,6 +296,7 @@ def main():
 	parser.add_argument('-nerr', type=int, default=0)
 	parser.add_argument('-s', '--seed', type=int)
 	parser.add_argument('-out', '--out_file', type=str, default="reducedCnf")
+	parser.add_argument('-smart',type=bool,default=False)
 	args = parser.parse_args()
 
 	# Check the command line arguments first...
@@ -289,6 +314,7 @@ def main():
 		nisr = args.number_independet_sets_removed
 		seed = args.seed
 		out = args.out_file
+		smart = args.smart
 
 		# Seed random...
 		random.seed(seed)
@@ -296,7 +322,7 @@ def main():
 		# Create the injector...
 		#try:
 		start = time.time()
-		inject = injector(n, r, sample, na, ne, nrr, nerr, nisr, out)
+		inject = injector(n, r, sample, na, smart, ne, nrr, nerr, nisr, out)
 		end = time.time()
 		timestampMilli("Total time: ", start, end)
 		#except Exception as e:
