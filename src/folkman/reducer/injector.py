@@ -74,6 +74,7 @@ class injector:
 			self.graph.removeIndependentSet()
 		for i in range(self.nerr):
 			edge = random.randint(0, len(self.graph.getGraph().edges()))
+			self.graph.dropEdge(edge)
 
 	def fill(self):
 		for i in range(self.ne):
@@ -209,6 +210,8 @@ class injector:
 						if inVars:
 							if (units[index] == True): # the literal is true, so drop the clauses
 								include = False
+								print >> sys.stderr, "HOW CAN THIS HAPPEN?"
+								return 
 							else:
 								clause.remove(l) # remove the literal, it evaluated to false...
 				if include and len(clause) > 0: # do not append empty clauses, they cause immediate unsatisfiability...

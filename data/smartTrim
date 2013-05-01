@@ -1,0 +1,73 @@
+SMART SELECTION OF EDGES
+
+nisr3_na60_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 304
+Maximum number of 2-clauses: 708
+Average number of 2-clauses: 515
+Minimum number of 3-clauses: 7918
+Maximum number of 3-clauses: 7918
+Average number of 3-clauses: 7918
+Average ratio of 2-to-3 clauses: 0.0653239133523
+
+nisr3_nrr4_na60_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 276
+Maximum number of 2-clauses: 648
+Average number of 2-clauses: 441
+Minimum number of 3-clauses: 6446
+Maximum number of 3-clauses: 6446
+Average number of 3-clauses: 6446
+
+nisr2_na60_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 344
+Maximum number of 2-clauses: 764
+Average number of 2-clauses: 554
+Minimum number of 3-clauses: 10372
+Maximum number of 3-clauses: 10372
+Average number of 3-clauses: 10372
+Average ratio of 2-to-3 clauses: 0.0532702305974
+Total time: 1230889.2231ms
+
+
+nrr37_na60_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 238
+Maximum number of 2-clauses: 608
+Average number of 2-clauses: 459
+Minimum number of 3-clauses: 6036
+Maximum number of 3-clauses: 6036
+Average number of 3-clauses: 6036
+Average ratio of 2-to-3 clauses: 0.0760713492198
+Total time: 1892188.35211ms
+
+nrr37_na80_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 378
+Maximum number of 2-clauses: 798
+Average number of 2-clauses: 603
+Minimum number of 3-clauses: 5526
+Maximum number of 3-clauses: 5526
+Average number of 3-clauses: 5526
+Average ratio of 2-to-3 clauses: 0.109255191429
+
+nrr37_nerr100_na60_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 240
+Maximum number of 2-clauses: 578
+Average number of 2-clauses: 380
+Minimum number of 3-clauses: 4630
+Maximum number of 3-clauses: 4630
+Average number of 3-clauses: 4630
+Average ratio of 2-to-3 clauses: 0.0827761719425
+
+nrr37_ne500_na60_1000
+Total number of formulas: 1000
+Minimum number of 2-clauses: 248
+Maximum number of 2-clauses: 646
+Average number of 2-clauses: 435
+Minimum number of 3-clauses: 5892
+Maximum number of 3-clauses: 5892
+Average number of 3-clauses: 5892
+Average ratio of 2-to-3 clauses: 0.0735456751038

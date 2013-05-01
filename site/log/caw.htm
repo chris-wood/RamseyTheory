@@ -2,6 +2,31 @@
 <p> 
 	This week I worked on the following tasks:
 	<ul>
+		<li>Started writing code to translate an arrowing problem into an equivalent SDP problem (based on a discussion with Alex).</li>
+		<li>
+			<p>
+				Continued more expansive experiments subgraphs $H$ of $G_{127}$. I found that intelligent selection of edges to color (variables
+				to fix) in the corresponding formula $\phi_{H}$ yielded good 2/3 clause ratios. In particular, selecting edges that were
+				disjoint (i.e. not belonging to the same triangle) drastically bumped up this ratio to around 0.07 from 0.02. In general,
+				for subgraphs $H$ on the order of $90$ vertices with a 2/3 ratio of 0.06 or higher, the solvers can decide in a matter of
+				seconds. If this ratio is lower, the solver does not terminate in any reasonable amount of time. 
+			</p>
+			<p>
+				Also, it was interesting to observe that by adding edges to a subgraph $H$ on $90$ vertices such that $K_4$ was avoided,
+				the average number of clauses of size 3 dropped among a sample of 1000 formulas when compared to the same subgraph
+				without edges added. Granted, quite a bit of edges needed to be added to make this work (i.e. 500 edges were needed to 
+				drop the average of 3 clauses down from 6036 to 5892), but increasing this number might help solving the formulas
+				easier. 
+			</p>
+		</li>
+		<li>I continued with the development of the survey on Folkman numbers. You may view the latest document <a href="caw_doc/FolkmanSurvey.pdf">here</a>.</li>
+	</ul>
+</p>
+<hr/>
+<h3>Week 7</h3>
+<p>
+	This week I worked on the following tasks:
+	<ul>
 		<li>Ran many hardness estimation experiments for $G_{127}$. These take a very long time to run, and with limited
 			computational resources, I'm constrainted to running at most three experiments at once. I've made due, though. 
 			You may view the results in the latest version of the SAT report located <a href="caw_doc/SATreport.pdf">here</a>.
