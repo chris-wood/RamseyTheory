@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  23 APR 2013 23:00
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  8 MAY 2013 02:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -768,80 +768,105 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 276.
  [5]
-Overfull \hbox (5.7759pt too wide) in paragraph at lines 303--322
+Overfull \hbox (5.7759pt too wide) in paragraph at lines 304--323
 [][]
  []
 
-[6] [7]
-Overfull \hbox (23.3615pt too wide) in paragraph at lines 436--443
-[][]
+[6] [7] <chart_1.png, id=49, 523.9575pt x 321.2pt>
+File: chart_1.png Graphic file (type png)
+ <use chart_1.png>
+Package pdftex.def Info: chart_1.png used on input line 436.
+(pdftex.def)             Requested size: 392.96716pt x 240.89941pt.
+
+<chart_2.png, id=50, 515.9275pt x 321.2pt>
+File: chart_2.png Graphic file (type png)
+ <use chart_2.png>
+Package pdftex.def Info: chart_2.png used on input line 444.
+(pdftex.def)             Requested size: 386.94467pt x 240.89941pt.
+
+<chart_3.png, id=51, 570.13pt x 321.2pt>
+File: chart_3.png Graphic file (type png)
+ <use chart_3.png>
+Package pdftex.def Info: chart_3.png used on input line 452.
+(pdftex.def)             Requested size: 427.59645pt x 240.89941pt.
+
+Overfull \hbox (9.3409pt too wide) in paragraph at lines 452--453
+ [] 
  []
 
+<chart_4.png, id=52, 451.6875pt x 321.2pt>
+File: chart_4.png Graphic file (type png)
+ <use chart_4.png>
+Package pdftex.def Info: chart_4.png used on input line 460.
+(pdftex.def)             Requested size: 338.76479pt x 240.89941pt.
 
-Overfull \hbox (25.63873pt too wide) in paragraph at lines 447--454
-[][]
- []
+<chart_5.png, id=53, 451.6875pt x 321.2pt>
+File: chart_5.png Graphic file (type png)
+ <use chart_5.png>
+Package pdftex.def Info: chart_5.png used on input line 468.
+(pdftex.def)             Requested size: 338.76479pt x 240.89941pt.
+ [8] [9 <./chart_1.png (PNG copy)> <./chart_2.png (PNG copy)>] [10 <./chart_3.p
+ng (PNG copy)> <./chart_4.png (PNG copy)>] [11 <./chart_5.png (PNG copy)>]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 553.
 
-[8]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 491.
 
- (/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1cmtt.fd
+(/usr/local/texlive/2012/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 2503) in paragraph at lines 491--492
+Underfull \hbox (badness 2503) in paragraph at lines 553--554
 []\T1/cmr/m/n/10.95 S. A. Cook, The Com-plex-ity of Theorem-Proving Pro-ce-dure
 s, \T1/cmr/m/it/10.95 In Pro-ceed-
  []
 
 
-Underfull \hbox (badness 1931) in paragraph at lines 491--492
+Underfull \hbox (badness 1931) in paragraph at lines 553--554
 \T1/cmr/m/it/10.95 ings of the third an-nual ACM sym-po-sium on The-ory of com-
 put-ing (STOC
  []
 
-[9]
-Underfull \hbox (badness 1990) in paragraph at lines 513--514
+
+Underfull \hbox (badness 1990) in paragraph at lines 575--576
 []\T1/cmr/m/n/10.95 N. Kolev, New Up-per Bound for the Edge Folk-man Num-ber $\
 OML/cmm/m/it/10.95 F[]\OT1/cmr/m/n/10.95 (3\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/1
 0.95 5; 13)$\T1/cmr/m/n/10.95 ,
  []
 
-[10] (./SATreport.aux) ) 
+[12] [13] (./SATreport.aux) ) 
 Here is how much of TeX's memory you used:
- 14467 strings out of 493488
- 258410 string characters out of 3141326
- 430819 words of memory out of 3000000
- 17427 multiletter control sequences out of 15000+200000
+ 14496 strings out of 493488
+ 258726 string characters out of 3141326
+ 430838 words of memory out of 3000000
+ 17450 multiletter control sequences out of 15000+200000
  27212 words of font info for 73 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  74i,11n,77p,458b,333s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/cm-
-super/cm-super-t1.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmex10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmmi6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mr6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
-.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfbx109
-5.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfcc1095.
-pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pf
-b></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0900.pfb>
-</usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></
-usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></us
-r/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb></usr/
-local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></usr/lo
-cal/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr/loca
-l/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/
-texlive/2012/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on SATreport.pdf (10 pages, 335625 bytes).
+{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvip
+s/cm-super/cm-super-t1.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmex10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/symbol
+s/msbm10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sf
+bx1095.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfcc
+1095.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm08
+00.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm0900
+.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1095.p
+fb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb
+></usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfrm2074.pfb><
+/usr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1200.pfb></u
+sr/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfsx1440.pfb></usr
+/local/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/l
+ocal/texlive/2012/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on SATreport.pdf (13 pages, 389504 bytes).
 PDF statistics:
- 129 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
+ 145 PDF objects out of 1000 (max. 8388607)
+ 101 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 38 words of extra memory for PDF output out of 10000 (max. 10000000)
 

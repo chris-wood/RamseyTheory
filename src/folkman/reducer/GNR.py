@@ -50,6 +50,9 @@ class GNR:
 				raise Exception("Couldn't find a new edge that didn't already exist after 100 tries...")
 		if not (self.k4WithEdge(e)):
 			self.graph.edges().append(e)
+			return True
+		else:
+			return False
 
 	def k4WithEdge(self, e):
 		# Simply check to see if there exists an edge between all of them...

@@ -25,11 +25,12 @@ import time
 # -out = out files for the CNFs
 
 class injector:
-	def __init__(self, n, r, sample, na, smart, ne, nrr, nerr, nisr, out):
+	def __init__(self, n, r, sample, fix, na, smart, ne, nrr, nerr, nisr, out, dump):
 		self.n = n
 		self.r = r
 		self.sample = sample
 		self.graph = GNR(n, r)
+		self.fix = fix
 		self.na = na
 		self.smart = smart
 		self.ne = ne
@@ -37,6 +38,7 @@ class injector:
 		self.nerr = nerr
 		self.nisr = nisr
 		self.out = out
+		self.dump = dump
 
 		# Preliminary error checking
 		if (self.graph.getGraph().edges() < self.na):
@@ -56,14 +58,24 @@ class injector:
 		print >> sys.stderr, 'Stripping the graph'
 		self.strip()
 		print >> sys.stderr, 'Filling out edges'
-		self.fill() # Let exceptions carry up to -main-
+		edgesAdded = self.fill() # Let exceptions carry up to -main-
+		print("e: " + str(edgesAdded))
 		r = reducer()
 		numVars, cnf = r.reduce(self.graph.getGraph())
 		self.write("reduced", numVars, cnf, 0)
 
-		# Assign values and propagate
+		if (self.dump):
+			print >> sys.stderr, "Dumping the modified graph"
+			self.dumpGraph()
+
+		# Assign values and propagate, if fix was set to true
 		print >> sys.stderr, 'Assigning the random variables'
-		self.assignAndWrite(numVars, cnf)
+		if (self.fix):
+			self.assignAndWrite(numVars, cnf)
+
+	def dumpGraph(self):
+		for e in self.graph.getGraph().edges():
+			print(str(e[0]) + " " + str(e[1]))
 
 	def strip(self):
 		for i in range(self.nrr):
@@ -77,8 +89,12 @@ class injector:
 			self.graph.dropEdge(edge)
 
 	def fill(self):
+		edgesAdded = 0
 		for i in range(self.ne):
-			self.graph.addRandomEdgeAvoidK4()
+			if self.graph.addRandomEdgeAvoidK4():
+				edgesAdded = edgesAdded + 1
+		return edgesAdded
+
 
 	def edgesIntersect(self, e, vars, cnf):
 		for c in cnf:
@@ -291,7 +307,7 @@ def main():
 	parser = argparse.ArgumentParser(prog='injector')
 	parser.add_argument('-n', type=int)
 	parser.add_argument('-r', type=int)
-	parser.add_argument('-sample', type=int, default=100)
+	parser.add_argument('-sample', type=int, default=0)
 	parser.add_argument('-na', '--num_assigned', type=int, default=0)
 	parser.add_argument('-ne', '--num_edges_to_add', type=int, default=0)
 	parser.add_argument('-nrr', '--number_random_removed', type=int, default=0)
@@ -300,6 +316,8 @@ def main():
 	parser.add_argument('-s', '--seed', type=int)
 	parser.add_argument('-out', '--out_file', type=str, default="reducedCnf")
 	parser.add_argument('-smart',type=bool,default=False)
+	parser.add_argument('-fix',type=bool,default=True)
+	parser.add_argument('-dump',type=bool,default=False)
 	args = parser.parse_args()
 
 	# Check the command line arguments first...
@@ -318,6 +336,8 @@ def main():
 		seed = args.seed
 		out = args.out_file
 		smart = args.smart
+		fix = args.fix
+		dump = args.dump
 
 		# Seed random...
 		random.seed(seed)
@@ -325,7 +345,7 @@ def main():
 		# Create the injector...
 		#try:
 		start = time.time()
-		inject = injector(n, r, sample, na, smart, ne, nrr, nerr, nisr, out)
+		inject = injector(n, r, sample, fix, na, smart, ne, nrr, nerr, nisr, out, dump)
 		end = time.time()
 		timestampMilli("Total time: ", start, end)
 		#except Exception as e:

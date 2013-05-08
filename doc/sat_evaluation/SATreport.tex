@@ -197,7 +197,7 @@ detected. If a conflict emerges during propagation, then the algorithm must back
 to the most recent literal decision, negate the value, and then continue down the search tree.
 
 Generally speaking, most SAT solvers that employ this algorithm spend the majority of their time in this procedures. 
-Chatt \cite{chaff} introduced more advanced heuristics to optimize this part of the 
+Chaff \cite{chaff} introduced more advanced heuristics to optimize this part of the 
 DPLL algorithm. Variable watching, which is an optimization that seeks to maintain some 
 knowledge about which clauses recently become unit clauses after a variable assignment, helps
 reduce the number of clauses that are visited during the BCP procedure. 
@@ -282,7 +282,8 @@ Therefore, for this experiment, we have the following parameters:
 	propogated through the rest of the formula. 
 	\item $p$ - the number of levels of recursive propagation that occur after assigning 
 	$r$ truth values. By default, $p = 1$, indicating a single pass of unit propagation.
-	\item $n_e$ - the number of edges randomly added to $H$ such that no $K_4$ is formed.
+	\item $n_e$ - the number of edges randomly added to $H$ such that no $K_4$ is formed. Since $G_{127}$ is edge
+	critical, it is not possible to add any edge to the graph without forming a $K_4$.
 \end{itemize}
 Clause reduction will use the same unit propagation and pure literal elimination techniques
 presented in the DPLL algorithm as a preprocessing step for $\phi_H$ before it is run with a solver.
@@ -298,24 +299,24 @@ required to decide $\phi_H$ for various $H = G[n]$.
 
 \begin{table}
 	\caption{SAT solver guidance experimental results. Values of NA indicate that the computation
-	could not be complete (i.e. the SAT solver could not decide a formula instance in a reasonable
-	amount of time). DNF means that a single formula within the experiment did not finish within 5 hours.}
+	could not be completed (i.e. the SAT solver could not decide a formula instance in a reasonable
+	amount of time). NA}
 	\begin{tabular}{c | c | c | c | c | c}
 		\hline
 		$m_s$ & $m_r$ & $r$ & Average time [s] & Minimum time [s] & Estimated CPU years\\ \hline
 		0 & 37 & 18 & NA & 15402s & 512.1 (based on minimum time) \\ \hline
 		0 & 30 & 20 & NA & 8334.8 & 276.9 (based on minimum time) \\ \hline
 		0 & 37 & 22 & NA & 1858.1 & 246.9 (based on minimum time) \\ \hline
-		0 & 37 & 23 & NA & DNF & DNF \\ \hline
+		0 & 37 & 23 & NA & NA & NA \\ \hline
 		0 & 37 & 24 & NA & 2361.6s & 1256 (based on minimum time) \\ \hline
-		0 & 37 & 25 & ~ & ~ & ~ \\ \hline
-		0 & 37 & 26 & ~ & ~ & ~ \\ \hline
-		0 & 37 & 27 & ~ & ~ & ~ \\ \hline
-		0 & 37 & 28 & ~ & ~ & ~ \\ \hline
-		0 & 37 & 29 & ~ & ~ & ~ \\ \hline
-		0 & 37 & 30 & NA & DNF & DNF \\ \hline
-		0 & 37 & 31 & NA & DNF & DNF \\ \hline
-		0 & 37 & 32 & NA & DNF & DNF \\ 
+		0 & 37 & 25 & NA & NA & NA \\ \hline
+		0 & 37 & 26 & NA & NA & NA \\ \hline
+		0 & 37 & 27 & NA & NA & NA \\ \hline
+		0 & 37 & 28 & NA & NA & NA \\ \hline
+		0 & 37 & 29 & NA & NA & NA \\ \hline
+		0 & 37 & 30 & NA & NA & NA \\ \hline
+		0 & 37 & 31 & NA & NA & NA \\ \hline
+		0 & 37 & 32 & NA & NA & NA \\ 
 		\hline
 	\end{tabular}
 	\label{tab:guidanceExperiment}
@@ -341,7 +342,7 @@ shows the results that have been compiled from this experiment so far.
 \begin{table}
 	\caption{Structural induced subgraph generation and variable fixation
 	experimental results. Values of NA indicate that the computation
-	could not be complete (i.e. the SAT solver could not decide a formula instance in a reasonable
+	could not be completed (i.e. the SAT solver could not decide a formula instance in a reasonable
 	amount of time).}
 	\begin{tabular}{c | c | c | c | c | c}
 		\hline
@@ -397,61 +398,121 @@ results for this experiment are shown in Table \ref{tab:guidanceExperiment3}
 
 \begin{table}
 	\caption{Induced subgraph modification experimental results. Values of NA indicate that the computation
-	could not be complete (i.e. the SAT solver could not decide a formula instance in a reasonable
+	could not be completed (i.e. the SAT solver could not decide a formula instance in a reasonable
 	amount of time).}
 	\begin{tabular}{c | c | c | c | c | c | c}
 		\hline
 		$m_s$ & $m_r$ & $r$ & $n_e$ & Average time [s] & Minimum time [s] & Estimated CPU years \\ \hline
 		0 & 27 & 28 & 60 & NA & NA & NA \\ \hline
-		0 & 27 & 29 & 60 & NA & NA & NA \\ \hline
-		0 & 0 & 30 & 60 & NA & NA & NA \\ 
+		0 & 27 & 29 & 60 & NA & 81923.4 & NA \\ \hline
+		0 & 27 & 30 & 60 & NA & 67219.6 & NA \\ 
 		\hline
 	\end{tabular}
 	\label{tab:guidanceExperiment3}
 \end{table}
 
-\section{Exploring Other Candidate Graphs}
-While the residue graph $G_{127} = G(127,3)$ is one potential candidate for a 
-graph witnessing $G \to (3,3;4)^e$, it is natural to consider of other types of
-graphs for this property. In particular, we consider distance-based circulant graphs,
-GCD circulant graph, random graphs that are $K_4$-free, and Lu's circulant graphs
-$L(m,s)$. A typical circulant graph is defined by the pair $(\mathbb{Z}_n, \{xy : x - y \in S\})$. GCD circulant graphs are very similar, but are simply characterized
-by the fact that $E(G) = \{xy : (x,y) = 1\}$. 
-The graph $L(m,s)$, where $m$ and $s$ are relatively prime integers,
-is defined as the pair $(\mathbb{Z}_n, \{xy : x - y \in s^i \mod m \})$.
+\section{Formula Balancedness}
+An interesting result from these hardness estimation experiments was that the 
+balancedness of the formula $\phi_H$ had a surprising impact on the ease with
+which solvers can determine the formula's satisfiability. If we force a certain
+coloring of the edges of $H$, which equates to assigning truth values to
+the corresponding variables in $\phi_H$, it is clear that the number of clauses
+will either decrease or the number of literals in each clause will decrease, or both,
+after propagating these truth value assignments throughout the formula. In this experiment,
+we are after the phase shift that occurs when comparing the ratio of clauses of size $2$
+to clauses of size $3$. We note that if a clause has size $1$ the literal's truth value
+can be fixed and then propagated throughout the formula again (this process can recurse
+indefinitely). 
 
-\begin{table*}[t]
-	\caption{SAT solver guidance experimental results for circulant graphs.}
-	\begin{tabular}{c | c | c | c | c | c | c}
-		\hline
-		$n$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
-		NA & NA & NA & NA & NA & NA & NA \\
-		\hline
-	\end{tabular}
-	\label{tab:guidanceExperiment-circulant}
-\end{table*}
+As part of this experiment we looked at fixing $50$ and $60$ variables in $\phi_H$,
+where $H$ is an induced subgraph on $85$, $90$, and $95$ vertices. To further this analysis,
+we also experimented with disjoint edge colorings (i.e. choosing edges that don't belong
+to the same triangle) and random edge colorings. The phase shift is visualized in Figures 
+\ref{f1}, \ref{f2}, \ref{f3}, \ref{f4}, and \ref{f5} for $H$ graphs of varying size using
+both the disjoint and random edge selection strategies. 
 
-\begin{table*}[t]
-	\caption{SAT solver guidance experimental results for $L(m,s)$ circulant graphs.}
-	\begin{tabular}{c | c | c | c | c | c | c | c}
-		\hline
-		$m$ & $s$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
-		NA & NA & 0 & NA & NA & NA & NA & NA \\ 
-		\hline
-	\end{tabular}
-	\label{tab:guidanceExperiment-lms}
-\end{table*}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.75]{chart_1.png}
+\end{center}
+\caption{The global maximum should lie at infinity (the solver did not finish within a time frame of 5 hours).} 
+\label{f1}
+\end{figure}
 
-\begin{table*}[t]
-	\caption{SAT solver guidance experimental results for random $K_4$-free graphs.}
-	\begin{tabular}{c | c | c | c | c | c | c | c}
-		\hline
-		$n$ & $p$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
-		NA & NA & NA & NA & NA & NA & NA & NA \\
-		\hline
-	\end{tabular}
-	\label{tab:guidanceExperiment-random}
-\end{table*}
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.75]{chart_2.png}
+\end{center}
+\caption{The global maximum should lie at infinity (the solver did not finish within a time frame of 5 hours).} 
+\label{f2}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.75]{chart_3.png}
+\end{center}
+\caption{The global maximum should lie at infinity (the solver did not finish within a time frame of 5 hours).} 
+\label{f3}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.75]{chart_4.png}
+\end{center}
+\caption{The global maximum should lie at infinity (the solver did not finish within a time frame of 5 hours).} 
+\label{f4}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[scale=0.75]{chart_5.png}
+\end{center}
+\caption{The global maximum should lie at infinity (the solver did not finish within a time frame of 5 hours).} 
+\label{f5}
+\end{figure}
+
+% \section{Exploring Other Candidate Graphs}
+% While the residue graph $G_{127} = G(127,3)$ is one potential candidate for a 
+% graph witnessing $G \to (3,3;4)^e$, it is natural to consider of other types of
+% graphs for this property. In particular, we consider distance-based circulant graphs,
+% GCD circulant graph, random graphs that are $K_4$-free, and Lu's circulant graphs
+% $L(m,s)$. A typical circulant graph is defined by the pair $(\mathbb{Z}_n, \{xy : x - y \in S\})$. GCD circulant graphs are very similar, but are simply characterized
+% by the fact that $E(G) = \{xy : (x,y) = 1\}$. 
+% The graph $L(m,s)$, where $m$ and $s$ are relatively prime integers,
+% is defined as the pair $(\mathbb{Z}_n, \{xy : x - y \in s^i \mod m \})$.
+
+% \begin{table*}[t]
+% 	\caption{SAT solver guidance experimental results for circulant graphs.}
+% 	\begin{tabular}{c | c | c | c | c | c | c}
+% 		\hline
+% 		$n$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
+% 		NA & NA & NA & NA & NA & NA & NA \\
+% 		\hline
+% 	\end{tabular}
+% 	\label{tab:guidanceExperiment-circulant}
+% \end{table*}
+
+% \begin{table*}[t]
+% 	\caption{SAT solver guidance experimental results for $L(m,s)$ circulant graphs.}
+% 	\begin{tabular}{c | c | c | c | c | c | c | c}
+% 		\hline
+% 		$m$ & $s$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
+% 		NA & NA & 0 & NA & NA & NA & NA & NA \\ 
+% 		\hline
+% 	\end{tabular}
+% 	\label{tab:guidanceExperiment-lms}
+% \end{table*}
+
+% \begin{table*}[t]
+% 	\caption{SAT solver guidance experimental results for random $K_4$-free graphs.}
+% 	\begin{tabular}{c | c | c | c | c | c | c | c}
+% 		\hline
+% 		$n$ & $p$ & $m_s$ & $m_r$ & $r$ & $V$ (min, avg, max) & $C$ (min, avg, max) & $R$ (min, avg, max) \\ \hline
+% 		NA & NA & NA & NA & NA & NA & NA & NA \\
+% 		\hline
+% 	\end{tabular}
+% 	\label{tab:guidanceExperiment-random}
+% \end{table*}
 
 % TODO: description, picture, and rationale...
 % TODO: write the code to construct these graphs.
@@ -464,6 +525,7 @@ is defined as the pair $(\mathbb{Z}_n, \{xy : x - y \in s^i \mod m \})$.
 % $S \subset \mathbb{Z}_n$ satisfying $-S = S$ and $0 \in S$. An example of such
 % a graph is shown in Figure \ref{fig:circulant}.
 % TODO: figure of small circulant.
+
 
 \section{Arrowing Problems}
 In this section we present some new results for edge Folkman numbers, some of which are improvements
