@@ -61,6 +61,7 @@ class injector:
 		edgesAdded = self.fill() # Let exceptions carry up to -main-
 		print("e: " + str(edgesAdded))
 		r = reducer()
+		print >> sys.stderr, "Reducing to 3-SAT"
 		numVars, cnf = r.reduce(self.graph.getGraph())
 		self.write("reduced", numVars, cnf, 0)
 
@@ -174,8 +175,9 @@ class injector:
 			for c in cnf: # for each clause
 				include = True
 				clause = c[:] # Copy over the clause
+				settled = False
 				for l in c: # for each literal
-					if include:
+					if include and settled == False:
 						index = -1
 						inVars = False
 						if (l < 0 and (l * -1) in varsToAssign):
@@ -186,12 +188,14 @@ class injector:
 							inVars = True
 						if inVars:
 							if (assign[index] == True): # the literal is true, so drop the clause
-								# print >> sys.stderr, "Dropping clause because " + str(index) + " was assigned to " + str(assign[index])
+								print >> sys.stderr, "Dropping clause because " + str(index) + " was assigned to " + str(assign[index])
 								include = False
 							else:
-								# print >> sys.stderr, "Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index])
+								print >> sys.stderr, "Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index])
+								include = True
 								clause.remove(l) # remove the literal, it evaluated to false...
 				if include:
+					print >> sys.stderr, "Resulting clause inserted: " + str(clause)
 					newCnf.append(clause)
 
 			# Pass over the new CNF and find all unit clauses
