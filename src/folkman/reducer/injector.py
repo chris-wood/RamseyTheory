@@ -47,10 +47,10 @@ class injector:
 			raise Exception("Cannot remove more vertices than the graph contains.")
 
 		# Generate the CNF formula
-		r = reducer()
-		print >> sys.stderr, 'Creating the original CNF formula'
-		numVars, cnf = r.reduce(self.graph.getGraph())
-		self.write("reduced", numVars, cnf, 0)
+		# r = reducer()
+		# print >> sys.stderr, 'Creating the original CNF formula'
+		# numVars, cnf = r.reduce(self.graph.getGraph())
+		# self.write("reduced", numVars, cnf, 0)
 
 		# Strip down to the induced subgraph
 		# using the structural/random properties, as specified
@@ -58,8 +58,8 @@ class injector:
 		print >> sys.stderr, 'Stripping the graph'
 		self.strip()
 		print >> sys.stderr, 'Filling out edges'
-		edgesAdded = self.fill() # Let exceptions carry up to -main-
-		print("e: " + str(edgesAdded))
+		# edgesAdded = self.fill() # Let exceptions carry up to -main-
+		# print("e: " + str(edgesAdded))
 		r = reducer()
 		print >> sys.stderr, "Reducing to 3-SAT"
 		numVars, cnf = r.reduce(self.graph.getGraph())
@@ -176,26 +176,37 @@ class injector:
 				include = True
 				clause = c[:] # Copy over the clause
 				settled = False
+				# print("Examining clause: " + str(clause))
 				for l in c: # for each literal
 					if include and settled == False:
 						index = -1
 						inVars = False
+						negative = False
 						if (l < 0 and (l * -1) in varsToAssign):
 							index = (l * -1)
 							inVars = True
+							negative = True
 						elif (l > 1 and l in varsToAssign):
 							index = l
 							inVars = True
 						if inVars:
-							if (assign[index] == True): # the literal is true, so drop the clause
-								print >> sys.stderr, "Dropping clause because " + str(index) + " was assigned to " + str(assign[index])
+							settled = True
+							if (assign[index] == True and negative == False): # the literal is true, so drop the clause
+								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
 								include = False
-							else:
-								print >> sys.stderr, "Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index])
+							elif (assign[index] == True and negative == True):
+								# print("Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index]))
 								include = True
 								clause.remove(l) # remove the literal, it evaluated to false...
+							elif (assign[index] == False and negative == False):
+								# print("Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index]))
+								include = True
+								clause.remove(l) # remove the literal, it evaluated to false...
+							elif (assign[index] == False and negative == True):
+								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
+								include = False
 				if include:
-					print >> sys.stderr, "Resulting clause inserted: " + str(clause)
+					# print("Resulting clause inserted: " + str(clause))
 					newCnf.append(clause)
 
 			# Pass over the new CNF and find all unit clauses
