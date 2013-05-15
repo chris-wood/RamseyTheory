@@ -59,7 +59,10 @@ class injector:
 		self.strip()
 		print >> sys.stderr, 'Filling out edges'
 		# edgesAdded = self.fill() # Let exceptions carry up to -main-
-		# print("e: " + str(edgesAdded))
+
+		# Saturate by default!
+		self.graph.saturateAvoidK4();
+
 		r = reducer()
 		print >> sys.stderr, "Reducing to 3-SAT"
 		numVars, cnf = r.reduce(self.graph.getGraph())

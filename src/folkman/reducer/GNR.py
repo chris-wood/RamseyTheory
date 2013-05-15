@@ -40,6 +40,15 @@ class GNR:
 			v = self.graph.edges()[e][1]
 			self.graph.remove_edge(u, v)
 
+	# Greedily add as many edges as possible while avoiding K4!
+	def saturateAvoidK4(self):
+		for x in self.graph.nodes():
+			for y in self.graph.nodes():
+				if (x != y):
+					e = makeEdge(x, y)
+					if not (self.k4WithEdge(e)):
+						self.graph.edges().append(e)
+
 	def addRandomEdgeAvoidK4(self):
 		e = self.pickRandomEdge()
 		count = 0
@@ -68,8 +77,8 @@ class GNR:
 				edges.append(self.makeEdge(v,x2))
 				edges.append(self.makeEdge(x1,x2))
 				if self.containsEdges(edges):
-					return False
-		return True
+					return True
+		return False
 
 	def makeEdge(self, u, v):
 		if (u <= v):
@@ -81,7 +90,7 @@ class GNR:
 		for e in edges:
 			if not (self.inEdges(e)):
 				return False
-		return True # All of them were inside!
+		return True # All of them were in the edge set
 
 	def inEdges(self, e):
 		if (e[0] < e[1]):
