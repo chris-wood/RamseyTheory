@@ -3,6 +3,7 @@
 
 from networkx import nx
 import random
+import sys
 
 class GNR:
 	''' Class for the graph G(n,r) = (Z_n, {(u,v) | u - v = alpha^r mod n}).
@@ -45,7 +46,8 @@ class GNR:
 		for x in self.graph.nodes():
 			for y in self.graph.nodes():
 				if (x != y):
-					e = makeEdge(x, y)
+					print >> sys.stderr, "Trying to add edge: " + str(x) + "-" + str(y)
+					e = self.makeEdge(x, y)
 					if not (self.k4WithEdge(e)):
 						self.graph.edges().append(e)
 
