@@ -60,6 +60,36 @@ class reducer:
 		# return the CNF formula and number of variables 
 		return len(edgeMap), cnf
 
+	def makeEdge(self, u, v):
+		if (u <= v):
+			return (u,v)
+		else:
+			return (v,u)
+
+	def makeHGraphSDP(self, G):
+		''' Generate an SDP equivalent output formula for the H_G graph
+		'''
+		h = nx.Graph()
+
+		# The vertices of H are the edges of G
+		for e in G.edges():
+			h.add_node(e)
+
+		# Add in the edges of H
+		for v1 in G.nodes():
+			for v2 in G.nodes():
+				for v3 in G.nodes():
+					if (v1 != v2 and v1 != v3 and v2 != v3):
+						e1 = self.makeEdge(v1, v2)
+						e2 = self.makeEdge(v1, v3)
+						e3 = self.makeEdge(v2, v3)
+						if (e1 in G.edges() and e2 in G.edges() and e3 in G.edges()):
+							h.add_edge(e1, e2)
+							h.add_edge(e1, e3)
+							h.add_edge(e2, e3)
+		sdp = str(len(h.nodes())) + " " + str(len(h.edges())) + "\n"
+
+
 def main():
 	n = 47 # test...
 	for i in range(20):

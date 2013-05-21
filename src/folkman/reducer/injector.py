@@ -178,7 +178,6 @@ class injector:
 			for c in cnf: # for each clause
 				include = True
 				clause = c[:] # Copy over the clause
-				settled = False
 				# print("Examining clause: " + str(clause))
 				for l in c: # for each literal
 					if include and settled == False:
@@ -193,7 +192,6 @@ class injector:
 							index = l
 							inVars = True
 						if inVars:
-							settled = True
 							if (assign[index] == True and negative == False): # the literal is true, so drop the clause
 								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
 								include = False
@@ -235,19 +233,29 @@ class injector:
 					if include:
 						index = -1
 						inVars = False
+						negative = False
 						if (l < 0 and (l * -1) in units.keys()):
 							index = (l * -1)
 							inVars = True
+							negative = True
 						elif (l > 0 and l in units.keys()):
 							index = l
 							inVars = True
 						if inVars:
-							if (units[index] == True): # the literal is true, so drop the clauses
+							if (units[index] == True and negative == False): # the literal is true, so drop the clause
+								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
 								include = False
-								print >> sys.stderr, "HOW CAN THIS HAPPEN?"
-								return 
-							else:
+							elif (units[index] == True and negative == True):
+								# print("Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index]))
+								include = True
 								clause.remove(l) # remove the literal, it evaluated to false...
+							elif (units[index] == False and negative == False):
+								# print("Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index]))
+								include = True
+								clause.remove(l) # remove the literal, it evaluated to false...
+							elif (units[index] == False and negative == True):
+								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
+								include = False
 				if include and len(clause) > 0: # do not append empty clauses, they cause immediate unsatisfiability...
 					if (len(clause) == 2):
 						sizeTwoClauses = sizeTwoClauses + 1
@@ -259,6 +267,7 @@ class injector:
 					write = False
 					break
 
+			# Bump up the configuration index...
 			configIndex = configIndex + 1
 
 			# Write the output file
