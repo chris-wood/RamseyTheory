@@ -88,6 +88,7 @@ class reducer:
 							h.add_edge(e1, e3)
 							h.add_edge(e2, e3)
 		sdp = str(len(h.nodes())) + " " + str(len(h.edges())) + "\n"
+		
 
 
 def main():
