@@ -37,6 +37,8 @@ else:
 			sleep(sleepInterval)
 			elapsedTime = elapsedTime + sleepInterval
 
+		if (p.poll() != None):
+			finished = True
 		if (finished):
 			for line in p.stdout.readlines():
 				if (line.startswith("CPU time")):
