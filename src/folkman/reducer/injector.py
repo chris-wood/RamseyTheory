@@ -25,7 +25,7 @@ import time
 # -out = out files for the CNFs
 
 class injector:
-	def __init__(self, n, r, sample, fix, na, smart, ne, nrr, nerr, nisr, out, dump):
+	def __init__(self, n, r, sample, fix, na, smart, saturate, ne, nrr, nerr, nisr, out, dump):
 		self.n = n
 		self.r = r
 		self.sample = sample
@@ -33,6 +33,7 @@ class injector:
 		self.fix = fix
 		self.na = na
 		self.smart = smart
+		self.saturate = saturate
 		self.ne = ne
 		self.nrr = nrr
 		self.nerr = nerr
@@ -61,7 +62,9 @@ class injector:
 		# edgesAdded = self.fill() # Let exceptions carry up to -main-
 
 		# Saturate by default!
-		#self.graph.saturateAvoidK4();
+		if (saturate):
+			print >> sys.stderr, "Saturating with edges..."
+			self.graph.saturateAvoidK4();
 
 		r = reducer()
 		print >> sys.stderr, "Reducing to 3-SAT"
@@ -336,6 +339,7 @@ def main():
 	parser.add_argument('-s', '--seed', type=int)
 	parser.add_argument('-out', '--out_file', type=str, default="reducedCnf")
 	parser.add_argument('-smart',type=bool,default=False)
+	parser.add_argument('-saturate',type=bool,default=False)
 	parser.add_argument('-fix',type=bool,default=True)
 	parser.add_argument('-dump',type=bool,default=False)
 	args = parser.parse_args()
@@ -356,22 +360,18 @@ def main():
 		seed = args.seed
 		out = args.out_file
 		smart = args.smart
+		saturate = args.saturate
 		fix = args.fix
-		dump = args.dump
+		dump = args.dump # This is to dump the MODIFIED GRAPH WITHOUT PRE-COLORING...
 
 		# Seed random...
 		random.seed(seed)
 
 		# Create the injector...
-		#try:
 		start = time.time()
-		inject = injector(n, r, sample, fix, na, smart, ne, nrr, nerr, nisr, out, dump)
+		inject = injector(n, r, sample, fix, na, smart, saturate, ne, nrr, nerr, nisr, out, dump)
 		end = time.time()
 		timestampMilli("Total time: ", start, end)
-		#except Exception as e:
-		#	print >> sys.stderr, "\nError: " + str(e) + "\n"
-		#	showUsage()
-		#	return -1
 
 if __name__ == "__main__":
 	main()
