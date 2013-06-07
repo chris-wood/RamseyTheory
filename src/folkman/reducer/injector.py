@@ -61,7 +61,7 @@ class injector:
 		# edgesAdded = self.fill() # Let exceptions carry up to -main-
 
 		# Saturate by default!
-		self.graph.saturateAvoidK4();
+		#self.graph.saturateAvoidK4();
 
 		r = reducer()
 		print >> sys.stderr, "Reducing to 3-SAT"
@@ -178,6 +178,7 @@ class injector:
 			for c in cnf: # for each clause
 				include = True
 				clause = c[:] # Copy over the clause
+				settled = False
 				# print("Examining clause: " + str(clause))
 				for l in c: # for each literal
 					if include and settled == False:
@@ -192,6 +193,7 @@ class injector:
 							index = l
 							inVars = True
 						if inVars:
+							settled = True
 							if (assign[index] == True and negative == False): # the literal is true, so drop the clause
 								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
 								include = False
@@ -233,29 +235,19 @@ class injector:
 					if include:
 						index = -1
 						inVars = False
-						negative = False
 						if (l < 0 and (l * -1) in units.keys()):
 							index = (l * -1)
 							inVars = True
-							negative = True
 						elif (l > 0 and l in units.keys()):
 							index = l
 							inVars = True
 						if inVars:
-							if (units[index] == True and negative == False): # the literal is true, so drop the clause
-								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
+							if (units[index] == True): # the literal is true, so drop the clauses
 								include = False
-							elif (units[index] == True and negative == True):
-								# print("Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index]))
-								include = True
+								print >> sys.stderr, "HOW CAN THIS HAPPEN?"
+								return 
+							else:
 								clause.remove(l) # remove the literal, it evaluated to false...
-							elif (units[index] == False and negative == False):
-								# print("Dropping literal " + str(index) + " from the clause because it was assigned to " + str(assign[index]))
-								include = True
-								clause.remove(l) # remove the literal, it evaluated to false...
-							elif (units[index] == False and negative == True):
-								# print("Dropping clause because " + str(index) + " was assigned to " + str(assign[index]))
-								include = False
 				if include and len(clause) > 0: # do not append empty clauses, they cause immediate unsatisfiability...
 					if (len(clause) == 2):
 						sizeTwoClauses = sizeTwoClauses + 1
@@ -267,7 +259,6 @@ class injector:
 					write = False
 					break
 
-			# Bump up the configuration index...
 			configIndex = configIndex + 1
 
 			# Write the output file
@@ -305,6 +296,8 @@ class injector:
 			print >> sys.stderr, "Average ratio of 2-to-3 clauses: " + str(totalRatio / numFormulas)
 
 	def write(self, index, numVars, cnf, numTwoClauses):
+		filename = self.out + "_" + str(index) + ".pickle"
+		self.graph.dump(filename)
 		print >> sys.stderr, str(self.out + "_" + str(index))
 		f = open(self.out + "_" + str(index), 'wb')
 		header, clauses = makeDimacsCNF(numVars, cnf)

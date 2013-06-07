@@ -1,36 +1,35 @@
-# File: GNR.py
-# Author: Christopher Wood
+# File: gg.py
+# Author: Christopher Wood, caw4567@rit.edu
 
-import sys
 from networkx import nx
 import random
-import pickle
+import sys
 
-class GNR:
-	''' Class for the graph G(n,r) = (Z_n, {(u,v) | u - v = alpha^r mod n}).
-	'''
-	def __init__(self, n, r, pfile = ""):
-		if (pfile == ""):
-			self.n = n
-			self.r = r
-			self.graph = nx.Graph()
+def buildRandomGraph(npendants, saturate = 1):
+	g = nx.Graph()
+	for v in range(npendants):
+		g.add_node(v)
 
-			# Add the vertices
-			for v in range(0, n):
-				self.graph.add_node(v)
+	if (saturate == 1):
+		
 
-			# Add the edges
-			for x in range(0, n):
-				for y in range(0, n):
-					if (x != y):
-						for alpha in range(0, n):
-							# E(G) = {(x,y) | x-y = alpha^r mod n}
-							if (((x - y) % n) == ((alpha ** r) % n)):
-								self.graph.add_edge(x, y)
-		else:
-			self.n = n
-			self.r = r
-			self.graph = pickle.load(open(pfile))
+	def __init__(self, n, r):
+		self.n = n
+		self.r = r
+		self.graph = nx.Graph()
+
+		# Add the vertices
+		for v in range(0, n):
+			self.graph.add_node(v)
+
+		# Add the edges
+		for x in range(0, n):
+			for y in range(0, n):
+				if (x != y):
+					for alpha in range(0, n):
+						# E(G) = {(x,y) | x-y = alpha^r mod n}
+						if (((x - y) % n) == ((alpha ** r) % n)):
+							self.graph.add_edge(x, y)
 
 	def removeIndependentSet(self):
 		iset = nx.maximal_independent_set(self.graph)
@@ -52,8 +51,8 @@ class GNR:
 		for x in self.graph.nodes():
 			for y in self.graph.nodes():
 				if (x != y):
-					e = self.makeEdge(x, y)
 					print >> sys.stderr, "Trying to add edge: " + str(x) + "-" + str(y)
+					e = self.makeEdge(x, y)
 					if not (self.k4WithEdge(e)):
 						self.graph.edges().append(e)
 
@@ -135,6 +134,3 @@ class GNR:
 
 	def getGraph(self):
 		return self.graph
-
-	def dump(self, pfile):
-		pickle.dump(self.graph, open(pfile, 'w'))
