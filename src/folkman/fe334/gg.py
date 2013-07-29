@@ -54,25 +54,62 @@ def k4WithEdge(g, e):
 	v = e[1]
 	for x1 in g.nodes():
 		for x2 in g.nodes():
-			edges = []
-		 	edges.append(makeEdge(u,v))
-			edges.append(makeEdge(u,x1))
-			edges.append(makeEdge(u,x2))
-			edges.append(makeEdge(v,x1))
-			edges.append(makeEdge(v,x2))
-			edges.append(makeEdge(x1,x2))
-			if containsEdges(g, edges):
-				return True
+			if x1 != x2 and u != x1 and u != x2 and v != x1 and v != x2:
+				edges = []
+		 		edges.append(makeEdge(u,v))
+				edges.append(makeEdge(u,x1))
+				edges.append(makeEdge(u,x2))
+				edges.append(makeEdge(v,x1))
+				edges.append(makeEdge(v,x2))
+				edges.append(makeEdge(x1,x2))
+				if containsEdges(g, edges):
+					return True
 	return False
 
 def saturateAvoidK4(g, vertices):
+	edges = []
 	for x in vertices:
 		for y in vertices:
 			if (x != y):
 				print >> sys.stderr, "Trying to add edge: " + str(x) + "-" + str(y)
 				e = makeEdge(x, y)
-				if not (k4WithEdge(g, e)):
-					g.edges().append(e)
+				g.edges().append(e)
+				edges.append(e)
+				if (hasK4(g)):
+					g.edges().remove(e)
+					edges.remove(e)
+			print >> sys.stderr, "Checking y with edges: " + str(edges)
+			for e in edges: # Try y here
+				if (e[0] != y):
+					e1 = makeEdge(e[0], y)
+					g.edges().append(e1)
+					edges.append(e1)
+					if (hasK4(g)):
+						g.edges().remove(e1)
+						edges.remove(e1) 
+				if (e[1] != y):
+					e2 = makeEdge(e[1], y)
+					g.edges().append(e2)
+					edges.append(e2)
+					if (hasK4(g)):
+						g.edges().remove(e2)
+						edges.remove(e2) 
+		print >> sys.stderr, "Checking x with edges: " + str(edges)
+		for e in edges: # Try x here
+			if (e[0] != x):
+				e1 = makeEdge(e[0], x)
+				g.edges().append(e1)
+				edges.append(e1)
+				if (hasK4(g)):
+					g.edges().remove(e1)
+					edges.remove(e1) 
+			if (e[1] != x):
+				e2 = makeEdge(e[1], x)
+				g.edges().append(e2)
+				edges.append(e2)
+				if (hasK4(g)):
+					g.edges().remove(e2)
+					edges.remove(e2)
 
 def buildRandomGraph(nv, npendants, saturate = 1):
 	g = nx.Graph()
@@ -90,8 +127,9 @@ def buildRandomGraph(nv, npendants, saturate = 1):
 	if (saturate == 1):
 		saturateAvoidK4(g, vertices)
 
-	if (hasK4(g)):
-		raise Exception("No K4 should exist... Check the code.")
+	#print >> sys.stderr, "Checking for K4..."
+	#if (hasK4(g)):
+	#	raise Exception("No K4 should exist... Check the code.")
 	print >> sys.stderr, g.edges()
 
 	return g
