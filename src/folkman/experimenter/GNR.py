@@ -5,6 +5,7 @@ import sys
 from networkx import nx
 import random
 import pickle
+from itertools import combinations
 
 class GNR:
 	''' Class for the graph G(n,r) = (Z_n, {(u,v) | u - v = alpha^r mod n}).
@@ -31,6 +32,64 @@ class GNR:
 			self.n = n
 			self.r = r
 			self.graph = pickle.load(open(pfile))
+
+	# TODO: left off here - need to test this code to make sure it's right, and then probably rewrite it since it's pretty shitty
+
+	def is_edge_set_adjacent(self, edges):
+		''' TODO: this only works for triangles... I need to change that.
+		'''
+		for i in range(len(edges)):
+			v1 = edges[i][0]
+			v2 = edges[i][1]
+			v1Match = False
+			v2Match = False
+			for j in range(len(edges)):
+				if (i != j):
+					if v1 == edges[j][0] or v1 == edges[j][1]:
+						v1Match = True
+					if v2 == edges[j][0] or v2 == edges[j][1]:
+						v2Match = True
+				if (v1Match and v2Match):
+					break
+			if (v1Match == False or v2Match == False):
+				return False
+		return True
+
+	def random_edge_split(self, n):
+		''' Randomly split the edges of G into n bags.
+		'''
+		bags = {}
+		for e in self.graph.edges():
+			b = random.randint(0, n)
+			if not (b in bags):
+				bags[b] = []
+			bags[b].append(e)
+		return bags
+
+	def edge_bags_contains_kn(self, bags, n):
+		''' Check to see if bags (map : int => []) contains monochromatic kn in any bag.
+		'''
+		for b in bags:
+			indices = list(combinations(range(len(bags[b])),n))
+			print >> sys.stderr, "C(n,k) = " + str(len(indices))
+			for ind in indices:
+				edges = []
+				for i in ind:
+					edges.append(bags[b][i])
+				if self.is_edge_set_adjacent(edges):
+					return True
+		return False # out of all C(n,k) choices, none yielded monochromatic Kn in the same bag
+
+	def random_edge_split_avoid_kn(self, b, n):
+		print >> sys.stderr, "Still trying to find a proper coloring..."
+		bags = self.random_edge_split(b)
+		print >> sys.stderr, "Found a bag, checking for Kn containment with n = " + str(n)
+		count = 0
+		while (self.edge_bags_contains_kn(bags, n)):
+			count = count + 1
+			bags = self.random_edge_split(b)
+			print >> sys.stderr, "Still trying to find a proper coloring..."
+		return bags
 
 	def removeIndependentSet(self):
 		iset = nx.maximal_independent_set(self.graph)
