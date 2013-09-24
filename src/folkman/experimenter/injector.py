@@ -25,7 +25,7 @@ import time
 # -out = out files for the CNFs
 
 class injector:
-	def __init__(self, n, r, assign, sample_size, na, smart, saturate, ne, nrr, nerr, nisr, out):
+	def __init__(self, n, r, fix, sample_size, na, smart, saturate, ne, nrr, nerr, nisr, out):
 		self.n = n
 		self.r = r
 		self.sample = sample_size
@@ -39,7 +39,6 @@ class injector:
 		self.nerr = nerr
 		self.nisr = nisr
 		self.out = out
-		self.dump = dump
 
 		# Preliminary error checking
 		if (self.graph.getGraph().edges() < self.na):
@@ -78,7 +77,7 @@ class injector:
 		print >> sys.stderr, "Done."
 
 		# Assign values and propagate, if fix was set to true
-		if (self.assign):
+		if (self.fix):
 			print >> sys.stderr, "Performing edge assignment and writing the output..."
 			self.assignAndWrite(numVars, cnf)
 			print >> sys.stderr, "Done."
