@@ -1,0 +1,27 @@
+Stripping the graph...
+Random vertices to remove: 47
+Random edges to remove: 0
+Maximal independent sets to remove: 0
+Done.
+Reducing to 3-SAT...
+Done.
+Writing the original CNF formula...
+127_3_47_0_0/127_3_47_0_0_0_reduce
+Done.
+Writing reduced graph edge list...
+Done.
+Performing edge assignment and writing the output...
+Variables to assign: []
+Assigning variables...
+Config 0
+127_3_47_0_0/127_3_47_0_0_0_1
+Total number of formulas: 1
+Minimum number of 2-clauses: 0
+Maximum number of 2-clauses: 0
+Average number of 2-clauses: 0
+Minimum number of 3-clauses: 4924
+Maximum number of 3-clauses: 4924
+Average number of 3-clauses: 4924
+Average ratio of 2-to-3 clauses: 0.0
+Done.
+Total time: 21406.0168266ms

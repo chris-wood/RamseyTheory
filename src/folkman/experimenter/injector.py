@@ -87,8 +87,6 @@ class injector:
 	def dumpGraph(self):
 		filename = self.out + "_graph.pickle"
 		self.graph.dump(filename)
-		for e in self.graph.getGraph().edges():
-			print(str(e[0]) + " " + str(e[1]))
 
 	# Strip down the graph according to the specified parameters
 	def strip(self):

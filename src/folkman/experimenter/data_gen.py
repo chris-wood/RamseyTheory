@@ -35,10 +35,16 @@ for t in range(trials):
 					for smart in smartList:
 						for saturate in saturateList:
 							prefix = str(n) + "_" + str(r) + "_" + str(nrr) + "_" + str(nisr) + "_" + str(na)
-							directory = os.path.dirname(os.path.abspath(__file__)) + prefix + os.pathsep
-							if not os.path.exists(directory):
+							directory = os.path.dirname(os.path.abspath(__file__)) + "/" + prefix + "/"
+							print >> sys.stderr, "Target directory: " + directory
+							if not os.path.isdir(directory):
+								print >> sys.stderr, "Making directory: " + directory
 								os.makedirs(directory)
-							runCmd = "python injector.py -n " + str(n) + " -r " + str(r) + " -na " + str(na) + " -ne " + str(ne) + " -nrr " + str(nrr) + " -nisr " + str(nisr) + " -out " + prefix + " -s " + str(seed) + " -smart " + str(smart) + " -saturate " + str(saturate)
+							runCmd = "python injector.py -n " + str(n) + " -r " + str(r) + " -na " + str(na) + " -ne " + str(ne) + " -nrr " + str(nrr) + " -nisr " + str(nisr) + " -out " + prefix + "/" + prefix + "_" + str(t) + " -s " + str(seed)
+							if (smart):
+								runCmd = runCmd + " -smart"
+							if (saturate):
+								runCmd = runCmd + " -saturate"
 							print >> sys.stderr, "Running: " + runCmd
 							p = subprocess.Popen(runCmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 					
