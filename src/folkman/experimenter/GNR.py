@@ -3,6 +3,7 @@
 
 import sys
 from networkx import nx
+from networkx.algorithms import isomorphism
 import random
 import pickle
 from itertools import combinations
@@ -33,7 +34,7 @@ class GNR:
 			self.r = r
 			self.graph = pickle.load(open(pfile))
 
-	# TODO: left off here - need to test this code to make sure it's right, and then probably rewrite it since it's pretty shitty
+	
 
 	def is_edge_set_adjacent(self, edges):
 		''' TODO: this only works for triangles... I need to change that.
@@ -69,15 +70,33 @@ class GNR:
 	def edge_bags_contains_kn(self, bags, n):
 		''' Check to see if bags (map : int => []) contains monochromatic kn in any bag.
 		'''
+		Kn = nx.complete_graph(n)
 		for b in bags:
 			indices = list(combinations(range(len(bags[b])),n))
 			print >> sys.stderr, "C(n,k) = " + str(len(indices))
 			for ind in indices:
 				edges = []
+				G = nx.Graph()
 				for i in ind:
+					try:
+						G.add_node(bags[b][i][0])
+					except:
+						pass
+					try:
+						G.add_node(bags[b][i][1])
+					except:
+						pass
 					edges.append(bags[b][i])
-				if self.is_edge_set_adjacent(edges):
+				
+				# Build induced subgraph from this set of edges and then check to see
+				# if Kn is an induced subgraph in G
+				G.add_edges_from(edges)
+				GM = isomorphism.GraphMatcher(G,Kn)
+				if GM.subgraph_is_isomorphic():
 					return True
+
+				#if self.is_edge_set_adjacent(edges):
+				#	return True
 		return False # out of all C(n,k) choices, none yielded monochromatic Kn in the same bag
 
 	def random_edge_split_avoid_kn(self, b, n):
