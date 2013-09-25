@@ -67,6 +67,56 @@ class GNR:
 			bags[b].append(e)
 		return bags
 
+
+	def iterative_edge_split_avoid_kn(self, b, n):
+		''' Randomly split the edges of G into n bags.
+		'''
+		bags = {}
+		Kn = nx.complete_graph(n)
+		for e in self.graph.edges():
+			colors = 0
+			while colors != b:
+				color = colors
+				if not (color in bags):
+					bags[color] = []
+
+				# Check to see if adding e to the 'color' bag yields a monochromatic Kn
+				edges = []
+				G = nx.Graph()
+				#for ee in bags[color]:
+				#	try:
+				#		G.add_node(ee[0])
+				#	except:
+				#		pass
+				#	try:
+				#		G.add_node(ee[1])
+				#	except:
+				#		pass
+				# Add the edges now...
+				G.add_edges_from(bags[color])
+				#try:
+				#	G.add_node(e[0])
+				#except:
+				#	pass
+				#try:
+				#	G.add_node(e[1])
+				#except:
+				#	pass
+				G.add_edges_from([e])
+
+				# Set up and check for subgraph isomorphism
+				# If it contains a Kn, then don't color the edge with that color, try another one...
+				GM = isomorphism.GraphMatcher(G, Kn)
+				if GM.subgraph_is_isomorphic() == False:
+					bags[color].append(e)
+					foundBag = True
+				else:
+					colors = colors + 1
+					print >> sys.stderr, "Trying another color for edge: " + str(e) + "," + str(color)
+			if colors == b:
+				raise Exception("Could not find a color to add edge: " + str(e))
+		return bags
+
 	def edge_bags_contains_kn(self, bags, n):
 		''' Check to see if bags (map : int => []) contains monochromatic kn in any bag.
 		'''
@@ -98,6 +148,14 @@ class GNR:
 				#if self.is_edge_set_adjacent(edges):
 				#	return True
 		return False # out of all C(n,k) choices, none yielded monochromatic Kn in the same bag
+	
+#	def iterative_edge_split_avoid_kn(self, b, n):
+#		print >> sys.stderr, "Still trying to find a proper coloring..."
+#		bags = self.iterative_edge_split_avoid_kn(b, n)
+#		print >> sys.stderr, "Found a bag, checking for Kn containment with n = " + str(n)
+#		if self.edge_bags_contains_kn(bags, n):
+#			raise Exception("This should not happen!")
+#		return bags
 
 	def random_edge_split_avoid_kn(self, b, n):
 		print >> sys.stderr, "Still trying to find a proper coloring..."

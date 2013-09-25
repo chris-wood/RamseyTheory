@@ -25,7 +25,8 @@ G = GNR(127, 3)
 
 # Split into r/b coloring (two bags) and avoid K3 (triangle)
 print >> sys.stderr, "In line at the grocery store now (bagging)!"
-bags = G.random_edge_split_avoid_kn(2,3)
+#bags = G.random_edge_split_avoid_kn(2,3)
+bags = G.iterative_edge_split_avoid_kn(2,3)
 print >> sys.stderr, "Success!"
 
 def timestampMilli(msg, start, end):
