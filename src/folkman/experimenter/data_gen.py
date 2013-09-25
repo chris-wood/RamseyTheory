@@ -6,8 +6,9 @@ import glob
 
 # Read in params from cmd line
 trials = int(sys.argv[1])
-seed = int(sys.argv[2])
-params = sys.argv[3]
+samples = int(sys.argv[2])
+seed = int(sys.argv[3])
+params = sys.argv[4]
 
 # Read in graph adjustment params from file
 nrrList = []
@@ -40,7 +41,7 @@ for t in range(trials):
 							if not os.path.isdir(directory):
 								print >> sys.stderr, "Making directory: " + directory
 								os.makedirs(directory)
-							runCmd = "python injector.py -n " + str(n) + " -r " + str(r) + " -na " + str(na) + " -ne " + str(ne) + " -nrr " + str(nrr) + " -nisr " + str(nisr) + " -out " + prefix + "/" + prefix + "_" + str(t) + " -s " + str(seed)
+							runCmd = "python injector.py -n " + str(n) + " -r " + str(r) + " -na " + str(na) + " -ne " + str(ne) + " -nrr " + str(nrr) + " -nisr " + str(nisr) + " -out " + prefix + "/" + prefix + "_" + str(t) + " -s " + str(seed) + " -sample_size " + str(samples)
 							if (smart):
 								runCmd = runCmd + " -smart"
 							if (saturate):
