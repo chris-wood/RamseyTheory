@@ -109,12 +109,12 @@ class GNR:
 				GM = isomorphism.GraphMatcher(G, Kn)
 				if GM.subgraph_is_isomorphic() == False:
 					bags[color].append(e)
-					foundBag = True
+					break
 				else:
 					colors = colors + 1
-					print >> sys.stderr, "Trying another color for edge: " + str(e) + "," + str(color)
 			if colors == b:
-				raise Exception("Could not find a color to add edge: " + str(e))
+				#raise Exception("Could not find a color to add edge: " + str(e))
+				return None
 		return bags
 
 	def edge_bags_contains_kn(self, bags, n):
@@ -122,31 +122,31 @@ class GNR:
 		'''
 		Kn = nx.complete_graph(n)
 		for b in bags:
-			indices = list(combinations(range(len(bags[b])),n))
-			print >> sys.stderr, "C(n,k) = " + str(len(indices))
-			for ind in indices:
-				edges = []
-				G = nx.Graph()
-				for i in ind:
-					try:
-						G.add_node(bags[b][i][0])
-					except:
-						pass
-					try:
-						G.add_node(bags[b][i][1])
-					except:
-						pass
-					edges.append(bags[b][i])
+			#indices = list(combinations(range(len(bags[b])),n))
+			#print >> sys.stderr, "C(n,k) = " + str(len(indices))
+			#for ind in indices:
+			edges = []
+			G = nx.Graph()
+			#for i in ind:
+			#try:
+			#	G.add_node(bags[b][i][0])
+			#except:
+			#	pass
+			#try:
+			#	G.add_node(bags[b][i][1])
+			#except:
+			#	pass
+			#edges.append(bags[b][i])
 				
-				# Build induced subgraph from this set of edges and then check to see
-				# if Kn is an induced subgraph in G
-				G.add_edges_from(edges)
-				GM = isomorphism.GraphMatcher(G,Kn)
-				if GM.subgraph_is_isomorphic():
-					return True
+			# Build induced subgraph from this set of edges and then check to see
+			# if Kn is an induced subgraph in G
+			G.add_edges_from(bags[b])
+			GM = isomorphism.GraphMatcher(G, Kn)
+			if GM.subgraph_is_isomorphic():
+				return True
 
-				#if self.is_edge_set_adjacent(edges):
-				#	return True
+			#if self.is_edge_set_adjacent(edges):
+			#	return True
 		return False # out of all C(n,k) choices, none yielded monochromatic Kn in the same bag
 	
 #	def iterative_edge_split_avoid_kn(self, b, n):
@@ -165,7 +165,8 @@ class GNR:
 		while (self.edge_bags_contains_kn(bags, n)):
 			count = count + 1
 			bags = self.random_edge_split(b)
-			print >> sys.stderr, "Still trying to find a proper coloring..."
+			if (count % 500 == 0):
+				print >> sys.stderr, "Still trying to find a proper coloring..."
 		return bags
 
 	def removeIndependentSet(self):
