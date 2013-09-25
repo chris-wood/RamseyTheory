@@ -14,26 +14,27 @@ import random
 import time
 
 # Heuristic:
-# 1. find a coloring without monochromatic triangles
-# 2. pick a random vertex in the graph
-# 3. Let N(v) (neighboring nodes) is the union of nodes connected via B(lue) edges and R(ed) edges
-# 4. Compute n(v), the number of edges between B and R
-# 5. If n(v) >= 154, generate SAT equivalent for the coloring and write to disk, try to solve
+# 1. 
+#(random) split Nv = B union R with n(v) >= 154.
+#2.
+#Precolor the edges from v to Nv and those induced by B and R,
+#as described above. This precolors 42 + about (231-154),
+#or almost 120 edges.
+#3.
+#Make a SAT instance alpha for this precoloring.= GNR(127, 3)
 
-# Build G
-G = GNR(127, 3)
 
+
+
+#### OLD CODE BELOW
 # Split into r/b coloring (two bags) and avoid K3 (triangle)
-print >> sys.stderr, "In line at the grocery store now (bagging)!"
-
-bags = G.random_edge_split_avoid_kn(2,3)
-
-
+#print >> sys.stderr, "In line at the grocery store now (bagging)!"
+#bags = G.random_edge_split_avoid_kn(2,3)
 #bags = G.iterative_edge_split_avoid_kn(2,3)
 #while bags == None:
 #	print >> sys.stderr, "Trying again..."
 #	bags = G.iterative_edge_split_avoid_kn(2,3)
-print >> sys.stderr, "Success!"
+#print >> sys.stderr, "Success!"
 
 def timestampMilli(msg, start, end):
 	print >> sys.stderr, msg + str((end - start) * 1000) + "ms"

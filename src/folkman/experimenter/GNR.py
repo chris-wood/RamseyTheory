@@ -8,6 +8,21 @@ import random
 import pickle
 from itertools import combinations
 
+
+def count_edges_between_sets(B, R):
+	count = 0
+	for ei in B:
+		for ej in R:
+			if ei[0] == ej[0]:
+				count = count + 1
+			if ei[0] == ej[1]:
+				count = count + 1
+			if ei[1] == ej[0]:
+				count == count + 1
+			if ei[1] == ej[1]:
+				count = count + 1
+	return count
+
 class GNR:
 	''' Class for the graph G(n,r) = (Z_n, {(u,v) | u - v = alpha^r mod n}).
 	'''
@@ -61,12 +76,26 @@ class GNR:
 		'''
 		bags = {}
 		for e in self.graph.edges():
-			b = random.randint(0, n)
+			b = random.randint(0, n - 1)
 			if not (b in bags):
 				bags[b] = []
 			bags[b].append(e)
 		return bags
 
+
+	def find_rb_neighbors(self, v, bags):
+		B = []
+		R = []
+		for e in self.graph.edges():
+			if v == e[0] or v == e[1]:
+				if e in bags[0]:
+					B.append(e)
+				elif e in bags[1]:
+					R.append(e)
+		return B, R
+
+	def find_candidate_rb_split(self, nv):
+		raise Exception("TODO: pick random vertex such that n(v) >= 157")
 
 	def iterative_edge_split_avoid_kn(self, b, n):
 		''' Randomly split the edges of G into n bags.
