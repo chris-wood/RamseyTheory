@@ -36,25 +36,25 @@ class GNR:
 
 	
 
-	def is_edge_set_adjacent(self, edges):
-		''' TODO: this only works for triangles... I need to change that.
-		'''
-		for i in range(len(edges)):
-			v1 = edges[i][0]
-			v2 = edges[i][1]
-			v1Match = False
-			v2Match = False
-			for j in range(len(edges)):
-				if (i != j):
-					if v1 == edges[j][0] or v1 == edges[j][1]:
-						v1Match = True
-					if v2 == edges[j][0] or v2 == edges[j][1]:
-						v2Match = True
-				if (v1Match and v2Match):
-					break
-			if (v1Match == False or v2Match == False):
-				return False
-		return True
+#	def is_edge_set_adjacent(self, edges):
+#		''' TODO: this only works for triangles... I need to change that.
+#		'''
+#		for i in range(len(edges)):
+#			v1 = edges[i][0]
+#			v2 = edges[i][1]
+#			v1Match = False
+#			v2Match = False
+#			for j in range(len(edges)):
+#				if (i != j):
+#					if v1 == edges[j][0] or v1 == edges[j][1]:
+#						v1Match = True
+#					if v2 == edges[j][0] or v2 == edges[j][1]:
+#						v2Match = True
+#				if (v1Match and v2Match):
+#					break
+#			if (v1Match == False or v2Match == False):
+#				return False
+#		return True
 
 	def random_edge_split(self, n):
 		''' Randomly split the edges of G into n bags.
