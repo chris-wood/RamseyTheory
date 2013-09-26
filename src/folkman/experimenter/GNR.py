@@ -71,6 +71,20 @@ class GNR:
 #				return False
 #		return True
 
+	def count_nv(self, B, R):
+		count = 0
+		for u in B:
+			for v in R:
+				v1 = u
+				v2 = v
+				if u > v:
+					v1 = v
+					v2 = u
+				#print >> sys.stderr, (v1, v2)
+				if (v1,v2) in self.graph.edges():
+					count = count + 1
+		return count
+
 	def random_edge_split(self, n):
 		''' Randomly split the edges of G into n bags.
 		'''
@@ -87,15 +101,61 @@ class GNR:
 		B = []
 		R = []
 		for e in self.graph.edges():
-			if v == e[0] or v == e[1]:
+			if v == e[0]:
 				if e in bags[0]:
-					B.append(e)
+					B.append(e[1])
 				elif e in bags[1]:
-					R.append(e)
+					R.append(e[1])
+			if v == e[1]:
+				if e in bags[0]:
+					B.append(e[0])
+				elif e in bags[1]:
+					R.append(e[0])
+				
 		return B, R
 
 	def find_candidate_rb_split(self, nv):
-		raise Exception("TODO: pick random vertex such that n(v) >= 157")
+		found = False
+		v = -1
+		bags = {}
+		B = []
+		R = []
+		pcmap = {}
+		while not found:
+			print >> sys.stderr, "Searching for candidate B/R split for Nv"
+			v = random.randint(0, len(self.graph.nodes()) - 1)
+			bags = self.random_edge_split(2) # split into two colors
+			B, R = self.find_rb_neighbors(v, bags)
+			print >> sys.stderr, "Lengths: " + str(len(B)) + " " + str(len(R))
+			count = self.count_nv(B, R)
+			print >> sys.stderr, "Count: " + str(count)
+			if count >= nv:
+				found = True
+
+		# Split found, now build up the pre-coloring map (pcmap) with the edges from
+		# v to B/R and the edges incuded by the vertices in B/R	
+		#   find_rb_neighbors puts bags[0] as B and bags[1] as R
+		pcmap[0] = []
+		pcmap[1] = []
+		for v in bags[0]:
+			pcmap[0].append(v)
+		for v in bags[1]:
+			pcmap[1].append(v)
+
+		# Check for edges induced by B (blue == 0), which should be colored red (1)
+		for u in B:
+			for v in B:
+				e = (u,v) if (u < v) else (v,u)
+				if (u != v and e in self.graph.edges()):
+					pcmap[1].append(e)
+		# Now do the opposite for the red set
+		for u in R:
+			for v in R:
+				e = (u,v) if (u < v) else (v,u)
+				if (u != v and e in self.graph.edges()):
+					pcmap[0].append(e)
+
+		return v, bags, B, R, pcmap
 
 	def iterative_edge_split_avoid_kn(self, b, n):
 		''' Randomly split the edges of G into n bags.

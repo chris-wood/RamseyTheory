@@ -23,7 +23,13 @@ import time
 #3.
 #Make a SAT instance alpha for this precoloring.= GNR(127, 3)
 
-
+G = GNR(127,3)
+nv = 125 # THIS SHOULD BE 157 as per SPR's comments
+print >> sys.stderr, "Searching for split"
+v, bags, B, R, pcmap = G.find_candidate_rb_split(nv) 
+print >> sys.stderr, str(B)
+print >> sys.stderr, str(R)
+print >> sys.stderr, "Passing to reducer with precoloring in place (bags)..."
 
 
 #### OLD CODE BELOW

@@ -25,7 +25,7 @@ import time
 # -out = out files for the CNFs
 
 class injector:
-	def __init__(self, n, r, fix, sample_size, na, smart, saturate, ne, nrr, nerr, nisr, out):
+	def __init__(self, n, r, fix = True, sample_size = 1, na = 0, smart = False, saturate = False, ne = 0, nrr = 0, nerr = 0, nisr = 0, out = ""):
 		self.n = n
 		self.r = r
 		self.sample = sample_size
@@ -40,6 +40,7 @@ class injector:
 		self.nisr = nisr
 		self.out = out
 
+	def inject(self):
 		# Preliminary error checking
 		if (self.graph.getGraph().edges() < self.na):
 			raise Exception("Cannot remove more edges than the graph contains.")
@@ -81,6 +82,12 @@ class injector:
 			print >> sys.stderr, "Performing edge assignment and writing the output..."
 			self.assignAndWrite(numVars, cnf)
 			print >> sys.stderr, "Done."
+
+	def inject_arbitrary_graph_with_edge_precoloring(self, gnrG, pcmap):
+		''' For an arbitrary GNR graph G and set of precolored edges, precolor the edges and 
+		perform the reduction to SAT using the same approach as the general inject() above.
+		'''
+		raise Exception("TODO")
 
 	# Write the edge-list representation of the graph (after preprocessed)
 	# as well as the pickled graph object
@@ -388,6 +395,7 @@ def main():
 		# Create the injector...
 		start = time.time()
 		inject = injector(n, r, assign, sample_size, na, smart, saturate, ne, nrr, nerr, nisr, out)
+		inject.inject()
 		end = time.time()
 		timestampMilli("Total time: ", start, end)
 
