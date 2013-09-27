@@ -44,7 +44,7 @@ class injector:
 		# Preliminary error checking
 		if (self.graph.getGraph().edges() < self.na):
 			raise Exception("Cannot remove more edges than the graph contains.")
-		if (n < (nrr + nisr)):
+		if (self.n < (self.nrr + self.nisr)):
 			raise Exception("Cannot remove more vertices than the graph contains.")
 		
 		# Strip down to the induced subgraph
@@ -58,7 +58,7 @@ class injector:
 		print >> sys.stderr, 'Done.'
 
 		# Saturate by default!
-		if (saturate):
+		if (self.saturate):
 			print >> sys.stderr, "Saturating with edges..."
 			self.graph.saturateAvoidK4();
 			print >> sys.stderr, "Done."
