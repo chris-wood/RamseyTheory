@@ -1,8 +1,9 @@
+Stripping the graph...
 Traceback (most recent call last):
 File "injector.py", line 403, in <module>
 main()
 File "injector.py", line 398, in main
 inject.inject()
-File "injector.py", line 47, in inject
-if (n < (nrr + nisr)):
-NameError: global name 'n' is not defined
+File "injector.py", line 54, in inject
+print >> sys.stderr, "Random vertices to remove: " + str(nrr)
+NameError: global name 'nrr' is not defined

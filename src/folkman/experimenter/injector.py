@@ -51,9 +51,9 @@ class injector:
 		# using the structural/random properties, as specified
 		# by the command cmd line arguments
 		print >> sys.stderr, 'Stripping the graph...'
-		print >> sys.stderr, "Random vertices to remove: " + str(nrr)
-		print >> sys.stderr, "Random edges to remove: " + str(nerr)
-		print >> sys.stderr, "Maximal independent sets to remove: " + str(nisr)
+		print >> sys.stderr, "Random vertices to remove: " + str(self.nrr)
+		print >> sys.stderr, "Random edges to remove: " + str(self.nerr)
+		print >> sys.stderr, "Maximal independent sets to remove: " + str(self.nisr)
 		self.strip()
 		print >> sys.stderr, 'Done.'
 
