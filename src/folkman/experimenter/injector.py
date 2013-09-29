@@ -156,8 +156,8 @@ class injector:
                     var = random.randint(0, numVars)
         else:
             ei = self.vte(var, edgeMap)
-            if (var in varsToAssign or edgeMap[ei] in pcmap[0] or edgeMap[ei] in pcmap[1]):
-                while (var in varsToAssign or edgeMap[ei] in pcmap[0] or edgeMap[ei] in pcmap[1]):
+            if (var in varsToAssign or ei in pcmap[0] or ei in pcmap[1]):
+                while (var in varsToAssign or ei in pcmap[0] or ei in pcmap[1]):
                     var = random.randint(0, numVars)
                     ei = self.vte(var, edgeMap)
         return var
