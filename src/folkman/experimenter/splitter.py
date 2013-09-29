@@ -6,6 +6,7 @@
 
 from networkx import nx
 from GNR import GNR
+from injector import *
 from reducer import reducer
 from reducer import makeDimacsCNF
 import sys
@@ -30,7 +31,8 @@ v, bags, B, R, pcmap = G.find_candidate_rb_split(nv)
 print >> sys.stderr, str(B)
 print >> sys.stderr, str(R)
 print >> sys.stderr, "Passing to reducer with precoloring in place (bags)..."
-
+injector = injector()
+injector.inject_arbitrary_graph_with_edge_precoloring(G, pcmap)
 
 #### OLD CODE BELOW
 # Split into r/b coloring (two bags) and avoid K3 (triangle)

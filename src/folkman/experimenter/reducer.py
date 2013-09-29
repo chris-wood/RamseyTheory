@@ -58,7 +58,7 @@ class reducer:
 						cnf.append([edgeMap[edge] * -1, edgeMap[edge1] * -1, edgeMap[edge2] * -1]) # negative clause
 
 		# return the CNF formula and number of variables 
-		return len(edgeMap), cnf
+		return len(edgeMap), edgeMap, cnf
 
 	def makeEdge(self, u, v):
 		if (u <= v):
