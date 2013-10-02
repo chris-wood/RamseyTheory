@@ -38,18 +38,21 @@ def triangle_type(G, v, v1, v2, v3, B, R, T):
 		if v == v2:
 			tv = v2
 			pair = (v1, v3)
-		else:
+		elif v == v3:
 			tv = v3
 			pair = (v1, v2)
 
 		# differentiate the cases
-		if pair[0] in B and pair[1] in B:
+		if pair[0] in B and pair[1] in R:
 			return 1
 		elif pair[0] in B and pair[1] in B:
 			return 2
 		elif pair[0] in R and pair[1] in R:
 			return 3
 		else:
+			print(v, v1, v2, v3)
+			print(pair)
+			print(B, R)
 			raise Exception("Not possible HOMER! Check the (1/2/3) categorization code.")
 	elif v1b or v2b or v3b: # cases 4/6/7
 		if (v1b and v2b) or (v1b and v3b) or (v2b and v3b):
@@ -68,15 +71,17 @@ def triangle_type(G, v, v1, v2, v3, B, R, T):
 		elif (v1t and v2t) or (v1t and v3t) or (v2t and v3t):
 			return 8
 		else:
-			raise Exception("Not possible HOMER! Check the (4/6/7) categorization code.")
+			raise Exception("Not possible HOMER! Check the (5/6/8) categorization code.")
 	elif v1t and v2t and v3t: # case 9
 		return 9
 	else:
 		raise Exception("Not possible HOMER! Check the categorization code.")
 
-def define_triangle_classes(G, v, B, R, pcmap):
+def define_triangle_classes(G, v, B, R, T, pcmap):
+	classes = []
 	counts = []
 	for i in range(9): # there are 9 classes per SPR's comments
+		classes.append([])
 		counts.append(0)
 
 	# Exhaustively search for all triangles and then switch on what type they are
@@ -87,11 +92,10 @@ def define_triangle_classes(G, v, B, R, pcmap):
 			for v3 in G.nodes():
 				if (medge(v1, v2) in G.edges() and medge(v1, v3) in G.edges() and medge(v2, v3) in G.edges()):
 					triangles = triangles + 1
-
-					# TODO: do the classification of the triangle here.. put the tuple in the appropriate bucket
-
-
-	return triangles
+					index = triangle_type(G, v, v1, v2, v3, B, R, T)
+					classes[index - 1].append((v1, v2, v3))
+					counts[index - 1] = counts[index - 1] + 1
+	return triangles, classes, counts
 
 # Heuristic:
 # 1. 
@@ -119,6 +123,12 @@ print >> sys.stderr, str(v)
 print >> sys.stderr, str(B)
 print >> sys.stderr, str(R)
 print >> sys.stderr, "Split found!"
+
+# Categorization
+triangles, classes, counts = define_triangle_classes(G.graph, v, B, R, T, pcmap)
+print "Num triangles: " + str(triangles)
+print "Counts: " + str(counts)
+print "Classes: " + str(classes)
 
 
 # Do the SAT conversion later
