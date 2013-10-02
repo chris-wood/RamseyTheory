@@ -94,6 +94,7 @@ def define_triangle_classes(G, v, B, R, T, pcmap):
 		for v2 in G.nodes():
 			for v3 in G.nodes():
 				if (medge(v1, v2) in G.edges() and medge(v1, v3) in G.edges() and medge(v2, v3) in G.edges()):
+					print >> sys.stderr, "Found triangle: " + str((v1, v2, v3))
 					triangles = triangles + 1
 					index = triangle_type(G, v, v1, v2, v3, B, R, T)
 					classes[index - 1].append((v1, v2, v3))
