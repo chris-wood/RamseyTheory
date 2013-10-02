@@ -25,9 +25,13 @@ import time
 #Make a SAT instance alpha for this precoloring.= GNR(127, 3)
 
 G = GNR(127,3)
-nv = 135 # THIS SHOULD BE 157 as per SPR's comments
+nv = 157 # THIS SHOULD BE 157 as per SPR's comments
 print >> sys.stderr, "Searching for split"
+start = time.time()
 v, bags, B, R, pcmap = G.find_candidate_rb_split(nv, target = 21, delta = 0.9) 
+end = time.time()
+print >> sys.stdout, str((end - start) * 1000) + "ms"
+print >> sys.stderr, str((end - start) * 1000) + "ms"
 print >> sys.stdout, str(v)
 print >> sys.stdout, str(B)
 print >> sys.stdout, str(R)
