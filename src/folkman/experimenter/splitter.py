@@ -14,6 +14,58 @@ import argparse
 import random
 import time
 
+def medge(v1, v2):
+	if v1 <= v2:
+		return (v1, v2)
+	else:
+		return (v2, v1)
+
+def triangle_type(G, v, v1, v2, v3, B, R):
+	if v == v1 or v == v2 or v == v3: # cases 1/2/3
+		tv = v1
+		pair = (v2, v3)
+		if v == v2:
+			tv = v2
+			pair = (v1, v3)
+		else:
+			tv = v3
+			pair = (v1, v2)
+
+		# differentiate the cases
+		if pair[0] in B and pair[1] in B:
+			return 1
+		if pair[0] in B and pair[1] in B:
+			return 2
+		else if pair[0] in R and pair[1] in R:
+			return 3
+
+	elif v1 in B or v2 in B or v3 in B: # cases 4/6/7
+
+		# TODO: continue here
+
+		return 0
+	else:
+		raise Exception("Not possible HOMER! Check the categorization code.")
+
+def define_triangle_classes(G, v, B, R, pcmap):
+	counts = []
+	for i in range(9): # there are 9 classes per SPR's comments
+		counts.append(0)
+
+	# Exhaustively search for all triangles and then switch on what type they are
+	# and throw them into the right count bucket
+	triangles = 0
+	for v1 in G.nodes():
+		for v2 in G.nodes():
+			for v3 in G.nodes():
+				if (medge(v1, v2) in G.edges() and medge(v1, v3) in G.edges() and medge(v2, v3) in G.edges()):
+					triangles = triangles + 1
+
+					# TODO: do the classification of the triangle here.. put the tuple in the appropriate bucket
+
+
+	return triangles
+
 # Heuristic:
 # 1. 
 #(random) split Nv = B union R with n(v) >= 154.
