@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-File "injector.py", line 403, in <module>
-main()
-File "injector.py", line 398, in main
-inject.inject()
-File "injector.py", line 47, in inject
-if (n < (nrr + nisr)):
-NameError: global name 'n' is not defined

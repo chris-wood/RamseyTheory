@@ -98,7 +98,7 @@ class GNR:
         return bags
 
 
-    def find_rb_neighbors(self, v, bags):
+    def find_rb_neighbors_with_precoloring(self, v, bags):
         B = []
         R = []
         for e in self.graph.edges():
@@ -115,7 +115,27 @@ class GNR:
                 
         return B, R
 
-    def find_candidate_rb_split(self, nv):
+    def find_rb_neighbors(self, v, target, delta):
+        ''' Target is used to specify the expected size for each B/R bag
+        '''
+        B = []
+        R = []
+        cap = target + (target * delta)
+        for e in self.graph.edges():
+            if v == e[0] or v == e[1]:
+                bagged = False
+                b = 0
+                while not bagged: # hopefully this halts :p
+                    b = random.randint(0, 1)
+                    if b == 0 and len(B) <= cap:
+                        bagged = True
+                        B.append(e)
+                    elif b == 1 and len(R) <= cap:
+                        bagged = True
+                        R.append(e)
+        return B, R
+
+    def find_candidate_rb_split(self, nv, target = 0, delta = 1.0):
         found = False
         v = -1
         bags = {}
@@ -125,8 +145,17 @@ class GNR:
         while not found:
             print >> sys.stderr, "Searching for candidate B/R split for Nv"
             v = random.randint(0, len(self.graph.nodes()) - 1)
-            bags = self.random_edge_split(2) # split into two colors
-            B, R = self.find_rb_neighbors(v, bags)
+
+            # Old way of randomly generating B, R
+            B = []
+            R = []
+            if (target == 0):
+                bags = self.random_edge_split(2) # split into two colors
+                B, R = self.find_rb_neighbors_with_precoloring(v, bags)
+            else:
+                # New way of generating B,R - do precoloring such that their weight is about equal
+                B, R = self.find_rb_neighbors(v, target, 0.9)
+
             print >> sys.stderr, "Lengths: " + str(len(B)) + " " + str(len(R))
             count = self.count_nv(B, R)
             print >> sys.stderr, "Count: " + str(count)

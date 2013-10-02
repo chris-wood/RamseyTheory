@@ -25,14 +25,17 @@ import time
 #Make a SAT instance alpha for this precoloring.= GNR(127, 3)
 
 G = GNR(127,3)
-nv = 125 # THIS SHOULD BE 157 as per SPR's comments
+nv = 135 # THIS SHOULD BE 157 as per SPR's comments
 print >> sys.stderr, "Searching for split"
-v, bags, B, R, pcmap = G.find_candidate_rb_split(nv) 
+v, bags, B, R, pcmap = G.find_candidate_rb_split(nv, 21, 0.9) 
 print >> sys.stderr, str(B)
 print >> sys.stderr, str(R)
-print >> sys.stderr, "Passing to reducer with precoloring in place (bags)..."
-injector = injector()
-injector.inject_arbitrary_graph_with_edge_precoloring(G, pcmap)
+print >> sys.stderr, "Split found!"
+
+
+# Do the SAT conversion later
+#injector = injector()
+#injector.inject_arbitrary_graph_with_edge_precoloring(G, pcmap)
 
 #### OLD CODE BELOW
 # Split into r/b coloring (two bags) and avoid K3 (triangle)
