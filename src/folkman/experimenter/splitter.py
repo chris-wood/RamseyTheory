@@ -20,7 +20,18 @@ def medge(v1, v2):
 	else:
 		return (v2, v1)
 
-def triangle_type(G, v, v1, v2, v3, B, R):
+def triangle_type(G, v, v1, v2, v3, B, R, T):
+
+	v1b = v1 in B
+	v2b = v2 in B
+	v3b = v3 in B
+	v1r = v1 in R
+	v2r = v2 in R
+	v3r = v3 in R
+	v1t = v1 in T
+	v2t = v2 in T
+	v3t = v3 in T
+
 	if v == v1 or v == v2 or v == v3: # cases 1/2/3
 		tv = v1
 		pair = (v2, v3)
@@ -34,16 +45,32 @@ def triangle_type(G, v, v1, v2, v3, B, R):
 		# differentiate the cases
 		if pair[0] in B and pair[1] in B:
 			return 1
-		if pair[0] in B and pair[1] in B:
+		elif pair[0] in B and pair[1] in B:
 			return 2
-		else if pair[0] in R and pair[1] in R:
+		elif pair[0] in R and pair[1] in R:
 			return 3
-
-	elif v1 in B or v2 in B or v3 in B: # cases 4/6/7
-
-		# TODO: continue here
-
-		return 0
+		else:
+			raise Exception("Not possible HOMER! Check the (1/2/3) categorization code.")
+	elif v1b or v2b or v3b: # cases 4/6/7
+		if (v1b and v2b) or (v1b and v3b) or (v2b and v3b):
+			return 4
+		elif v1r or v2r or v3r: # 1 in b and 1 in r, the third must be in T
+			return 6
+		elif (v1t and v2t) or (v1t and v3t) or (v2t and v3t):
+			return 7
+		else:
+			raise Exception("Not possible HOMER! Check the (4/6/7) categorization code.")
+	elif v1r or v2r or v3r: # cases 5/8
+		if (v1r and v2r) or (v1r and v3r) or (v2r and v3r):
+			return 5
+		elif v1r or v2r or v3r: # 1 in b and 1 in r, the third must be in T
+			return 6 # duplicate case as above!
+		elif (v1t and v2t) or (v1t and v3t) or (v2t and v3t):
+			return 8
+		else:
+			raise Exception("Not possible HOMER! Check the (4/6/7) categorization code.")
+	elif v1t and v2t and v3t: # case 9
+		return 9
 	else:
 		raise Exception("Not possible HOMER! Check the categorization code.")
 
@@ -81,7 +108,7 @@ G = GNR(127,3)
 nv = int(sys.argv[1]) # THIS SHOULD BE 157 as per SPR's comments
 print >> sys.stderr, "Searching for split"
 start = time.time()
-v, bags, B, R, pcmap = G.find_candidate_rb_split(nv, target = 21, delta = 0.9) 
+v, bags, B, R, T, pcmap = G.find_candidate_rb_split(nv, target = 21, delta = 0.9) 
 end = time.time()
 print >> sys.stdout, str((end - start) * 1000) + "ms"
 print >> sys.stderr, str((end - start) * 1000) + "ms"
@@ -108,31 +135,31 @@ print >> sys.stderr, "Split found!"
 #	bags = G.iterative_edge_split_avoid_kn(2,3)
 #print >> sys.stderr, "Success!"
 
-def timestampMilli(msg, start, end):
-	print >> sys.stderr, msg + str((end - start) * 1000) + "ms"
+# def timestampMilli(msg, start, end):
+# 	print >> sys.stderr, msg + str((end - start) * 1000) + "ms"
 
-def main():
-	parser = argparse.ArgumentParser(prog='injector')
-	#parser.add_argument('-n', type=int)
-	#parser.add_argument('-r', type=int)
-	#parser.add_argument('-sample_size', type=int, default=0)
-	#parser.add_argument('-na', '--num_assigned', type=int, default=0)
-	#parser.add_argument('-ne', '--num_edges_to_add', type=int, default=0)
-	#parser.add_argument('-nrr', '--number_random_removed', type=int, default=0)
-	#parser.add_argument('-nisr', '--number_independet_sets_removed', type=int, default=0)
-	#parser.add_argument('-nerr', type=int, default=0)
-	#parser.add_argument('-s', '--seed', type=int)
-	#parser.add_argument('-out', '--out_file', type=str, default="reducedCnf")
-	#parser.add_argument('-smart',type=bool,default=False)
-	#parser.add_argument('-saturate',type=bool,default=False)
-	#parser.add_argument('-assign',type=bool,default=True)
-	args = parser.parse_args()
+# def main():
+# 	parser = argparse.ArgumentParser(prog='injector')
+# 	#parser.add_argument('-n', type=int)
+# 	#parser.add_argument('-r', type=int)
+# 	#parser.add_argument('-sample_size', type=int, default=0)
+# 	#parser.add_argument('-na', '--num_assigned', type=int, default=0)
+# 	#parser.add_argument('-ne', '--num_edges_to_add', type=int, default=0)
+# 	#parser.add_argument('-nrr', '--number_random_removed', type=int, default=0)
+# 	#parser.add_argument('-nisr', '--number_independet_sets_removed', type=int, default=0)
+# 	#parser.add_argument('-nerr', type=int, default=0)
+# 	#parser.add_argument('-s', '--seed', type=int)
+# 	#parser.add_argument('-out', '--out_file', type=str, default="reducedCnf")
+# 	#parser.add_argument('-smart',type=bool,default=False)
+# 	#parser.add_argument('-saturate',type=bool,default=False)
+# 	#parser.add_argument('-assign',type=bool,default=True)
+# 	args = parser.parse_args()
 
-	start = time.time()
-	# DO THE SPLITTING HERE	
-	end = time.time()
-	timestampMilli("Total time: ", start, end)
+# 	start = time.time()
+# 	# DO THE SPLITTING HERE	
+# 	end = time.time()
+# 	timestampMilli("Total time: ", start, end)
 
-if __name__ == "__main__":
-	main()
+# if __name__ == "__main__":
+	# main()
 

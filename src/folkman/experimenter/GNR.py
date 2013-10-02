@@ -144,6 +144,7 @@ class GNR:
         bags = {}
         B = []
         R = []
+        T = []
         pcmap = {}
         while not found:
             print >> sys.stderr, "Searching for candidate B/R split for Nv"
@@ -167,7 +168,12 @@ class GNR:
             if count >= nv:
                 found = True
 
-        return v, bags, B, R, pcmap
+        # Build T = {V(G) - {B,R}}
+        for u in self.graph.nodes():
+            if (u != v and u not in B and u not in R):
+                T.append(u)
+
+        return v, bags, B, R, T, pcmap
 
         ''' Old code below. Uncomment when splitting is done.
         '''
