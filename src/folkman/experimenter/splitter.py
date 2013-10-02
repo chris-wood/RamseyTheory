@@ -43,7 +43,7 @@ def triangle_type(G, v, v1, v2, v3, B, R, T):
 			pair = (v1, v2)
 
 		# differentiate the cases
-		if pair[0] in B and pair[1] in R:
+		if (pair[0] in B and pair[1] in R) or (pair[1] in B and pair[0] in R):
 			return 1
 		elif pair[0] in B and pair[1] in B:
 			return 2
@@ -51,7 +51,6 @@ def triangle_type(G, v, v1, v2, v3, B, R, T):
 			return 3
 		else:
 			print(v, v1, v2, v3)
-			print(pair)
 			print(B, R)
 			raise Exception("Not possible HOMER! Check the (1/2/3) categorization code.")
 	elif v1b or v2b or v3b: # cases 4/6/7
@@ -62,6 +61,8 @@ def triangle_type(G, v, v1, v2, v3, B, R, T):
 		elif (v1t and v2t) or (v1t and v3t) or (v2t and v3t):
 			return 7
 		else:
+			print(v, v1, v2, v3)
+			print(B, R)
 			raise Exception("Not possible HOMER! Check the (4/6/7) categorization code.")
 	elif v1r or v2r or v3r: # cases 5/8
 		if (v1r and v2r) or (v1r and v3r) or (v2r and v3r):
@@ -71,6 +72,8 @@ def triangle_type(G, v, v1, v2, v3, B, R, T):
 		elif (v1t and v2t) or (v1t and v3t) or (v2t and v3t):
 			return 8
 		else:
+			print(v, v1, v2, v3)
+			print(B, R)
 			raise Exception("Not possible HOMER! Check the (5/6/8) categorization code.")
 	elif v1t and v2t and v3t: # case 9
 		return 9
