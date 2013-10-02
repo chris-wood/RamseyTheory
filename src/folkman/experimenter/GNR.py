@@ -120,19 +120,22 @@ class GNR:
         '''
         B = []
         R = []
-        cap = target + (target * delta)
+        cap = target + (target * (1.0 - delta))
         for e in self.graph.edges():
             if v == e[0] or v == e[1]:
+                endpoint = e[0]
+                if v == e[0]:
+                    endpoint = e[1]
                 bagged = False
                 b = 0
                 while not bagged: # hopefully this halts :p
                     b = random.randint(0, 1)
                     if b == 0 and len(B) <= cap:
                         bagged = True
-                        B.append(e)
+                        B.append(endpoint)
                     elif b == 1 and len(R) <= cap:
                         bagged = True
-                        R.append(e)
+                        R.append(endpoint)
         return B, R
 
     def find_candidate_rb_split(self, nv, target = 0, delta = 1.0):
@@ -155,6 +158,8 @@ class GNR:
             else:
                 # New way of generating B,R - do precoloring such that their weight is about equal
                 B, R = self.find_rb_neighbors(v, target, 0.9)
+                print >> sys.stderr, B
+                print >> sys.stderr, R
 
             print >> sys.stderr, "Lengths: " + str(len(B)) + " " + str(len(R))
             count = self.count_nv(B, R)
@@ -162,30 +167,35 @@ class GNR:
             if count >= nv:
                 found = True
 
-        # Split found, now build up the pre-coloring map (pcmap) with the edges from
-        # v to B/R and the edges incuded by the vertices in B/R 
-        #   find_rb_neighbors puts bags[0] as B and bags[1] as R
-        pcmap[0] = []
-        pcmap[1] = []
-        for v in bags[0]:
-            pcmap[0].append(v)
-        for v in bags[1]:
-            pcmap[1].append(v)
-
-        # Check for edges induced by B (blue == 0), which should be colored red (1)
-        for u in B:
-            for v in B:
-                e = (u,v) if (u < v) else (v,u)
-                if (u != v and e in self.graph.edges()):
-                    pcmap[1].append(e)
-        # Now do the opposite for the red set
-        for u in R:
-            for v in R:
-                e = (u,v) if (u < v) else (v,u)
-                if (u != v and e in self.graph.edges()):
-                    pcmap[0].append(e)
-
         return v, bags, B, R, pcmap
+
+        ''' Old code below. Uncomment when splitting is done.
+        '''
+
+        # # Split found, now build up the pre-coloring map (pcmap) with the edges from
+        # # v to B/R and the edges incuded by the vertices in B/R 
+        # #   find_rb_neighbors puts bags[0] as B and bags[1] as R
+        # pcmap[0] = []
+        # pcmap[1] = []
+        # for v in bags[0]:
+        #     pcmap[0].append(v)
+        # for v in bags[1]:
+        #     pcmap[1].append(v)
+
+        # # Check for edges induced by B (blue == 0), which should be colored red (1)
+        # for u in B:
+        #     for v in B:
+        #         e = (u,v) if (u < v) else (v,u)
+        #         if (u != v and e in self.graph.edges()):
+        #             pcmap[1].append(e)
+        # # Now do the opposite for the red set
+        # for u in R:
+        #     for v in R:
+        #         e = (u,v) if (u < v) else (v,u)
+        #         if (u != v and e in self.graph.edges()):
+        #             pcmap[0].append(e)
+
+        # return v, bags, B, R, pcmap
 
     def iterative_edge_split_avoid_kn(self, b, n):
         ''' Randomly split the edges of G into n bags.
