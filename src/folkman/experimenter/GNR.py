@@ -138,7 +138,7 @@ class GNR:
                         R.append(endpoint)
         return B, R
 
-    def find_candidate_rb_split(self, nv, target = 0, delta = 1.0):
+    def find_candidate_rb_split(self, nv, target = 0, delta = 1.0, random_vertex_selection = True, num_bag_attempts = 1, bag_lb = -1, bag_ub = -1):
         found = False
         v = -1
         bags = {}
@@ -146,27 +146,40 @@ class GNR:
         R = []
         T = []
         pcmap = {}
+        vi = 0
         while not found:
             print >> sys.stderr, "Searching for candidate B/R split for Nv"
-            v = random.randint(0, len(self.graph.nodes()) - 1)
+
+            v = (vi + 1) % len(self.graph.nodes())
+            if random_vertex_selection:
+                v = random.randint(0, len(self.graph.nodes()) - 1)
 
             # Old way of randomly generating B, R
-            B = []
-            R = []
-            if (target == 0):
-                bags = self.random_edge_split(2) # split into two colors
-                B, R = self.find_rb_neighbors_with_precoloring(v, bags)
-            else:
-                # New way of generating B,R - do precoloring such that their weight is about equal
-                B, R = self.find_rb_neighbors(v, target, 0.9)
-                print >> sys.stderr, B
-                print >> sys.stderr, R
+            if bag_lb == -1 or bag_ub == -1:
+                for i in range(num_bag_attempts):
+                    B = []
+                    R = []
+                    if (target == 0):
+                        bags = self.random_edge_split(2) # split into two colors
+                        B, R = self.find_rb_neighbors_with_precoloring(v, bags)
+                    else:
+                        # New way of generating B,R - do precoloring such that their weight is about equal
+                        B, R = self.find_rb_neighbors(v, target, 0.9)
+                        print >> sys.stderr, B
+                        print >> sys.stderr, R
 
-            print >> sys.stderr, "Lengths: " + str(len(B)) + " " + str(len(R))
-            count = self.count_nv(B, R)
-            print >> sys.stderr, "Count: " + str(count)
-            if count >= nv:
-                found = True
+                    print >> sys.stderr, "Lengths: " + str(len(B)) + " " + str(len(R))
+                    count = self.count_nv(B, R)
+                    print >> sys.stderr, "Count: " + str(count)
+                    if count >= nv:
+                        found = True
+            else: # a range for baggings has been specified, so try them...
+                # how many will there be?
+                # each vertex has 42 neighbors, so 2^42 different combinations considering b=2 bags
+                # if we limit >= 18 vertices per bag, how many possibilities does that remove?
+
+                raise Exception("TODO")
+
 
         # Build T = {V(G) - {B,R}}
         for u in self.graph.nodes():
