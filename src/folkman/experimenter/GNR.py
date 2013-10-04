@@ -177,9 +177,7 @@ class GNR:
                 # how many will there be?
                 # each vertex has 42 neighbors, so 2^42 different combinations considering b=2 bags
                 # if we limit >= 18 vertices per bag, how many possibilities does that remove?
-
                 raise Exception("TODO")
-
 
         # Build T = {V(G) - {B,R}}
         for u in self.graph.nodes():
