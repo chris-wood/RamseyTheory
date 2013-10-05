@@ -116,7 +116,7 @@ G = GNR(127,3)
 nv = int(sys.argv[1]) # THIS SHOULD BE 157 as per SPR's comments
 print >> sys.stderr, "Searching for split"
 start = time.time()
-v, bags, B, R, T, pcmap = G.find_candidate_rb_split(nv, target = 21, delta = 0.9) 
+v, bags, B, R, T, pcmap = G.find_candidate_rb_split(nv, target = 21, delta = 0.9, random_vertex_selection = False, exhaustive = True)
 end = time.time()
 print >> sys.stdout, str((end - start) * 1000) + "ms"
 print >> sys.stderr, str((end - start) * 1000) + "ms"

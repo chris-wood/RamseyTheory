@@ -6,8 +6,7 @@ from networkx import nx
 from networkx.algorithms import isomorphism
 import random
 import pickle
-from itertools import combinations
-
+from itertools import combinations, permutations
 
 def count_edges_between_sets(B, R):
     count = 0
@@ -138,6 +137,86 @@ class GNR:
                         R.append(endpoint)
         return B, R
 
+    def build_br_sets_from_neighbor_partition(self, v, neighbors, partitions):
+        rbl = []
+        for part in partitions:
+            # Try one combination with all in blue and the other in red
+            B = []
+            R = []
+            for u in part:
+                B.append(neighbors[u])
+            for i in range(len(neighbors)):
+                if i not in part:
+                    R.append(neighbors[i])
+            rbl.append((B, R))
+
+            # Swap which vertex goes into which set
+            B = []
+            R = []
+            for u in part:
+                R.append(neighbors[u])
+            for i in range(len(neighbors)):
+                if i not in part:
+                    B.append(neighbors[i])
+            rbl.append((B, R))
+        return rbl
+
+    def find_sets_of_rb_neighbors(self, v, exhaustive = True):
+        rbl = []
+        neighbors = self.graph.neighbors(v)
+        if exhaustive: 
+            # assume we can't find a split when a bag has <= 17 vertices, 
+            # we need to exhaustively traverse C(42,18), C(42,19), C(42, 42,20, 42,21) combinations
+            # there are 1852521913710 possible values to consider for all cases...
+
+            # C(42,18) 
+            print >> sys.stderr, "p18 start: " + str(v)
+            p18 = list(combinations(range(len(neighbors)), 18))
+            print >> sys.stderr, "p18 generated..."
+            rbl18 = self.build_br_sets_from_neighbor_partition(self, v, neighbors, p18)
+            for tup in rbl18:
+                rbl.append(tup)
+            # C(42, 19)
+            print >> sys.stderr, "p19 start: " + str(v)
+            p19 = list(combinations(range(len(neighbors)), 19))
+            rbl19 = self.build_br_sets_from_neighbor_partition(self, v, neighbors, p19)
+            print >> sys.stderr, "p19 generated..."
+            for tup in rbl19:
+                rbl.append(tup)
+            # C(42, 20)
+            print >> sys.stderr, "p20 start: " + str(v)
+            p20 = list(combinations(range(len(neighbors)), 20))
+            rbl20 = self.build_br_sets_from_neighbor_partition(self, v, neighbors, p20)
+            print >> sys.stderr, "p20 generated..."
+            for tup in rbl20:
+                rbl.append(tup)
+            # C(42, 21)
+            print >> sys.stderr, "p21 start: " + str(v)
+            p21 = list(combinations(range(len(neighbors)), 21))
+            rbl21 = self.build_br_sets_from_neighbor_partition(self, v, neighbors, p21)
+            print >> sys.stderr, "p21 generated..."
+            for tup in rbl21:
+                rbl.append(tup)
+
+            # Necessary to repeat these cases? I don't think so...
+            # p22 = list(combinations(range(len(neighbors)),22))
+            # rbl22 = self.build_br_sets_from_neighbor_partition(self, v, neighbors, p22)
+            # for tup in rbl22:
+            #     rbl.append(tup)
+            # p23 = list(combinations(range(len(neighbors)),23))
+            # rbl23 = self.build_br_sets_from_neighbor_partition(self, v, neighbors, p23)
+            # for tup in rbl23:
+            #     rbl.append(tup)
+            # p24 = list(combinations(range(len(neighbors)),24))
+            # rbl24 = self.build_br_sets_from_neighbor_partition(self, v, neighbors, p24)
+            # for tup in rbl24:
+            #     rbl.append(tup)
+
+            return rbl
+        else:
+            raise Exception("Non-exhaustive version of find_sets_of_rb_neighbors not implemented yet")
+        return rbl
+
     def find_candidate_rb_split(self, nv, target = 0, delta = 1.0, random_vertex_selection = True, num_bag_attempts = 1, exhaustive = False):
         found = False
         v = -1
@@ -151,6 +230,8 @@ class GNR:
             print >> sys.stderr, "Searching for candidate B/R split for Nv"
 
             v = (vi + 1) % len(self.graph.nodes())
+            if (v == 0): # 
+                v = 1
             if random_vertex_selection:
                 v = random.randint(0, len(self.graph.nodes()) - 1)
 
@@ -174,24 +255,19 @@ class GNR:
                     if count >= nv:
                         found = True
             else: 
-                B = []
-                R = []
-                if (target == 0):
-                    bags = self.random_edge_split(2) # split into two colors
-                    B, R = self.find_rb_neighbors_with_precoloring(v, bags)
-                else:
-                    # New way of generating B,R - do precoloring such that their weight is about equal
-                    B, R = self.find_rb_neighbors(v, target, 0.9)
+                # find_sets_of_rb_neighbors(self, v, target, exhaustive = True):
+                rb_list = self.find_sets_of_rb_neighbors(v, True) # this function will take forever...
+                for (Bt, Rt) in rb_list:
                     print >> sys.stderr, B
                     print >> sys.stderr, R
-
-                print >> sys.stderr, "Lengths: " + str(len(B)) + " " + str(len(R))
-                count = self.count_nv(B, R)
-                print >> sys.stderr, "Count: " + str(count)
-                if count >= nv:
-                    found = True
-
-                raise Exception("TODO")
+                    print >> sys.stderr, "Lengths: " + str(len(B)) + " " + str(len(R))
+                    count = self.count_nv(B, R)
+                    print >> sys.stderr, "Count: " + str(count)
+                    if count >= nv:
+                        B = Bt
+                        R = Rt
+                        found = True
+                        break
 
         # Build T = {V(G) - {B,R}}
         for u in self.graph.nodes():
