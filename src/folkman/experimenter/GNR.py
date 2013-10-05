@@ -1,4 +1,4 @@
-# File: GNR.py
+# File: GNR.py   
 # Author: Christopher Wood
 
 import sys
